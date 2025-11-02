@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Patne</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/android-chrome-512x512.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #ffffff;
+            --fg: #000000;
+            --border: #e5e5e5;
+            --muted: #666666;
+            --accent: #000000;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+            margin-top: 40px;
+            font-size: 16px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .mono {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--fg);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .links a {
+            color: var(--fg);
+            text-decoration: none;
+            border-bottom: 1px solid var(--fg);
+            transition: opacity 0.2s;
+            padding-bottom: 1px;
+        }
+
+        .links a:hover {
+            opacity: 0.6;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .featured-card {
+            padding: 32px;
+            border: 2px solid var(--fg);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+            background: var(--bg);
+        }
+
+        .featured-card:hover {
+            box-shadow: 8px 8px 0 var(--fg);
+            transform: translate(-4px, -4px);
+        }
+
+        .featured-label {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--fg);
+            color: var(--bg);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .card-link {
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid var(--fg);
+            padding-bottom: 2px;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .card-link:hover {
+            opacity: 0.6;
+        }
+
+        .posts-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .post-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .post-card:hover {
+            border-color: var(--fg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .post-excerpt {
+            color: var(--muted);
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .about-snippet {
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fafafa;
+        }
+
+        .about-snippet p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--fg);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            background: var(--fg);
+            color: var(--bg);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .container {
+                padding: 80px 20px 40px;
+            }
+            .nav-content {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-logo">Ayush Patne</div>
+            <div class="nav-links mono">
+                <a href="index.html">Home</a>
+                <a href="resume.html">Resume</a>
+                <a href="#posts">Archive</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Building AI systems from research to production</h1>
+            <p class="tagline">This is where I share what I build, how I build it, and the lessons I learn along the way. ML, Gen AI, LLMs, and experiments in AI all included</p>
+            <div class="links mono">
+                <a href="mailto:ayushpatne@gmail.com">Email</a>
+                <a href="https://linkedin.com/in/ayushpatne" target="_blank">LinkedIn</a>
+                <a href="https://github.com/ayushpatne" target="_blank">GitHub</a>
+                <a href="https://medium.com/@ayushpatne" target="_blank">Medium</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Featured</h2>
+            <div class="featured-card">
+                <span class="featured-label mono">Featured Project</span>
+                <h3 class="card-title">Building Maira: An Emotionally Intelligent AI Companion</h3>
+                <p class="card-meta mono">Dec 2024 · 15 min read</p>
+                <p class="card-description">Deep dive into building a conversational AI system with context-aware memory, emotional intelligence, and persistent timeline architecture using Gemini 2.0, Flutter, and Firebase. How I solved the context problem and made AI feel more human.</p>
+                <a href="#" class="card-link mono">Read the full story →</a>
+            </div>
+
+            <div class="featured-card">
+                <span class="featured-label mono">Featured Research</span>
+                <h3 class="card-title">Federated Learning for Fraud Detection: Privacy-Preserving ML at Scale</h3>
+                <p class="card-meta mono">May 2025 · Bachelor's Dissertation</p>
+                <p class="card-description">How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture, challenges, and learnings.</p>
+                <a href="#" class="card-link mono">Read the documentation →</a>
+            </div>
+        </section>
+
+        <section id="posts">
+            <h2>Recent Posts</h2>
+            <div class="posts-grid">
+                <div class="post-card">
+                    <h3 class="post-title">Fine-tuning TinyLlama for Creative Writing</h3>
+                    <p class="card-meta mono">Oct 2024 · 8 min read</p>
+                    <p class="post-excerpt">What I learned training a 1.1B parameter model on 10,000 stories, from dataset preparation to achieving stylistic consistency.</p>
+                    <div class="post-tags">
+                        <span class="tag mono">LLMs</span>
+                        <span class="tag mono">PyTorch</span>
+                        <span class="tag mono">Fine-tuning</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <h3 class="post-title">Hopps: Building an ML-Powered Social Dining App</h3>
+                    <p class="card-meta mono">Sep 2024 · 12 min read</p>
+                    <p class="post-excerpt">From idea to 70+ restaurant partnerships—the technical and business journey of building a recommendation engine with Flutter and GCP.</p>
+                    <div class="post-tags">
+                        <span class="tag mono">Startup</span>
+                        <span class="tag mono">ML</span>
+                        <span class="tag mono">Product</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <h3 class="post-title">Processing 250K NFT Records: NLP for Digital Art Classification</h3>
+                    <p class="card-meta mono">Apr 2024 · 10 min read</p>
+                    <p class="post-excerpt">Research internship at IIM Udaipur—building automated classification systems to differentiate AI-generated vs human-created NFTs.</p>
+                    <div class="post-tags">
+                        <span class="tag mono">NLP</span>
+                        <span class="tag mono">Research</span>
+                        <span class="tag mono">Hugging Face</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>About</h2>
+            <div class="about-snippet">
+                <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds, passionate about generative AI and building systems that people actually use. So far, I’ve focused on creating AI and ML systems, developing end-to-end pipelines, and contributing to a few research projects along the way. I’m curious about exploring AI research more deeply and always up for new challenges.</p>
+                <p>This site is where I document what I build and how I build it. Think build logs, technical breakdowns, and lessons learned from shipping AI products.</p>
+                <a href="resume.html" class="cta-button mono">Here’s everything about me →</a>
+            </div>
+        </section>
+
+        <footer>
+            <p class="mono">Built with HTML & CSS · Hosted on GitHub Pages</p>
+            <p style="margin-top: 8px;">© 2025 Ayush Patne</p>
+        </footer>
+
+        <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
