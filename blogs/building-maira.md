@@ -155,7 +155,7 @@ If you're building conversational AI, focus on memory and context first. Everyth
 
 ---
 
-**GitHub**: [Check out the code](https://github.com/ayushpatne/maira) (if you're interested in the implementation details)
+**GitHub**: [Check out the code](https://github.com/ayushxpatne/maira) (if you're interested in the implementation details)
 
 **Try Maira**: [Download on iOS](https://apps.apple.com/...) | [Android](https://play.google.com/...)
 
