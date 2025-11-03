@@ -1,0 +1,26 @@
+{
+  "featured": [
+    {
+      "slug": "fl-eth-dissertation",
+      "title": "Building a Privacy-Preserving Fraud Detection System with Federated Learning",
+      "date": "Nov 2025",
+      "readTime": "",
+      "excerpt": "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture.",
+      "tags": ["Federated Learning", "ML", "Privacy", "Research"],
+      "featured": true,
+      "type": "Research"
+    }
+  ],
+  "posts": [
+    {
+      "slug": "fl-eth-dissertation",
+      "title": "Building a Privacy-Preserving Fraud Detection System with Federated Learning",
+      "date": "Nov 2025",
+      "readTime": "",
+      "excerpt": "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture.",
+      "tags": ["Federated Learning", "ML", "Privacy", "Research"],
+      "featured": true,
+      "type": "Research"
+    }
+    ]
+}
