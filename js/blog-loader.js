@@ -29,7 +29,7 @@ class BlogLoader {
             card.innerHTML = `
                 <span class="featured-label mono">Featured ${post.type}</span>
                 <h3 class="card-title">${post.title}</h3>
-                <p class="card-meta mono">${post.date} · ${post.readTime}</p>
+                <p class="card-meta mono">${post.date}${post.readTime ? ` · ${post.readTime}` : ''}</p>
                 <p class="card-description">${post.excerpt}</p>
                 <a href="${post.slug ? `blog.html?post=${post.slug}` : post.link}" class="card-link mono">${post['button-text'] || 'Read the full story'} →</a>
             `;
