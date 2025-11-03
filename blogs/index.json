@@ -6,9 +6,30 @@
       "date": "Nov 2025",
       "readTime": "",
       "excerpt": "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture.",
-      "tags": ["Federated Learning", "ML", "Privacy", "Research"],
+      "tags": [
+        "Federated Learning",
+        "ML",
+        "Privacy",
+        "Research"
+      ],
       "featured": true,
       "type": "Research"
+    },
+    {
+      "link" : "https://trymaira.web.app/early-access/landing",
+      "button-text" : "Try Maira (beta) For Free →",
+      "title": "Maira: An AI Companion That Remembers & Cares",
+      "date": "Dec 2025",
+      "readTime": "",
+      "excerpt": "Early-stage emotionally-intelligent AI companion focused on memory, safety, and human-like support. Currently iterating on system prompts and prompt-engineering to make interactions safer and more empathetic.",
+      "tags": [
+        "AI",
+        "Emotional Intelligence",
+        "Memory",
+        "Prompt Engineering"
+      ],
+      "featured": true,
+      "type": "Project"
     }
   ],
   "posts": [
@@ -18,9 +39,14 @@
       "date": "Nov 2025",
       "readTime": "",
       "excerpt": "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture.",
-      "tags": ["Federated Learning", "ML", "Privacy", "Research"],
+      "tags": [
+        "Federated Learning",
+        "ML",
+        "Privacy",
+        "Research"
+      ],
       "featured": true,
       "type": "Research"
     }
-    ]
+  ]
 }

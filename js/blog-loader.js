@@ -17,7 +17,7 @@ class BlogLoader {
 
     async loadFeaturedPosts(containerId) {
         if (!this.blogIndex) await this.init();
-        
+
         const container = document.getElementById(containerId);
         if (!container) return;
 
@@ -31,7 +31,7 @@ class BlogLoader {
                 <h3 class="card-title">${post.title}</h3>
                 <p class="card-meta mono">${post.date} · ${post.readTime}</p>
                 <p class="card-description">${post.excerpt}</p>
-                <a href="blog.html?post=${post.slug}" class="card-link mono">Read the full story →</a>
+                <a href="${post.slug ? `blog.html?post=${post.slug}` : post.link}" class="card-link mono">${post['button-text'] || 'Read the full story'} →</a>
             `;
             container.appendChild(card);
         });
@@ -39,7 +39,7 @@ class BlogLoader {
 
     async loadRecentPosts(containerId, limit = 3) {
         if (!this.blogIndex) await this.init();
-        
+
         const container = document.getElementById(containerId);
         if (!container) return;
 
@@ -67,7 +67,7 @@ class BlogLoader {
 
     async loadAllPosts(containerId) {
         if (!this.blogIndex) await this.init();
-        
+
         const container = document.getElementById(containerId);
         if (!container) return;
 
@@ -96,20 +96,20 @@ class BlogLoader {
         try {
             const response = await fetch(`blogs/${slug}.md`);
             const markdown = await response.text();
-            
+
             // Parse markdown to HTML
             const html = marked.parse(markdown);
-            
+
             document.getElementById('blog-content').innerHTML = html;
-            
+
             // Generate table of contents
             this.generateTOC();
-            
+
             // Add syntax highlighting if available
             if (typeof Prism !== 'undefined') {
                 Prism.highlightAll();
             }
-            
+
         } catch (error) {
             console.error('Failed to load blog post:', error);
             document.getElementById('blog-content').innerHTML = '<p>Failed to load blog post.</p>';
@@ -119,7 +119,7 @@ class BlogLoader {
     generateTOC() {
         const content = document.getElementById('blog-content');
         const tocList = document.getElementById('toc-list');
-        
+
         if (!content || !tocList) return;
 
         const headings = content.querySelectorAll('h2, h3');
@@ -135,11 +135,11 @@ class BlogLoader {
             const a = document.createElement('a');
             a.href = `#${id}`;
             a.textContent = heading.textContent;
-            
+
             if (heading.tagName === 'H3') {
                 a.classList.add('toc-h3');
             }
-            
+
             li.appendChild(a);
             tocList.appendChild(li);
         });
@@ -150,10 +150,10 @@ class BlogLoader {
 
     setupTOCActiveState() {
         const tocLinks = document.querySelectorAll('#toc-list a');
-        
+
         window.addEventListener('scroll', () => {
             let current = '';
-            
+
             document.querySelectorAll('#blog-content h2, #blog-content h3').forEach(heading => {
                 const top = heading.offsetTop;
                 if (window.scrollY >= top - 100) {
@@ -183,7 +183,7 @@ const blogLoader = new BlogLoader();
 function initScrollTop() {
     const scrollTopBtn = document.getElementById('scrollTop');
     if (!scrollTopBtn) return;
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
             scrollTopBtn.classList.add('visible');
@@ -191,7 +191,7 @@ function initScrollTop() {
             scrollTopBtn.classList.remove('visible');
         }
     });
-    
+
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });

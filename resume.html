@@ -28,11 +28,13 @@
             display: grid;
             grid-template-columns: 1fr minmax(0, 720px) 1fr;
             gap: 60px;
+            animation: fadeIn 0.6s ease-out;
         }
 
         .resume-content {
             min-width: 0;
             grid-column: 2;
+            animation: fadeIn 1s ease-out;
         }
 
         .resume-toc {
@@ -43,6 +45,7 @@
             overflow-y: auto;
             padding-left: 20px;
             border-left: 2px solid var(--border);
+            animation: fadeIn 0.6s ease-out;
         }
 
         .resume-toc-title {
@@ -269,6 +272,10 @@
                             <li>Implemented context persistence system for long-term memory and emotional support</li>
                         </ul>
                     </div>
+                    <div style="height: 1rem;"></div>
+                    <a href="https://trymaira.web.app/early-access/landing" class="card-link mono">Try Maira (beta) For
+                        Free →</a>
+
                 </div>
 
                 <div class="item">
