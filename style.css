@@ -13,7 +13,7 @@
 }
 
 /* Load Google Fonts: Inter (main text) and Roboto Mono (monospace) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;700&display=swap'); */
 
 html {
     scroll-behavior: smooth;

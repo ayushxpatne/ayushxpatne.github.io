@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Blog Post - Ayush Patne</title>
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    
     <link rel="stylesheet" href="style.css">
     <!-- Marked.js for markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -13,7 +15,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <nav class="wide">
         <div class="nav-content">
@@ -46,7 +55,8 @@
     </footer>
 
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </button>
@@ -61,11 +71,11 @@
             // Load the blog post
             blogLoader.init().then(() => {
                 const metadata = blogLoader.getPostMetadata(postSlug);
-                
+
                 if (metadata) {
                     // Update page title
                     document.getElementById('page-title').textContent = `${metadata.title} - Ayush Patne`;
-                    
+
                     // Add header with metadata
                     document.getElementById('blog-header').innerHTML = `
                         <h1>${metadata.title}</h1>
@@ -75,7 +85,7 @@
                         </div>
                     `;
                 }
-                
+
                 // Load the markdown content
                 blogLoader.loadBlogPost(postSlug);
             });
@@ -86,4 +96,5 @@
         initScrollTop();
     </script>
 </body>
+
 </html>
