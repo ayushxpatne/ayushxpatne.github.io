@@ -1,10 +1,10 @@
 ## TL;DR
 Built a TikTok-style recommendation engine from scratch to finally demystify how social media algorithms understand content. The entire system is engineered around Google Gemini Embeddings to semantically map videos and FAISS vector search for fast, similarity-based recommendations. I even threw in a sliding window for user preferences (because tastes change!) and a mandatory 70/30 exploitation-exploration mix to keep your feed interesting.
 
-> Here is the live demo if you wanna have a look : [Live Demo](https://social-media-algo-code.onrender.com/). 
+> **Here is the live demo if you wanna have a look : [Live Demo](https://social-media-algo-code.onrender.com/).** 
 Its is hosted on Render Free Server- so yeah the instance might take a while to spin up. 
 
-> You can check out the chaotic code here : [GitHub](https://github.com/ayushxpatne/social-media-algo-code.git) 
+> **You can check out the chaotic code here : [GitHub](https://github.com/ayushxpatne/social-media-algo-code.git)** 
 
 **Tech Stack:** Python, Flask, FAISS, NumPy, Pandas, Google Gemini Embeddings
 
