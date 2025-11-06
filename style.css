@@ -663,7 +663,7 @@ pre[class*="language-"] {
     color: var(--muted);
     font-style: italic;
     background: #fafafa;
-    padding: 20px 24px;
+    padding: 20px 24px 0.5px;
     border-radius: 4px;
     transition: background 0.3s ease;
 }
