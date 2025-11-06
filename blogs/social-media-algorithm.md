@@ -1,5 +1,3 @@
-# I Never Understood How Social Media Algorithms Worked, So I Made One
-
 ## Introduction
 I never really understood how the social media algorithms worked, and.. Why does it know me so well? What makes anything go viral? and why do I spend hours on it? 
 
