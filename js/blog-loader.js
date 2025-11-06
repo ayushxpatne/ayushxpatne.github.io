@@ -91,16 +91,24 @@ class BlogLoader {
             container.appendChild(card);
         });
     }
-
     async loadBlogPost(slug) {
         try {
             const response = await fetch(`blogs/${slug}.md`);
             const markdown = await response.text();
-
-            // Parse markdown to HTML
             const html = marked.parse(markdown);
 
             document.getElementById('blog-content').innerHTML = html;
+
+            // Render math equations (KaTeX)
+            if (typeof renderMathInElement !== 'undefined') {
+                renderMathInElement(document.getElementById('blog-content'), {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false }
+                    ],
+                    throwOnError: false
+                });
+            }
 
             // Generate table of contents
             this.generateTOC();
@@ -108,6 +116,19 @@ class BlogLoader {
             // Add syntax highlighting if available
             if (typeof Prism !== 'undefined') {
                 Prism.highlightAll();
+
+                // Add language labels to code blocks
+                document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
+                    const match = pre.className.match(/language-(\w+)/);
+                    if (match) {
+                        const language = match[1];
+                        const label = document.createElement('div');
+                        label.className = 'code-language-label';
+                        label.textContent = language;
+                        pre.style.position = 'relative';
+                        pre.insertBefore(label, pre.firstChild);
+                    }
+                });
             }
 
         } catch (error) {

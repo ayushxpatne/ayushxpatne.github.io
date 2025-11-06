@@ -1,23 +1,24 @@
 {
   "featured": [
     {
-      "slug": "fl-eth-dissertation",
-      "title": "Building a Privacy-Preserving Fraud Detection System with Federated Learning",
+      "slug": "social-media-algorithm",
+      "title": "Building a Social Media Recommendation Algorithm from Scratch",
       "date": "Nov 2025",
-      "readTime": "",
-      "excerpt": "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture.",
+      "readTime": "25 min",
+      "excerpt": "Ever wondered how social media algorithms know you so well? I built one from scratch to find out—from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page.",
       "tags": [
-        "Federated Learning",
-        "ML",
-        "Privacy",
-        "Research"
+        "Machine Learning",
+        "Algorithms",
+        "Embeddings",
+        "FAISS",
+        "Recommendation Systems"
       ],
       "featured": true,
-      "type": "Research"
+      "type": "Technical"
     },
     {
-      "link" : "https://trymaira.web.app/early-access/landing",
-      "button-text" : "Try Maira (beta) For Free",
+      "link": "https://trymaira.web.app/early-access/landing",
+      "button-text": "Try Maira (beta) For Free",
       "title": "Maira: An AI Companion That Remembers & Cares",
       "date": "Dec 2025",
       "readTime": "",
@@ -45,8 +46,24 @@
         "Privacy",
         "Research"
       ],
-      "featured": true,
+      "featured": false,
       "type": "Research"
+    },
+    {
+      "slug": "social-media-algorithm",
+      "title": "Building a Social Media Recommendation Algorithm from Scratch",
+      "date": "Nov 2025",
+      "readTime": "25 min",
+      "excerpt": "Ever wondered how social media algorithms know you so well? I built one from scratch to find out—from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page.",
+      "tags": [
+        "Machine Learning",
+        "Algorithms",
+        "Embeddings",
+        "FAISS",
+        "Recommendation Systems"
+      ],
+      "featured": true,
+      "type": "Technical"
     }
   ]
 }
