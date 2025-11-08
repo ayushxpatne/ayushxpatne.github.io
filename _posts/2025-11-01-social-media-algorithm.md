@@ -2,7 +2,7 @@
 layout: post
 title: "Building a Social Media Recommendation Algorithm from Scratch"
 date: 2025-11-01
-excerpt: "Ever wondered how social media algorithms know you so well? I built one from scratch to find out—from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page."
+excerpt: "Ever wondered how social media algorithms know you so well? I built one from scratch to find out, everything from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page."
 tags: 
   - Machine Learning
   - Algorithms
