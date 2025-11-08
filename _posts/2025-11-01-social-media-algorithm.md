@@ -1,3 +1,19 @@
+---
+layout: post
+title: "Building a Social Media Recommendation Algorithm from Scratch"
+date: 2025-11-01
+excerpt: "Ever wondered how social media algorithms know you so well? I built one from scratch to find out—from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page."
+tags: 
+  - Machine Learning
+  - Algorithms
+  - Embeddings
+  - FAISS
+  - Recommendation Systems
+featured: true
+featured_type: "Technical"
+read_time: "25 min"
+---
+
 ## TL;DR
 Built a TikTok-style recommendation engine from scratch to finally demystify how social media algorithms understand content. The entire system is engineered around Google Gemini Embeddings to semantically map videos and FAISS vector search for fast, similarity-based recommendations. I even threw in a sliding window for user preferences (because tastes change!) and a mandatory 70/30 exploitation-exploration mix to keep your feed interesting.
 
@@ -265,10 +281,8 @@ So one of the two vectors is obviously embedding of videos, and the other is wha
 
 From the user's history, to create user_embeddings,  we will take the weighted average of embeddings, using scores as weight, of the videos which the user had interacted with. In other words, we will take the average of embeddings in such a way that, embeddings of videos with higher scores will have higher relevance in the user_embeddings and we will get one vector (embedding) which will encapsulate all the preferences of the user based on what user interacted with. 
 
-$$
-\text{User Embedding} = \frac{\text{(Embedding Of Video 1} \cdot \text{Score Of Video 1) } + \text{(Embedding Of Video 1} \cdot \text{Score Of Video 1) } \dots \text{(Embedding Of Video N} \cdot \text{Score Of Video N) } }{\text{Sum Of All Scores}}
+$$\text{User Embedding} = \frac{\text{(Embedding Of Video 1} \cdot \text{Score Of Video 1) } + \text{(Embedding Of Video 1} \cdot \text{Score Of Video 1) } \dots \text{(Embedding Of Video N} \cdot \text{Score Of Video N) } }{\text{Sum Of All Scores}}$$
 
-$$
 Once we get the user embedding, we search the database for videos which are “near” or “similar” to the user_embeddings. 
 
 ### The Search Problem

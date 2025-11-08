@@ -1,0 +1,30 @@
+---
+layout: default
+wide_nav: true
+wide_footer: true
+---
+
+<div class="blog-container">
+    <article class="blog-content">
+        <div id="blog-header">
+            <h1>{{ page.title }}</h1>
+            <p class="card-meta mono">
+                {{ page.date | date: "%b %-d, %Y" }}
+                {% if page.read_time %} · {{ page.read_time }}{% endif %}
+            </p>
+            {% if page.tags %}
+            <div class="post-tags" style="margin-bottom: 40px;">
+                {% for tag in page.tags %}
+                <span class="tag mono">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        
+        <div id="blog-content" class="blog-post">
+            {{ content }}
+        </div>
+    </article>
+
+    {% include toc.html %}
+</div>

@@ -1,3 +1,17 @@
+---
+layout: post
+title: "Building a Privacy-Preserving Fraud Detection System with Federated Learning"
+date: 2025-11-01
+excerpt: "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture."
+tags:
+  - Federated Learning
+  - ML
+  - Privacy
+  - Research
+featured: false
+read_time: ""
+---
+
 *This blog post is a condensed, reflective version of my undergraduate dissertation project completed at Vishwakarma Institute of Information Technology, Pune. I worked on this with my incredible team members Sushant Kuratkar, Pratik Nule, and Prateek Mazumder under the guidance of Prof. Geetanjali Yadav. While the original dissertation was a comprehensive 60-page technical document, I have distilled it here into the core concepts, implementation details, and honest reflections on what we learned.*
 
 *Interestingly, the evaluation metrics turned out near perfect, though this was incidental and not the main goal. The primary aim of the project was to explore feasibility and demonstrate that the concept could be implemented effectively, rather than to optimize for performance.*

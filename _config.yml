@@ -1,0 +1,70 @@
+# Site settings
+title: Ayush Patne
+email: ayushpatne@gmail.com
+description: >-
+  Building AI systems from research to production. 
+  ML, Gen AI, LLMs, and experiments in AI all included.
+baseurl: "/ayushpatne"
+url: "https://ayushxpatne.github.io"
+author: Ayush Patne
+
+# Social links
+links:
+  email: "ayushpatne@gmail.com"
+  linkedin: "https://linkedin.com/in/ayushpatne"
+  github: "https://github.com/ayushxpatne"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: null
+  syntax_highlighter_opts:
+    disable: true
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Ayush Patne"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-katex
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - .git
+  - .gitignore
+
+# Include files
+include:
+  - _pages
+
+# Liquid options
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Pagination
+paginate: 10
+paginate_path: "/blog/page:num/"

@@ -1,95 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+title: Home
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayush Patne</title>
-
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="shortcut icon" href="favicons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-    <link rel="manifest" href="favicons/site.webmanifest">
-    <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="favicons/android-chrome-512x512.png">
-
-    <link rel="stylesheet" href="style.css">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-</head>
-
-<body>
-    <nav>
-        <div class="nav-content">
-            <div class="nav-logo">Ayush Patne</div>
-            <div class="nav-links mono">
-                <a href="index.html">Home</a>
-                <a href="resume.html">Resume</a>
-                <a href="archive.html">Archive</a>
-            </div>
+<div class="container">
+    <header>
+        <h1>Building AI systems from research to production</h1>
+        <p class="tagline">This is where I share what I build, how I build it, and the lessons I learn along the way. ML, Gen AI, LLMs, and experiments in AI all included</p>
+        <div class="links mono">
+            <a href="mailto:{{ site.links.email }}">Email</a>
+            <a href="{{ site.links.linkedin }}" target="_blank">LinkedIn</a>
+            <a href="{{ site.links.github }}" target="_blank">GitHub</a>
         </div>
-    </nav>
+    </header>
 
-    <div class="container">
-        <header>
-            <h1>Building AI systems from research to production</h1>
-            <p class="tagline">This is where I share what I build, how I build it, and the lessons I learn along the
-                way. ML, Gen AI, LLMs, and experiments in AI all included</p>
-            <div class="links mono">
-                <a href="mailto:ayushpatne@gmail.com">Email</a>
-                <a href="https://linkedin.com/in/ayushpatne" target="_blank">LinkedIn</a>
-                <a href="https://github.com/ayushxpatne" target="_blank">GitHub</a>
-            </div>
-        </header>
+    <section>
+        <h2>Featured</h2>
+        <div id="featured-posts">
+            {% assign featured_posts = site.posts | where: "featured", true %}
+            {% for item in featured_posts %}
+                {% include featured-card.html item=item %}
+            {% endfor %}
+        </div>
+    </section>
 
-        <section>
-            <h2>Featured</h2>
-            <div id="featured-posts"></div>
-        </section>
+    <section id="posts">
+        <h2>Recent Posts</h2>
+        <div id="recent-posts" class="posts-grid">
+            {% for item in site.posts limit:3 %}
+                {% unless item.external_link %}
+                    {% include post-card.html item=item %}
+                {% endunless %}
+            {% endfor %}
+        </div>
+    </section>
 
-        <section id="posts">
-            <h2>Recent Posts</h2>
-            <div id="recent-posts" class="posts-grid"></div>
-        </section>
-
-        <section>
-            <h2>About</h2>
-            <div class="about-snippet">
-                <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds, passionate about generative AI
-                    and building systems that people actually use. So far, I've focused on creating AI and ML systems,
-                    developing end-to-end pipelines, and contributing to a few research projects along the way. I'm
-                    curious about exploring AI research more deeply and always up for new challenges.</p>
-                <p>This site is where I document what I build and how I build it. Think build logs, technical
-                    breakdowns, and lessons learned from shipping AI products.</p>
-                <a href="resume.html" class="cta-button mono">More about me →</a>
-            </div>
-        </section>
-
-        <footer>
-            <p class="mono">Built with HTML & CSS · Hosted on GitHub Pages</p>
-            <p style="margin-top: 8px;">© 2025 Ayush Patne</p>
-        </footer>
-
-        <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-            </svg>
-        </button>
-    </div>
-
-    <script src="js/blog-loader.js"></script>
-    <script>
-        // Load featured and recent posts
-        blogLoader.loadFeaturedPosts('featured-posts');
-        blogLoader.loadRecentPosts('recent-posts', 3);
-        initScrollTop();
-    </script>
-</body>
-
-</html>
+    <section>
+        <h2>About</h2>
+        <div class="about-snippet">
+            <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds, passionate about generative AI and building systems that people actually use. So far, I've focused on creating AI and ML systems, developing end-to-end pipelines, and contributing to a few research projects along the way. I'm curious about exploring AI research more deeply and always up for new challenges.</p>
+            <p>This site is where I document what I build and how I build it. Think build logs, technical breakdowns, and lessons learned from shipping AI products.</p>
+            <a href="{{ '/resume' | relative_url }}" class="cta-button mono">More about me →</a>
+        </div>
+    </section>
+</div>

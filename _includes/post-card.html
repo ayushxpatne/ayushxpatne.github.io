@@ -1,0 +1,13 @@
+<a href="{{ include.item.url | relative_url }}" class="post-card">
+    <h3 class="post-title">{{ include.item.title }}</h3>
+    <p class="card-meta mono">
+        {{ include.item.date | date: "%b %Y" }}
+        {% if include.item.read_time %} · {{ include.item.read_time }}{% endif %}
+    </p>
+    <p class="post-excerpt">{{ include.item.excerpt | strip_html | truncatewords: 30 }}</p>
+    <div class="post-tags">
+        {% for tag in include.item.tags %}
+        <span class="tag mono">{{ tag }}</span>
+        {% endfor %}
+    </div>
+</a>

@@ -1,0 +1,18 @@
+<div class="featured-card">
+    <span class="featured-label mono">Featured {{ include.item.featured_type | default: "Post" }}</span>
+    <h3 class="card-title">{{ include.item.title }}</h3>
+    <p class="card-meta mono">
+        {{ include.item.date | date: "%b %Y" }}
+        {% if include.item.read_time %} · {{ include.item.read_time }}{% endif %}
+    </p>
+    <p class="card-description">{{ include.item.excerpt | strip_html }}</p>
+    {% if include.item.external_link %}
+    <a href="{{ include.item.external_link }}" class="card-link mono" target="_blank">
+        {{ include.item.button_text | default: "View Project" }} →
+    </a>
+    {% else %}
+    <a href="{{ include.item.url | relative_url }}" class="card-link mono">
+        Read the full story →
+    </a>
+    {% endif %}
+</div>

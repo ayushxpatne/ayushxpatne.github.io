@@ -1,50 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive - Ayush Patne</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav>
-        <div class="nav-content">
-            <div class="nav-logo">Ayush Patne</div>
-            <div class="nav-links mono">
-                <a href="index.html">Home</a>
-                <a href="resume.html">Resume</a>
-                <a href="archive.html">Archive</a>
-            </div>
+---
+layout: default
+title: Archive
+permalink: /archive/
+---
+
+<div class="container">
+    <header>
+        <h1>Archive</h1>
+        <p class="tagline">All posts, projects, and writings</p>
+    </header>
+
+    <section>
+        <div id="all-posts" class="posts-grid">
+            {% for item in site.posts %}
+                {% if item.external_link %}
+                    {% include featured-card.html item=item %}
+                {% else %}
+                    {% include post-card.html item=item %}
+                {% endif %}
+            {% endfor %}
         </div>
-    </nav>
-
-    <div class="container">
-        <header>
-            <h1>Archive</h1>
-            <p class="tagline">All posts, projects, and writings</p>
-        </header>
-
-        <section>
-            <div id="all-posts" class="posts-grid"></div>
-        </section>
-
-        <footer>
-            <p class="mono">Built with HTML & CSS · Hosted on GitHub Pages</p>
-            <p style="margin-top: 8px;">© 2025 Ayush Patne</p>
-        </footer>
-
-        <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-            </svg>
-        </button>
-    </div>
-
-    <script src="js/blog-loader.js"></script>
-    <script>
-        blogLoader.loadAllPosts('all-posts');
-        initScrollTop();
-    </script>
-</body>
-</html>
+    </section>
+</div>

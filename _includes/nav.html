@@ -1,0 +1,10 @@
+<nav {% if page.wide_nav %}class="wide"{% endif %}>
+    <div class="nav-content">
+        <div class="nav-logo">{{ site.title }}</div>
+        <div class="nav-links mono">
+            <a href="{{ '/' | relative_url }}">Home</a>
+            <a href="{{ '/resume' | relative_url }}">Resume</a>
+            <a href="{{ '/archive' | relative_url }}">Archive</a>
+        </div>
+    </div>
+</nav>
