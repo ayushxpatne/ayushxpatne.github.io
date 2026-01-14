@@ -26,7 +26,7 @@ so, we are gonna start with the obvious task, "Cloud Computing Essentials".
 
 but first, we had to create an avatar and you know, obviously, i went with.. that's right.. Suit with shorts. *PEAK FORMAL ATTIRE INNIT*
 
-![[Screenshot 2026-01-12 at 5.21.17 PM.png]]
+![[aws-cloud-quest-task-1-img-1.png]]
 
 anyways.. as soon as the tutorial starts– yo why tf was there a gorilla? and why he started running behind this dude? wtf? and guess what... this is not the strangest part apparently. 
 
@@ -47,7 +47,7 @@ Learning Objectives:
 3. Test access to theh hosted webpage. 
 
 
-![[Screenshot 2026-01-12 at 4.03.59 PM.png]]
+![[aws-cloud-quest-task-1-img-2.png]]
 
 
 # What is S3?
