@@ -24,11 +24,11 @@ so, we are gonna start with the obvious task, "Cloud Computing Essentials".
 
 but first, we had to create an avatar and you know, obviously, i went with.. that's right.. Suit with shorts. *PEAK FORMAL ATTIRE INNIT*
 
-![][aws-cloud-quest-task-1-img-1.png]
+![[aws-cloud-quest-task-1-img-1.png]]
 
 anyways.. as soon as the tutorial starts– yo why tf was there a gorilla? and why he started running behind this dude? wtf? and guess what... this is not the strangest part apparently. 
 
-![][aws-cloud-quest-task-1-img-3.png]
+![[aws-cloud-quest-task-1-img-3.png]]
 
 Mrs. Gorilla.. is not wearing a hat.. yeah thats totally strange dude... her attacking the dude is completely normal.
 
@@ -45,7 +45,7 @@ Learning Objectives:
 3. Test access to theh hosted webpage. 
 
 
-![][aws-cloud-quest-task-1-img-2.png]
+![[aws-cloud-quest-task-1-img-2.png]]
 
 
 # What is S3?
