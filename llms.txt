@@ -2,14 +2,14 @@
 AI Engineer | MSc Advanced Computer Science (AI), University of Leeds
 
 ## Professional Profile
-Ayush is an AI specialist focused on building AI systems, from Generative AI to Federated Learning. He is the founder of 'Hopps' (a social dining platform) and has a background in research engineering from IIM Udaipur.
+Ayush is an AI specialist focused on building AI systems, from Generative AI to Federated Learning. He is the founder of 'Hopps' (a social dining platform) and is Currently pursuing MSc Advanced Computer Science (Artificial Intelligence) at University of Leeds. 
 
 ## Technical Expertise
 - **Core:** Generative AI, LLMs, Transformer Architectures, RAG Systems, Machine Learning, 
 
 ## Key Projects
 - **Hopps:** Social dining platform with an AI-powered recommendation system using Gemini API and Flutter.
-- **Maira:** An AI companion with a RAG-based memory system using Gemini 2.0 and SQLite embeddings.
+- **Maira:** An AI companion with a RAG-based memory system using Gemini 2.0, embeddings and SQLite.
 - **Social Media Engine:** A TikTok-style recommendation engine using IndexIVF clustering and semantic retrieval.
 - **Federated Learning:** A privacy-preserving fraud detection system for Ethereum transaction datasets.
 
