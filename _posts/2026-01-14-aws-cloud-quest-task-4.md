@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "AWS Cloud Quest Task 4: AWS Pricing (Spoiler: It Adds Up Fast)"
 date: 2026-01-14
 excerpt: Using AWS Price Calculator to estimate costs for a surf shop's cloud migration. Played around with instance types, scaling, and discovered that cloud bills can get wild real quick

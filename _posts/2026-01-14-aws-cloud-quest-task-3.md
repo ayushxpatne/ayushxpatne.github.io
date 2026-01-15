@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "AWS Cloud Quest Task 3: Picking The Right EC2 Instance (it matters)"
 date: 2026-01-14
 excerpt: Learning about AWS Systems Manager, using EC2 Instance Connect to access servers without SSH keys, and optimizing instance types for better performance

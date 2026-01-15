@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "Building a Privacy-Preserving Fraud Detection System with Federated Learning"
 date: 2025-11-01
 excerpt: "How I built a distributed training infrastructure that achieved 99.7% AUC-ROC on Ethereum fraud detection while keeping data private. Complete technical breakdown of the federated learning architecture."

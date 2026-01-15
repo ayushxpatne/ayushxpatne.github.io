@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "AWS Cloud Quest Task 1: Why S3 Is Actually Pretty Cool"
 date: 2026-01-12
 excerpt: My first impressions of an AWS learning game that feels more like a town-builder than a technical course. Follow along as I create a questionable avatar, dodge a rogue gorilla, and help a mayor fix his city's wave forecast website using Amazon S3. A hands-on dive into bucket policies, versioning, and static hosting.

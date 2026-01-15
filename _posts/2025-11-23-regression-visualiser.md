@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "Making Regression Actually Make Sense: Building an Interactive Visualizer"
 date: 2025-11-23
 excerpt: Ever wondered how social media algorithms know you so well? I built one from scratch to find out, everything from basic scoring to embeddings, FAISS indexing, and the exploitation-exploration tradeoff. A deep dive into the math and code behind your For You page.

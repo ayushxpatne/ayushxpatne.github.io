@@ -1,5 +1,6 @@
 ---
 layout: post
+author: "Ayush Patne"
 title: "AWS Cloud Quest Task 2: EC2 - When You Need a Server Yesterday"
 date: 2026-01-12
 excerpt: Learning about EC2 instances, AWS regions, availability zones, and spinning up virtual servers in the cloud. Also featuring my first DIY fail.
