@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "AWS Cloud Quest Task 2: EC2 and AWS Infrastructure"
+title: "AWS Cloud Quest Task 2: EC2 - When You Need a Server Yesterday"
 date: 2026-01-12
-excerpt: "Learning about EC2 instances, AWS regions, availability zones, and spinning up virtual servers in the cloud. Also featuring my first DIY fail."
+excerpt: Learning about EC2 instances, AWS regions, availability zones, and spinning up virtual servers in the cloud. Also featuring my first DIY fail.
 tags:
   - AWS
-  - Cloud Computing
+  - Cloud-Computing
   - EC2
   - Learning
 featured: false
@@ -14,7 +14,7 @@ read_time: 8 min
 ---
 Alright folks, we are back on it. Next task, Cloud First Steps. Here we will learn about EC2 and regions n stuff.. 
 
-> btw this is part 2 of my AWS Cloud Quest series where i'm learning AWS and writing about it in sort of informal way, but i promise there are learnings in the blogs. if you missed task 1, go check that out on the archives section of website.
+> btw this is part 2 of my AWS Cloud Quest series where i'm learning AWS and writing about it in sort of informal way, but i promise there are learnings in the blogs. if you missed task 1, you can check that out on the archives section of website.
 
 I think i was supposed to this first- but i accidentally did the cloud computing essentials before this. Well in my defence,  in the game there is no particular order of tasks specified. 
 
