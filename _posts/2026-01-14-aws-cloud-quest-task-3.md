@@ -93,9 +93,6 @@ INFO:werkzeug:31.205.40.143 - - [14/Jan/2026 19:54:13] "GET /favicon.ico HTTP/1.
 
  `"tail -f aws_compute_solutions.log"` is used to see the logfile.
 
-
->story time:  i've seen this terminal before.. back in my bachelors i had to work with AWS to set up a CI/CD pipeline and Jenkins. don't remember any of it now, but i do remember seeing this bird and going "oh lesgo we reached this step f\*\*\*\*ing finally". good times.
-
 ### DIY Section
 Then we are taken to the DIY Section of the Task, where our task was to change the instance type to `m4.large`. For this:
 1. Make sure instance is stopped.
