@@ -16,7 +16,7 @@ read_time: 4 min
 
 Heya folks! Welcome back. This time we're helping a surf shop owner migrate to the cloud.
 
-> btw this is part 2 of my AWS Cloud Quest series where i'm learning AWS and writing about it in sort of informal way, but i promise there are learnings in the blogs. if you missed task 1, you can check that out on the archives section of website.
+> btw this is part 4 of my AWS Cloud Quest series where i'm learning AWS and writing about it in sort of informal way, but i promise there are learnings in the blogs. if you missed previous tasks, you can check that out on the archives section of website.
 
 
 ## The Problem
