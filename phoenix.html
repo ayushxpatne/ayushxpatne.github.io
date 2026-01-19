@@ -5,24 +5,21 @@ title: Home
 
 <div class="home-grid">
     <aside class="home-intro">
-        <header>
-            <h1>Building AI systems from research to production.</h1>
-            <div class="about-snippet">
-                <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds. I'm passionate about generative AI and building systems that people actually use.</p>
-                <p>This site is my build log: technical breakdowns, experiments, and lessons learned from shipping AI products.</p>
-            </div>
-            
-            <div class="links mono">
-                <a href="{{ '/resume' | relative_url }}">Resume →</a>
-                <a href="mailto:{{ site.links.email }}">Email ↗</a>
-                <a href="{{ site.links.linkedin }}" target="_blank">LinkedIn ↗</a>
-                <a href="{{ site.links.github }}" target="_blank">GitHub ↗</a>
-            </div>
-        </header>
+        <h1>Building AI systems from research to production.</h1>
+        <div class="about-snippet">
+            <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds. I'm passionate about generative AI and building systems that people actually use.</p>
+            <p>This site is my build log: technical breakdowns, experiments, and lessons learned from shipping AI products.</p>
+        </div>
+        
+        <div class="links mono">
+            <a href="{{ '/resume' | relative_url }}">Resume →</a>
+            <a href="mailto:{{ site.links.email }}">Email ↗</a>
+            <a href="{{ site.links.linkedin }}" target="_blank">LinkedIn ↗</a>
+            <a href="{{ site.links.github }}" target="_blank">GitHub ↗</a>
+        </div>
     </aside>
 
     <main class="home-content">
-        
         <section class="home-content-block">
             <h2 class="home-section-title mono">Selected Work</h2>
             <div id="featured-posts">
@@ -42,8 +39,7 @@ title: Home
                     {% endunless %}
                 {% endfor %}
             </div>
-            <a href="{{ '/archive' | relative_url }}" class="mono" style="font-size: 0.9em; margin-top: 20px; display: inline-block;">View Archive →</a>
+            <a href="{{ '/archive' | relative_url }}" class="mono" style="font-size: 0.8em; margin-top: 20px; display: inline-block; opacity: 0.6;">View Archive →</a>
         </section>
-
     </main>
 </div>
