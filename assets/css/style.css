@@ -132,6 +132,44 @@ a:hover {
     text-decoration-color: var(--fg);
 }
 
+/* --- New Personal Intro Styles --- */
+
+.intro-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 4px !important;
+    text-transform: lowercase; /* Ted-style lowercase */
+}
+
+.intro-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+    text-transform: lowercase;
+}
+
+.home-intro .about-snippet p {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    color: var(--fg);
+    opacity: 0.85;
+}
+
+.archive-link {
+    font-size: 0.8rem; 
+    margin-top: 20px; 
+    display: inline-block; 
+    opacity: 0.5; 
+    text-decoration: none;
+}
+
+.archive-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
 /* Cards & Grids (Default / Archive Views) */
 .posts-grid {
     display: grid;
