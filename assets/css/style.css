@@ -26,73 +26,65 @@ body {
     font-family: 'Roboto Mono',  monospace;
     font-size: 0.9em;
 }
+/* =========================================
+   REFINED MINIMALIST NAVIGATION
+   ========================================= */
 
-/* Navigation */
 nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.8); /* Frosted effect */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.03); /* Extremely subtle */
+    padding: 24px 0;
 }
 
 .nav-content {
-    /* Align this with your .home-grid max-width and padding */
-    max-width: 1100px; 
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 20px 30px; 
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline; /* Better visual alignment with text */
-}
-
-.nav-logo {
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-    color: var(--fg);
+    padding: 0 30px;
+    display: grid;
+    /* This grid matches your home-grid (0.8fr 1.2fr) */
+    grid-template-columns: 0.8fr 1.2fr; 
 }
 
 .nav-links {
+    grid-column: 2; /* Forces links to start where the work section starts */
     display: flex;
     gap: 32px;
 }
 
 .nav-links a {
-    color: var(--muted);
     text-decoration: none;
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: lowercase; /* Matching your new bio style */
     letter-spacing: 0.05em;
-    transition: color 0.2s ease;
+    transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: var(--fg);
-}
-
-/* Active link state */
+.nav-links a:hover, 
 .nav-links a.active {
     color: var(--fg);
-    font-weight: 600;
 }
 
-/* Wide nav for blog posts - keeping consistency */
-nav.wide .nav-content {
-    max-width: 1100px;
-}
-
+/* Mobile Nav adjustment */
 @media (max-width: 768px) {
     .nav-content {
-        padding: 15px 20px;
+        display: block; /* Stack on mobile */
+        text-align: right;
     }
+    
+    nav {
+        padding: 15px 0;
+    }
+
     .nav-links {
-        gap: 16px;
+        justify-content: flex-end;
+        gap: 20px;
     }
 }
 

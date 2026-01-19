@@ -1,8 +1,9 @@
-<nav>
-    <div class="nav-content" style="justify-content: flex-end;"> <div class="nav-links mono">
-            <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a>
-            <a href="{{ '/resume' | relative_url }}" class="{% if page.url contains '/resume' %}active{% endif %}">Resume</a>
-            <a href="{{ '/archive' | relative_url }}" class="{% if page.url contains '/archive' %}active{% endif %}">Archive</a>
+<nav class="{% if page.wide_nav %}wide{% endif %}">
+    <div class="nav-content">
+        <div class="nav-links mono">
+            <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">home</a>
+            <a href="{{ '/resume' | relative_url }}" class="{% if page.url contains '/resume' %}active{% endif %}">resume</a>
+            <a href="{{ '/archive' | relative_url }}" class="{% if page.url contains '/archive' %}active{% endif %}">archive</a>
         </div>
     </div>
 </nav>
