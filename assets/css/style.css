@@ -385,7 +385,7 @@ footer {
     margin-bottom: 24px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
-    margin-top: 0; /* Align with left column */
+    margin-top: 10px; /* Align with left column */
     line-height: 1.5; /* Matches H1 optical start roughly */
 }
 
