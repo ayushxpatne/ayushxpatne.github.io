@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<div class="home-grid resume-layout">
+    <aside class="home-intro">
+        <header>
+            <h1 class="intro-name">{{ site.author }}</h1>
+            <p class="intro-subtitle mono">ai engineer · resume</p>
+            
+            <div class="resume-toc mono" id="resume-toc">
+                </div>
+
+            <div class="links mono" style="margin-top: 40px;">
+                <a href="mailto:{{ site.links.email }}">email ↗</a>
+                <a href="{{ site.links.linkedin }}">linkedin ↗</a>
+                <a href="{{ site.links.github }}">github ↗</a>
+            </div>
+        </header>
+    </aside>
+
+    <main class="home-content resume-markdown">
+        {{ content }}
+    </main>
+</div>
+
+<script>
+    // Simple script to generate TOC from H1 sections
+    document.addEventListener('DOMContentLoaded', () => {
+        const headings = document.querySelectorAll('.resume-markdown h1');
+        const toc = document.getElementById('resume-toc');
+        headings.forEach(h1 => {
+            const id = h1.innerText.toLowerCase().replace(/\s+/g, '-');
+            h1.id = id;
+            const link = document.createElement('a');
+            link.href = `#${id}`;
+            link.innerText = h1.innerText;
+            toc.appendChild(link);
+        });
+    });
+</script>
