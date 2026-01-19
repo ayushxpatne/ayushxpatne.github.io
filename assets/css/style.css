@@ -377,22 +377,31 @@ footer {
     letter-spacing: -0.03em;
 }
 
+/* Alignment & Spacing Fix (Point A) */
 .home-section-title {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--muted);
-    
-    /* Alignment Magic: */
-    margin-top: 0 !important; /* Force start at the very top */
-    padding-top: 4px; /* Optical adjustment to match the cap-height of the H1 */
-    
+    margin-top: 0 !important; 
+    padding-top: 4px; /* Optical alignment for the first header */
     margin-bottom: 24px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
     display: block;
 }
 
+/* Add space above "Recent Writing" without affecting "Selected Work" */
+.home-content-block + .home-content-block .home-section-title {
+    margin-top: 60px !important; 
+    padding-top: 0; /* Remove the alignment padding for secondary headers */
+}
+
+/* Ensure the whole card feels clickable (Point B) */
+.home-grid .featured-card {
+    cursor: pointer;
+    position: relative;
+}
 /* --- Restored Tags & Links (B & C) --- */
 
 .home-grid .post-card,

@@ -1,4 +1,8 @@
-<div class="featured-card">
+{% if include.item.external_link %}
+<a href="{{ include.item.external_link }}" class="featured-card" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+{% else %}
+<a href="{{ include.item.url | relative_url }}" class="featured-card" style="text-decoration: none; color: inherit; display: block;">
+{% endif %}
     <span class="featured-label mono">Featured {{ include.item.featured_type | default: "Post" }}</span>
     <h3 class="card-title">{{ include.item.title }}</h3>
     <p class="card-meta mono">
@@ -13,13 +17,12 @@
     </div>
 
     <p class="card-description">{{ include.item.excerpt | strip_html }}</p>
-    {% if include.item.external_link %}
-    <a href="{{ include.item.external_link }}" class="card-link mono" target="_blank">
-        {{ include.item.button_text | default: "View Project" }} →
-    </a>
-    {% else %}
-    <a href="{{ include.item.url | relative_url }}" class="card-link mono">
-        Read the full story →
-    </a>
-    {% endif %}
-</div>
+    
+    <div class="card-link mono">
+        {% if include.item.external_link %}
+            {{ include.item.button_text | default: "View Project" }} →
+        {% else %}
+            Read the full story →
+        {% endif %}
+    </div>
+</a>
