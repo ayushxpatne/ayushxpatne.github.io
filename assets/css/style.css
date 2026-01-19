@@ -410,6 +410,7 @@ footer {
     max-width: 1100px;
     margin: 100px auto 60px;
     padding: 0 30px;
+    margin-top: 140px;
 }
 
 @media (min-width: 768px) {
