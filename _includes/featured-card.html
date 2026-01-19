@@ -5,6 +5,13 @@
         {{ include.item.date | date: "%b %Y" }}
         {% if include.item.read_time %} · {{ include.item.read_time }}{% endif %}
     </p>
+    
+    <div class="post-tags">
+        {% for tag in include.item.tags %}
+        <span class="tag mono">{{ tag }}</span>
+        {% endfor %}
+    </div>
+
     <p class="card-description">{{ include.item.excerpt | strip_html }}</p>
     {% if include.item.external_link %}
     <a href="{{ include.item.external_link }}" class="card-link mono" target="_blank">
