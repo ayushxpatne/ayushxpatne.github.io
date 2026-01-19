@@ -661,3 +661,103 @@ footer {
         gap: 40px;
     }
 }
+
+/* =========================================
+   RESUME PAGE STYLES (High Density)
+   ========================================= */
+
+.resume-layout {
+    margin-top: 140px;
+}
+
+/* Sidebar TOC */
+.resume-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.resume-toc a {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.resume-toc a:hover {
+    color: var(--fg);
+}
+
+/* Content Styling */
+.resume-markdown h1 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-top: 60px;
+    margin-bottom: 24px;
+}
+
+.resume-markdown h1:first-of-type {
+    margin-top: 0; /* Align with left column */
+    padding-top: 4px; /* Visual balance with intro-name */
+}
+
+.resume-markdown h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 4px;
+    text-transform: lowercase;
+}
+
+.resume-markdown p strong {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 12px;
+}
+
+.resume-markdown ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.resume-markdown li {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 18px;
+}
+
+/* Minimalist bullet points */
+.resume-markdown li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--border);
+}
+
+.resume-markdown hr {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    margin: 40px 0;
+}
+
+/* Skills section styling */
+.resume-markdown li strong {
+    color: var(--fg);
+    display: inline;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .resume-toc {
+        display: none; /* Hide TOC on small screens to save space */
+    }
+}
