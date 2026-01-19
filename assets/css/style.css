@@ -548,74 +548,116 @@ footer {
 .home-intro .links a { text-decoration: none; font-weight: 500; font-size: 0.9em; }
 
 /* =========================================
-   ARCHIVE PAGE STYLES
+   ARCHIVE PAGE (Matching New Home Style)
    ========================================= */
 
-.archive-grid {
+/* The main container uses the same grid as Home */
+.archive-layout {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 60px;
     max-width: 1100px;
-    margin: 140px auto 60px; /* Matching the home-grid top margin */
+    margin: 140px auto 60px; /* Space for fixed nav */
     padding: 0 30px;
 }
 
 @media (min-width: 768px) {
-    .archive-grid {
-        grid-template-columns: 0.8fr 1.2fr;
+    .archive-layout {
+        grid-template-columns: 0.8fr 1.2fr; 
+        align-items: start;
     }
 }
 
-.archive-header, .archive-content {
-    grid-column: 1;
+/* Header styling (Left Column) */
+.archive-layout .intro-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 4px !important;
+    text-transform: lowercase;
 }
 
-@media (min-width: 768px) {
-    .archive-header, .archive-content {
-        grid-column: 2; /* Keeps content on the right side to match home layout */
-    }
-}
-
-/* Ensure post-cards in the archive match the home compact style */
-.archive-content .post-card,
-.archive-content .featured-card {
-    display: block;
-    padding: 24px 0;
-    border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    text-decoration: none;
-}
-
-.archive-content .post-card:hover,
-.archive-content .featured-card:hover {
-    opacity: 0.7;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Ensure tags and descriptions look clean on the archive list */
-.archive-content .post-excerpt,
-.archive-content .card-description {
-    font-size: 0.95rem;
+.archive-layout .intro-subtitle {
+    font-size: 0.85rem;
     color: var(--muted);
-    margin-bottom: 12px;
+    text-transform: lowercase;
 }
 
-.archive-content .post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+/* The List (Right Column) */
+.archive-layout #all-posts .post-card, 
+.archive-layout #all-posts .featured-card {
+    display: block;
+    border: none !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06) !important; /* Subtle divider */
+    border-radius: 0 !important;
+    padding: 32px 0 !important;
+    margin-bottom: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+/* Hover state for the whole list item */
+.archive-layout #all-posts a:hover {
+    opacity: 0.6;
+    transform: none !important;
+}
+
+/* Typography inside the list */
+.archive-layout .post-title, 
+.archive-layout .card-title {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    color: var(--fg);
     margin-bottom: 8px;
 }
 
-.archive-content .tag {
+.archive-layout .post-excerpt, 
+.archive-layout .card-description {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    max-width: 90%;
+}
+
+/* Tags in Archive */
+.archive-layout .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.archive-layout .tag {
     background: transparent;
     border: 1px solid var(--border);
     padding: 2px 6px;
     font-size: 0.65rem;
     color: var(--muted);
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* "Read More" link style */
+.archive-layout .card-link {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--fg);
+    text-transform: lowercase;
+}
+
+/* Remove border from the very last item */
+.archive-layout #all-posts a:last-child .post-card,
+.archive-layout #all-posts a:last-child .featured-card {
+    border-bottom: none !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .archive-layout {
+        margin-top: 100px;
+        gap: 40px;
+    }
 }

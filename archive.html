@@ -4,21 +4,30 @@ title: Archive
 permalink: /archive/
 ---
 
-<div class="archive-grid">
-    <header class="archive-header">
-        <h1 class="intro-name">archive</h1>
-        <p class="intro-subtitle mono">all posts, projects, and writings</p>
-    </header>
+<div class="home-grid archive-layout">
+    <aside class="home-intro">
+        <header>
+            <h1 class="intro-name">archive</h1>
+            <p class="intro-subtitle mono">all posts & projects</p>
+            
+            <div class="links mono" style="margin-top: 40px;">
+                <a href="{{ '/' | relative_url }}">← Back Home</a>
+            </div>
+        </header>
+    </aside>
 
-    <main class="archive-content">
-        <div id="all-posts">
-            {% for item in site.posts %}
-                {% if item.external_link %}
-                    {% include featured-card.html item=item %}
-                {% else %}
-                    {% include post-card.html item=item %}
-                {% endif %}
-            {% endfor %}
-        </div>
+    <main class="home-content">
+        <section class="home-content-block">
+            <h2 class="home-section-title mono">Full History</h2>
+            <div id="all-posts">
+                {% for item in site.posts %}
+                    {% if item.featured %}
+                        {% include featured-card.html item=item %}
+                    {% else %}
+                        {% include post-card.html item=item %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
     </main>
 </div>
