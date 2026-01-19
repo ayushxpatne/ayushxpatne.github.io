@@ -1,0 +1,155 @@
+---
+layout: default
+title: Home
+---
+
+<style>
+    .hero-featured-grid {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 100px 60px 60px;
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 80px;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 60vh;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+        margin-bottom: 24px;
+    }
+
+    .hero-section .tagline {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 32px;
+        max-width: 600px;
+    }
+
+    .featured-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .featured-sidebar .featured-card {
+        margin-bottom: 0;
+    }
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        .hero-featured-grid {
+            grid-template-columns: 1fr;
+            padding: 80px 40px 60px;
+            gap: 60px;
+        }
+
+        .hero-section {
+            min-height: auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+
+        .featured-sidebar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+        .hero-featured-grid {
+            padding: 80px 20px 40px;
+            gap: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+
+        .hero-section .tagline {
+            font-size: 1.05rem;
+        }
+
+        .featured-sidebar {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Regular sections below the grid */
+    .regular-section {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 60px 80px;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @media (max-width: 1024px) {
+        .regular-section {
+            padding: 0 40px 60px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .regular-section {
+            padding: 0 20px 40px;
+        }
+    }
+</style>
+
+<div class="hero-featured-grid">
+    <!-- Hero Section (60%) -->
+    <div class="hero-section">
+        <h1>Building AI systems from research to production</h1>
+        <p class="tagline">This is where I share what I build, how I build it, and the lessons I learn along the way. ML, Gen AI, LLMs, and experiments in AI all included</p>
+        <div class="links mono">
+            <a href="mailto:{{ site.links.email }}">Email</a>
+            <a href="{{ site.links.linkedin }}" target="_blank">LinkedIn</a>
+            <a href="{{ site.links.github }}" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+    <!-- Featured Sidebar (40%) -->
+    <div class="featured-sidebar">
+        <h2 style="margin-bottom: 0;">Featured</h2>
+        <div id="featured-posts">
+            {% assign featured_posts = site.posts | where: "featured", true %}
+            {% for item in featured_posts %}
+                {% include featured-card.html item=item %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Recent Posts Section -->
+<section class="regular-section" id="posts">
+    <h2>Recent Posts</h2>
+    <div id="recent-posts" class="posts-grid">
+        {% for item in site.posts limit:3 %}
+            {% unless item.external_link %}
+                {% include post-card.html item=item %}
+            {% endunless %}
+        {% endfor %}
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="regular-section">
+    <h2>About</h2>
+    <div class="about-snippet">
+        <p>I am an AI engineer pursuing my MSc in AI at the University of Leeds, passionate about generative AI and building systems that people actually use. So far, I've focused on creating AI and ML systems, developing end-to-end pipelines, and contributing to a few research projects along the way. I'm curious about exploring AI research more deeply and always up for new challenges.</p>
+        <p>This site is where I document what I build and how I build it. Think build logs, technical breakdowns, and lessons learned from shipping AI products.</p>
+        <a href="{{ '/resume' | relative_url }}" class="cta-button mono">More about me →</a>
+    </div>
+</section>
