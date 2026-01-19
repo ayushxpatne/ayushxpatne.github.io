@@ -546,3 +546,76 @@ footer {
 .home-intro .tagline { color: var(--muted); margin-bottom: 32px; }
 .home-intro .links { display: flex; flex-direction: column; gap: 10px; }
 .home-intro .links a { text-decoration: none; font-weight: 500; font-size: 0.9em; }
+
+/* =========================================
+   ARCHIVE PAGE STYLES
+   ========================================= */
+
+.archive-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 140px auto 60px; /* Matching the home-grid top margin */
+    padding: 0 30px;
+}
+
+@media (min-width: 768px) {
+    .archive-grid {
+        grid-template-columns: 0.8fr 1.2fr;
+    }
+}
+
+.archive-header, .archive-content {
+    grid-column: 1;
+}
+
+@media (min-width: 768px) {
+    .archive-header, .archive-content {
+        grid-column: 2; /* Keeps content on the right side to match home layout */
+    }
+}
+
+/* Ensure post-cards in the archive match the home compact style */
+.archive-content .post-card,
+.archive-content .featured-card {
+    display: block;
+    padding: 24px 0;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.archive-content .post-card:hover,
+.archive-content .featured-card:hover {
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Ensure tags and descriptions look clean on the archive list */
+.archive-content .post-excerpt,
+.archive-content .card-description {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+}
+
+.archive-content .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.archive-content .tag {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+}

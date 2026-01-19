@@ -4,14 +4,14 @@ title: Archive
 permalink: /archive/
 ---
 
-<div class="container">
-    <header>
-        <h1>Archive</h1>
-        <p class="tagline">All posts, projects, and writings</p>
+<div class="archive-grid">
+    <header class="archive-header">
+        <h1 class="intro-name">archive</h1>
+        <p class="intro-subtitle mono">all posts, projects, and writings</p>
     </header>
 
-    <section>
-        <div id="all-posts" class="posts-grid">
+    <main class="archive-content">
+        <div id="all-posts">
             {% for item in site.posts %}
                 {% if item.external_link %}
                     {% include featured-card.html item=item %}
@@ -20,5 +20,5 @@ permalink: /archive/
                 {% endif %}
             {% endfor %}
         </div>
-    </section>
+    </main>
 </div>
