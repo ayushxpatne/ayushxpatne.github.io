@@ -40,14 +40,14 @@ permalink: /resume/
 
 # projects
 
-## maira · ai companion system [ [live demo](https://trymaira.web.app/early-access/landing) ]
+## maira · ai companion system  [live demo](https://trymaira.web.app/early-access/landing) 
 
 * engineered a ::p::rag-based memory system:: integrating ::b::gemini 2.0 api:: with sqlite embedding retrieval using semantic similarity thresholds for context injection.
 * designed a parallel memory pipeline leveraging gemini to analyze message history, extracting ::y::categorized memories with importance scoring:: and redundancy detection.
 * built full-stack architecture using flutter, firebase, getx, and gcp cloud functions to track persistent user context and emotional states.
 * implemented fluid chat ux inspired by ::p::imessage design principles:: for judgment-free companionship with long-term context persistence.
 
-## social media recommendation engine [ [blog](https://ayushxpatne.github.io/ayushpatne/blog.html?post=social-media-algorithm) | [live demo](https://social-media-algo-code.onrender.com) ]
+## social media recommendation engine  [blog](https://ayushxpatne.github.io/ayushpatne/blog.html?post=social-media-algorithm)  [live demo](https://social-media-algo-code.onrender.com) 
 
 * engineered a tiktok-style recommendation engine using ::y::python, flask, and faiss:: for semantic video retrieval.
 * implemented ::b::indexivf clustering:: with approximate nearest neighbor search to efficiently query 3072-dimensional embeddings across 500+ videos.
@@ -60,7 +60,7 @@ permalink: /resume/
 * developed end-to-end training workflow including dataset preparation, tokenization, fine-tuning, and evaluation for generative text modeling.
 * achieved ::b::runner-up recognition:: at visionary techfest 24 ai/ml hackathon organized by binghamton university.
 
-## distributed training infrastructure · fraud detection [ [full project overview](https://ayushxpatne.github.io/ayushpatne/blog.html?post=fl-eth-dissertation) ]
+## distributed training infrastructure · fraud detection  [full project overview](https://ayushxpatne.github.io/ayushpatne/blog.html?post=fl-eth-dissertation) 
 
 * architected ::p::federated learning system:: enabling privacy-preserving collaborative training across 3 distributed clients over 10 rounds.
 * engineered data processing pipeline for highly imbalanced ethereum datasets (90%+ class imbalance), applying ::y::smote oversampling:: and feature engineering.
@@ -69,9 +69,9 @@ permalink: /resume/
 
 # research
 
-**"attention span and its correlation with mental health"**  
-richa shah, sarthak rak, ayush patne, dr. laxmi bewoor  
-*4th asian conference on innovation in technology, august 2024*
+## "attention span and its correlation with mental health"**  
+* richa shah, sarthak rak, ayush patne, dr. laxmi bewoor  
+* 4th asian conference on innovation in technology, august 2024
 
 * led research design analyzing correlation between attention span metrics and mental health indicators across 84 participants.
 * defined analytical approach utilizing ::p::knn clustering:: for behavioral segmentation and pattern identification.
@@ -88,10 +88,10 @@ richa shah, sarthak rak, ayush patne, dr. laxmi bewoor
 * **hackathon lead organizer** — viz-a-thon (dataviz), viit
 * **runner-up** — ai/ml domain, visionary techfest 24 hackathon (binghamton university)
 * **media team head** — tedxviit
-* **video & photography head** — ai student association, viit | indo-japan hyper-k workshop
+* **video & photography head** — ai student association, viit 
 * **class representative** — ay 2021-22
 
 # certifications
 
-* machine learning specialization — stanford online & deeplearning.ai
-* generative ai with large language models — deeplearning.ai & amazon web services
+* **machine learning specialization** — stanford online & deeplearning.ai
+* **generative ai with large language models** — deeplearning.ai & amazon web services
