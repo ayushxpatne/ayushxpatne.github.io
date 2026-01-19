@@ -761,3 +761,55 @@ footer {
         display: none; /* Hide TOC on small screens to save space */
     }
 }
+
+/* --- Pastel Highlights --- */
+.hlt-y { background-color: #fef3c7; padding: 0 2px; border-radius: 2px; } /* Pastel Yellow */
+.hlt-b { background-color: #e0f2fe; padding: 0 2px; border-radius: 2px; } /* Pastel Blue */
+.hlt-p { background-color: #fce7f3; padding: 0 2px; border-radius: 2px; } /* Pastel Pink */
+
+/* --- Skills-as-Tags --- */
+.skills-tag-container {
+    list-style: none !important;
+    padding-left: 0 !important;
+}
+
+.skills-tag-container li {
+    padding-left: 0 !important;
+    margin-bottom: 20px !important;
+}
+
+.skills-tag-container li::before {
+    content: "" !important; /* Remove the dash for skills */
+}
+
+/* This turns the comma-separated text into a tag-cloud look */
+.skills-tag-container li {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.skills-tag-container strong {
+    display: block;
+    color: var(--fg);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+}
+
+/* Adjust project links in resume */
+.resume-markdown a[href*="http"] {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    color: var(--muted);
+}
+
+.resume-markdown a[href*="http"]:hover {
+    border-color: var(--fg);
+    color: var(--fg);
+}
