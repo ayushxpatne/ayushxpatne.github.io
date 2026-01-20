@@ -522,6 +522,7 @@ footer {
 @media (max-width: 768px) {
     .blog-container {
         padding: 80px 16px 40px;
+        gap: 0px;
     }
 
     .blog-content {
