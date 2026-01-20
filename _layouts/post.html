@@ -7,6 +7,7 @@ wide_footer: true
 <div class="blog-container">
     <article class="blog-content">
         <div id="blog-header">
+            <p class="blog-breadcrumb">ayush's blog.</p>
             <h1>{{ page.title }}</h1>
             <p class="card-meta mono">
                 {{ page.date | date: "%b %-d, %Y" }}
@@ -20,7 +21,7 @@ wide_footer: true
             </div>
             {% endif %}
         </div>
-        
+
         <div id="blog-content" class="blog-post">
             {{ content }}
         </div>

@@ -201,6 +201,29 @@ a:hover {
     margin-bottom: 12px;
 }
 
+#blog-header .card-meta {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+#blog-header .post-tags {
+    margin-top: 20px;
+    margin-bottom: 48px;
+}
+
+#blog-header .tag {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
 .card-description, .post-excerpt {
     color: var(--fg);
     font-size: 1rem;
@@ -276,17 +299,17 @@ footer {
     height: fit-content;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    padding-left: 20px;
-    border-left: 2px solid var(--border);
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
     display: block;
 }
 
 .toc-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.05em;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     color: var(--muted);
 }
 
@@ -303,10 +326,11 @@ footer {
 .toc-list a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 0.85rem;
     display: block;
-    line-height: 1.4;
-    transition: color 0.2s;
+    line-height: 1.5;
+    transition: all 0.2s;
+    font-weight: 400;
 }
 
 .toc-list a.toc-h3 {
@@ -321,6 +345,23 @@ footer {
 
 .toc-list a.active {
     font-weight: 600;
+}
+
+.blog-breadcrumb {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#blog-header h1 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
 #blog-content h2 { margin-top: 2.5rem; }
