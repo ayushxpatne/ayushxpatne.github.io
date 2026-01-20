@@ -34,14 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     html = html.replace(/::p::(.*?)::/g, '<span class="hlt-p">$1</span>');
     body.innerHTML = html;
 
-    // 2. Skill Tagifier: Finds the Technical Skills list and adds classes
-    const skillsHeading = Array.from(document.querySelectorAll('h1')).find(h => h.innerText.toLowerCase().includes('skills'));
-    if (skillsHeading) {
-        const list = skillsHeading.nextElementSibling;
-        if (list && list.tagName === 'UL') {
-            list.classList.add('skills-tag-container');
-        }
-    }
+    // // 2. Skill Tagifier: Finds the Technical Skills list and adds classes
+    // const skillsHeading = Array.from(document.querySelectorAll('h1')).find(h => h.innerText.toLowerCase().includes('skills'));
+    // if (skillsHeading) {
+    //     const list = skillsHeading.nextElementSibling;
+    //     if (list && list.tagName === 'UL') {
+    //         list.classList.add('skills-tag-container');
+    //     }
+    // }
 
     // 3. TOC Generator (Same as before)
     const headings = document.querySelectorAll('.resume-markdown h1');

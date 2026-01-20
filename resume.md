@@ -47,7 +47,7 @@ permalink: /resume/
 * built full-stack architecture using flutter, firebase, getx, and gcp cloud functions to track persistent user context and emotional states.
 * implemented fluid chat ux inspired by ::p::imessage design principles:: for judgment-free companionship with long-term context persistence.
 
-## social media recommendation engine  [blog](https://ayushxpatne.github.io/ayushpatne/blog.html?post=social-media-algorithm)  [live demo](https://social-media-algo-code.onrender.com) 
+## social media recommendation engine  [blog](https://ayushxpatne.github.io/ayushpatne/blog/social-media-algorithm)  [live demo](https://social-media-algo-code.onrender.com) 
 
 * engineered a tiktok-style recommendation engine using ::y::python, flask, and faiss:: for semantic video retrieval.
 * implemented ::b::indexivf clustering:: with approximate nearest neighbor search to efficiently query 3072-dimensional embeddings across 500+ videos.
@@ -60,7 +60,7 @@ permalink: /resume/
 * developed end-to-end training workflow including dataset preparation, tokenization, fine-tuning, and evaluation for generative text modeling.
 * achieved ::b::runner-up recognition:: at visionary techfest 24 ai/ml hackathon organized by binghamton university.
 
-## distributed training infrastructure · fraud detection  [full project overview](https://ayushxpatne.github.io/ayushpatne/blog.html?post=fl-eth-dissertation) 
+## distributed training infrastructure · fraud detection  [full project overview](https://ayushxpatne.github.io/ayushpatne/blog/fl-eth-dissertation) 
 
 * architected ::p::federated learning system:: enabling privacy-preserving collaborative training across 3 distributed clients over 10 rounds.
 * engineered data processing pipeline for highly imbalanced ethereum datasets (90%+ class imbalance), applying ::y::smote oversampling:: and feature engineering.
