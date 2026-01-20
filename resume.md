@@ -14,7 +14,7 @@ permalink: /resume/
 
 # experience
 
-## founder · hopps
+## founding ai engineer · hopps
 **september 2024 — june 2025 | pune, india**
 
 * led cross-functional product development for a food-tech platform serving ::y::70+ restaurant partners:: and 20+ beta users.
