@@ -309,6 +309,11 @@ footer {
     transition: color 0.2s;
 }
 
+.toc-list a.toc-h3 {
+    padding-left: 16px;
+    font-size: 0.85em;
+}
+
 .toc-list a:hover,
 .toc-list a.active {
     color: var(--fg);
@@ -329,6 +334,15 @@ footer {
     overflow-x: auto; 
     margin: 20px 0;
 }
+
+#blog-content .math-display,
+#blog-content .MathJax_Display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 10px 0;
+}
+
 #blog-content code {
     background: #f5f5f5;
     padding: 2px 6px;
