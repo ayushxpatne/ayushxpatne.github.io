@@ -14,7 +14,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--fg);
     line-height: 1.6;
@@ -23,9 +23,10 @@ body {
 }
 
 .mono {
-    font-family: 'Roboto Mono',  monospace;
+    font-family: 'Roboto Mono', monospace;
     font-size: 0.9em;
 }
+
 /* =========================================
    REFINED MINIMALIST NAVIGATION
    ========================================= */
@@ -35,7 +36,8 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    background: rgba(255, 255, 255, 0.9);
+    /* Slight transparency */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
@@ -48,11 +50,12 @@ nav {
     padding: 0 30px;
     display: grid;
     /* This grid matches your home-grid (0.8fr 1.2fr) */
-    grid-template-columns: 0.8fr 1.2fr; 
+    grid-template-columns: 0.8fr 1.2fr;
 }
 
 .nav-links {
-    grid-column: 2; /* Forces links to start where the work section starts */
+    grid-column: 2;
+    /* Forces links to start where the work section starts */
     display: flex;
     gap: 32px;
 }
@@ -61,12 +64,13 @@ nav {
     text-decoration: none;
     color: var(--muted);
     font-size: 0.75rem;
-    text-transform: lowercase; /* Matching your new bio style */
+    text-transform: lowercase;
+    /* Matching your new bio style */
     letter-spacing: 0.05em;
     transition: color 0.2s;
 }
 
-.nav-links a:hover, 
+.nav-links a:hover,
 .nav-links a.active {
     color: var(--fg);
 }
@@ -74,10 +78,11 @@ nav {
 /* Mobile Nav adjustment */
 @media (max-width: 768px) {
     .nav-content {
-        display: block; /* Stack on mobile */
+        display: block;
+        /* Stack on mobile */
         text-align: right;
     }
-    
+
     nav {
         padding: 15px 0;
     }
@@ -85,6 +90,10 @@ nav {
     .nav-links {
         justify-content: flex-end;
         gap: 20px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
     }
 }
 
@@ -102,15 +111,28 @@ nav {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-weight: 700;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
 }
 
-h1 { font-size: 2.5rem; line-height: 1.2; }
-h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1.5rem; }
-h3 { font-size: 1.25rem; }
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
 
 a {
     color: var(--fg);
@@ -131,7 +153,8 @@ a:hover {
     font-weight: 700;
     letter-spacing: -0.04em;
     margin-bottom: 4px !important;
-    text-transform: lowercase; /* Ted-style lowercase */
+    text-transform: lowercase;
+    /* Ted-style lowercase */
 }
 
 .intro-subtitle {
@@ -150,10 +173,10 @@ a:hover {
 }
 
 .archive-link {
-    font-size: 0.8rem; 
-    margin-top: 20px; 
-    display: inline-block; 
-    opacity: 0.5; 
+    font-size: 0.8rem;
+    margin-top: 20px;
+    display: inline-block;
+    opacity: 0.5;
     text-decoration: none;
 }
 
@@ -168,7 +191,8 @@ a:hover {
     gap: 40px;
 }
 
-.post-card, .featured-card {
+.post-card,
+.featured-card {
     display: block;
     text-decoration: none;
     padding: 24px;
@@ -178,9 +202,10 @@ a:hover {
     background: var(--bg);
 }
 
-.post-card:hover, .featured-card:hover {
+.post-card:hover,
+.featured-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
     text-decoration: none;
 }
 
@@ -224,7 +249,8 @@ a:hover {
     font-weight: 500;
 }
 
-.card-description, .post-excerpt {
+.card-description,
+.post-excerpt {
     color: var(--fg);
     font-size: 1rem;
     margin-bottom: 16px;
@@ -331,7 +357,7 @@ footer {
     line-height: 1.5;
     transition: all 0.2s;
     font-weight: 400;
-    text-transform: lowercase; 
+    text-transform: lowercase;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -374,15 +400,29 @@ footer {
     letter-spacing: -0.03em;
 }
 
-#blog-content h2 { margin-top: 2.5rem; }
-#blog-content h3 { margin-top: 2rem; }
-#blog-content p { margin-bottom: 1.5rem; }
-#blog-content img { max-width: 100%; border-radius: 8px; margin: 20px 0; }
-#blog-content pre { 
-    background: #f5f5f5; 
-    padding: 20px; 
-    border-radius: 8px; 
-    overflow-x: auto; 
+#blog-content h2 {
+    margin-top: 2.5rem;
+}
+
+#blog-content h3 {
+    margin-top: 2rem;
+}
+
+#blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+#blog-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+#blog-content pre {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
     margin: 20px 0;
 }
 
@@ -410,10 +450,12 @@ footer {
     font-family: 'Roboto Mono', monospace;
     font-size: 0.9em;
 }
+
 #blog-content pre code {
     background: none;
     padding: 0;
 }
+
 #blog-content blockquote {
     border-left: 4px solid var(--fg);
     margin: 20px 0;
@@ -450,7 +492,7 @@ footer {
 
 .scroll-top:hover {
     transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes fadeIn {
@@ -458,6 +500,7 @@ footer {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -470,44 +513,51 @@ footer {
         padding: 100px 40px 60px;
         gap: 40px;
     }
-    .toc-sidebar { display: none; }
+
+    .toc-sidebar {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
     .blog-container {
-        padding: 80px 20px 40px;
+        padding: 80px 16px 40px;
     }
-    
+
+    .blog-content {
+        padding: 0 4px;
+    }
+
     .blog-breadcrumb {
         font-size: 0.95rem;
     }
-    
+
     #blog-header h1 {
         font-size: 1.75rem;
         line-height: 1.3;
     }
-    
+
     #blog-header .card-meta {
         font-size: 0.8rem;
     }
-    
+
     #blog-content h2 {
         font-size: 1.3rem;
     }
-    
+
     #blog-content h3 {
         font-size: 1.1rem;
     }
-    
+
     #blog-content p {
         font-size: 0.95rem;
     }
-    
+
     #blog-content pre {
         padding: 12px;
         font-size: 0.85rem;
     }
-    
+
     #blog-content code {
         font-size: 0.85rem;
     }
@@ -529,21 +579,24 @@ footer {
 
 @media (min-width: 768px) {
     .home-grid {
-        grid-template-columns: 0.8fr 1.2fr; 
+        grid-template-columns: 0.8fr 1.2fr;
         align-items: start;
     }
 
     .home-intro {
         position: sticky;
-        top: 100px; /* Adjusted to sit comfortably below nav */
+        top: 100px;
+        /* Adjusted to sit comfortably below nav */
     }
 }
 
 /* --- Alignment Fixes (A) --- */
 .home-intro h1 {
     font-size: 2rem;
-    line-height: 1.1; /* Tighter line height for alignment */
-    margin-top: 0 !important; /* Force start at the very top */
+    line-height: 1.1;
+    /* Tighter line height for alignment */
+    margin-top: 0 !important;
+    /* Force start at the very top */
     margin-bottom: 24px;
     letter-spacing: -0.03em;
 }
@@ -554,8 +607,9 @@ footer {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--muted);
-    margin-top: 0 !important; 
-    padding-top: 4px; /* Optical alignment for the first header */
+    margin-top: 0 !important;
+    padding-top: 4px;
+    /* Optical alignment for the first header */
     margin-bottom: 24px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border);
@@ -563,9 +617,10 @@ footer {
 }
 
 /* Add space above "Recent Writing" without affecting "Selected Work" */
-.home-content-block + .home-content-block .home-section-title {
-    margin-top: 60px !important; 
-    padding-top: 0; /* Remove the alignment padding for secondary headers */
+.home-content-block+.home-content-block .home-section-title {
+    margin-top: 60px !important;
+    padding-top: 0;
+    /* Remove the alignment padding for secondary headers */
 }
 
 /* Ensure the whole card feels clickable (Point B) */
@@ -573,6 +628,7 @@ footer {
     cursor: pointer;
     position: relative;
 }
+
 /* --- Restored Tags & Links (B & C) --- */
 
 .home-grid .post-card,
@@ -580,7 +636,7 @@ footer {
     display: block;
     padding: 20px 0;
     border: none;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 0;
     background: transparent;
     box-shadow: none;
@@ -609,7 +665,7 @@ footer {
     color: var(--muted);
 }
 
-.home-grid .card-description, 
+.home-grid .card-description,
 .home-grid .post-excerpt {
     font-size: 0.95rem;
     margin-bottom: 12px;
@@ -657,9 +713,22 @@ footer {
 }
 
 /* Keep previous intro links styles */
-.home-intro .tagline { color: var(--muted); margin-bottom: 32px; }
-.home-intro .links { display: flex; flex-direction: column; gap: 10px; }
-.home-intro .links a { text-decoration: none; font-weight: 500; font-size: 0.9em; }
+.home-intro .tagline {
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+.home-intro .links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.home-intro .links a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9em;
+}
 
 /* =========================================
    ARCHIVE PAGE (Matching New Home Style)
@@ -671,13 +740,14 @@ footer {
     grid-template-columns: 1fr;
     gap: 60px;
     max-width: 1100px;
-    margin: 140px auto 60px; /* Space for fixed nav */
+    margin: 140px auto 60px;
+    /* Space for fixed nav */
     padding: 0 30px;
 }
 
 @media (min-width: 768px) {
     .archive-layout {
-        grid-template-columns: 0.8fr 1.2fr; 
+        grid-template-columns: 0.8fr 1.2fr;
         align-items: start;
     }
 }
@@ -698,11 +768,12 @@ footer {
 }
 
 /* The List (Right Column) */
-.archive-layout #all-posts .post-card, 
+.archive-layout #all-posts .post-card,
 .archive-layout #all-posts .featured-card {
     display: block;
     border: none !important;
-    border-bottom: 1px solid rgba(0,0,0,0.06) !important; /* Subtle divider */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    /* Subtle divider */
     border-radius: 0 !important;
     padding: 32px 0 !important;
     margin-bottom: 0 !important;
@@ -719,7 +790,7 @@ footer {
 }
 
 /* Typography inside the list */
-.archive-layout .post-title, 
+.archive-layout .post-title,
 .archive-layout .card-title {
     font-size: 1.1rem !important;
     font-weight: 600;
@@ -727,7 +798,7 @@ footer {
     margin-bottom: 8px;
 }
 
-.archive-layout .post-excerpt, 
+.archive-layout .post-excerpt,
 .archive-layout .card-description {
     font-size: 0.95rem;
     color: var(--muted);
@@ -817,8 +888,10 @@ footer {
 }
 
 .resume-markdown h1:first-of-type {
-    margin-top: 0; /* Align with left column */
-    padding-top: 4px; /* Visual balance with intro-name */
+    margin-top: 0;
+    /* Align with left column */
+    padding-top: 4px;
+    /* Visual balance with intro-name */
 }
 
 .resume-markdown h2 {
@@ -859,7 +932,7 @@ footer {
 
 .resume-markdown hr {
     border: none;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     margin: 40px 0;
 }
 
@@ -872,14 +945,33 @@ footer {
 
 @media (max-width: 768px) {
     .resume-toc {
-        display: none; /* Hide TOC on small screens to save space */
+        display: none;
+        /* Hide TOC on small screens to save space */
     }
 }
 
 /* --- Pastel Highlights --- */
-.hlt-y { background-color: #fef3c7; padding: 0 2px; border-radius: 2px; } /* Pastel Yellow */
-.hlt-b { background-color: #e0f2fe; padding: 0 2px; border-radius: 2px; } /* Pastel Blue */
-.hlt-p { background-color: #fce7f3; padding: 0 2px; border-radius: 2px; } /* Pastel Pink */
+.hlt-y {
+    background-color: #fef3c7;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Pastel Yellow */
+.hlt-b {
+    background-color: #e0f2fe;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Pastel Blue */
+.hlt-p {
+    background-color: #fce7f3;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Pastel Pink */
 
 /* --- Skills-as-Tags --- */
 .skills-tag-container {
@@ -893,7 +985,8 @@ footer {
 }
 
 .skills-tag-container li::before {
-    content: "" !important; /* Remove the dash for skills */
+    content: "" !important;
+    /* Remove the dash for skills */
 }
 
 /* This turns the comma-separated text into a tag-cloud look */
