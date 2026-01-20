@@ -799,7 +799,7 @@ footer {
 
 /* Adjust project links in resume */
 .resume-markdown a[href*="http"] {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     text-transform: lowercase;
     text-decoration: none;
     border: 1px solid var(--border);

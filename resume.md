@@ -70,7 +70,7 @@ permalink: /resume/
 # research
 
 ## "attention span and its correlation with mental health"**  
-* richa shah, sarthak rak, ayush patne, dr. laxmi bewoor  
+**richa shah, sarthak rak, ayush patne, dr. laxmi bewoor**
 * 4th asian conference on innovation in technology, august 2024
 
 * led research design analyzing correlation between attention span metrics and mental health indicators across 84 participants.
@@ -78,10 +78,10 @@ permalink: /resume/
 
 # technical skills
 
-* **programming:** python (pandas, numpy, scikit-learn), pytorch, tensorflow, hugging face transformers
-* **ai/ml:** nlp, generative ai, llms, transformer architectures, prompt engineering, fine-tuning (lora/peft)
-* **infrastructure:** gcp (cloud functions, firebase), langchain, flask, git, distributed training systems, model deployment
-* **specializations:** rag systems, semantic similarity, asynchronous data pipelines, model evaluation
+**programming:** python (pandas, numpy, scikit-learn), pytorch, tensorflow, hugging face transformers
+**ai/ml:** nlp, generative ai, llms, transformer architectures, prompt engineering, fine-tuning (lora/peft)
+**infrastructure:** aws, gcp (cloud functions, firebase), langchain, flask, git, distributed training systems, model deployment
+**specializations:** rag systems, semantic similarity, asynchronous data pipelines, model evaluation
 
 # leadership & achievements
 
