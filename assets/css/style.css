@@ -307,7 +307,7 @@ footer {
 .toc-title {
     font-size: 0.7rem;
     font-weight: 600;
-    text-transform: lowercase;
+    /* text-transform: lowercase; */
     letter-spacing: 0.05em;
     margin-bottom: 20px;
     color: var(--muted);
@@ -331,6 +331,8 @@ footer {
     line-height: 1.5;
     transition: all 0.2s;
     font-weight: 400;
+    text-transform: lowercase; 
+    font-family: 'Roboto Mono', monospace;
 }
 
 .toc-list a.toc-h3 {
@@ -338,13 +340,21 @@ footer {
     font-size: 0.85em;
 }
 
-.toc-list a:hover,
-.toc-list a.active {
+.toc-list a:hover {
     color: var(--fg);
 }
 
 .toc-list a.active {
-    font-weight: 600;
+    color: var(--fg);
+    font-weight: 700;
+    position: relative;
+}
+
+.toc-list a.active::before {
+    content: "→";
+    position: absolute;
+    left: -16px;
+    color: var(--fg);
 }
 
 .blog-breadcrumb {
