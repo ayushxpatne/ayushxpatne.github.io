@@ -336,11 +336,20 @@ footer {
 }
 
 #blog-content .math-display,
-#blog-content .MathJax_Display {
+#blog-content .MathJax_Display,
+#blog-content .katex-display,
+#blog-content mjx-container[display="true"],
+#blog-content .math {
     overflow-x: auto;
     overflow-y: hidden;
     max-width: 100%;
     padding: 10px 0;
+}
+
+#blog-content mjx-container,
+#blog-content .katex {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 #blog-content code {
