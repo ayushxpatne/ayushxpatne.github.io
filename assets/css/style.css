@@ -953,14 +953,14 @@ footer {
 
 /* --- Pastel Highlights --- */
 .hlt-y {
-    background-color: #fef3c7;
+    background-color: #fff1b7;
     padding: 0 2px;
     border-radius: 2px;
 }
 
 /* Pastel Yellow */
 .hlt-b {
-    background-color: #e0f2fe;
+    background-color: #cceaff;
     padding: 0 2px;
     border-radius: 2px;
 }
@@ -968,6 +968,20 @@ footer {
 /* Pastel Blue */
 .hlt-p {
     background-color: #fce7f3;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Pastel Green */
+.hlt-g {
+    background-color: #85ffb0;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Pastel Red */
+.hlt-r {
+    background-color: #ff9494;
     padding: 0 2px;
     border-radius: 2px;
 }

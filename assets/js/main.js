@@ -93,6 +93,14 @@ function addCodeLanguageLabels() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize scroll to top
     initScrollTop();
+
+    // Highlight Engine: Replaces ::y::text:: with pastel spans
+    html = html.replace(/::y::(.*?)::/g, '<span class="hlt-y">$1</span>');
+    html = html.replace(/::b::(.*?)::/g, '<span class="hlt-b">$1</span>');
+    html = html.replace(/::p::(.*?)::/g, '<span class="hlt-p">$1</span>');
+    html = html.replace(/::g::(.*?)::/g, '<span class="hlt-g">$1</span>');
+    html = html.replace(/::r::(.*?)::/g, '<span class="hlt-r">$1</span>');
+    body.innerHTML = html;
     
     // Generate TOC if on blog post page
     if (document.getElementById('blog-content')) {
@@ -101,13 +109,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add code language labels
     addCodeLanguageLabels();
-    
-    // // Make nav logo clickable
-    // const navLogo = document.querySelector('.nav-logo');
-    // if (navLogo) {
-    //     navLogo.style.cursor = 'pointer';
-    //     navLogo.addEventListener('click', () => {
-    //         window.location.href = '{{ "/" | relative_url }}';
-    //     });
-    // }
 });
