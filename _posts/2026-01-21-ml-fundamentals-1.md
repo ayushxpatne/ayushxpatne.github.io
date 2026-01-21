@@ -52,6 +52,7 @@ Now we used all of this data (all 100 examples) to train a Machine Learning Mode
 | **No. of Seats** | **Ground Clearance** | **Label** |
 | ---------------- | -------------------- | --------- |
 | 2                | 150 mm               | **?**     |
+
 We put this new data in, and it predicts, Sports Car. But do we know if it is actually a Sports Car or not? What if the model is wrong? Is the model wrong? 
 
 That is why we don't use the entire dataset to train the model. We also need to see it, **evaluate** or **test** the model if it is predicting accurate/correct answers or not. 
@@ -72,6 +73,7 @@ If it predicted Super Car, and c1 was actually Sports Car, woohooo! our model pr
 | **7**            | 190 mm               | SUV                  | SUV              | **Yes**                  |
 | **4**            | 145 mm               | Sports Car           | Sports Car       | **Yes**                  |
 | **2**            | 200 mm               | Sports Car           | SUV              | **No**                   |
+
 So the **testing set** is used exactly like this, we see if the predicted label = actual label or not. 
 
 Now the question arises, how to decide which 75% of data should be training?
@@ -108,6 +110,7 @@ One great way to summarise how well the model/method performed (ie the test resu
 |---|---|---|
 |**Predicted Positive**|::g::True Positive::|::r::False Positive::|
 |**Predicted Negative**|::r::False Negative::|::g::True Negative::|
+
 To put it simply, 
 - **True Positive :** The model **predicted** a thing as **X**, and it **was actually X**. 
 - False Positive : The model **predicated** a thing as **X**, but it **was actually Not X**.
@@ -176,12 +179,14 @@ And now if train the model using above dataset, and test it using the test set, 
 |7|220 mm|1|1|**Yes** (TP)|
 |2|130 mm|0|0|**Yes** (TN)|
 |5|185 mm|1|1|**Yes** (TP)|
+
 And a much neater way to see is to use Confusion Matrix. So the confusion matrix for the above output will look like:
 
 |                                     | **Actually Positive (is SUV)** | **Actually Negative (is Not SUV)** |
 | ----------------------------------- | ------------------------------ | ---------------------------------- |
 | **Predicted Positive (is SUV)**     | **4** (True Positives)         | **1** (False Positive)             |
 | **Predicted Negative (is Not SUV)** | **1** (False Negative)         | **4** (True Negatives)             |
+
 Much more concise and intuitive right?
 
 ### Using Confusion Matrix to Compare Methods
@@ -192,6 +197,7 @@ Say for some Method X we got confusion matrix as:
 |---|---|---|
 |**Predicted Positive (is SUV)**|**30** (True Positive)|**15** (False Positive)|
 |**Predicted Negative (is Not SUV)**|**15** (False Negative)|**40** (True Negative)|
+
 **Total correct: 70/100**
 
 and for some method Y we got confusion matrix as:
@@ -200,6 +206,7 @@ and for some method Y we got confusion matrix as:
 |---|---|---|
 |**Predicted Positive (is SUV)**|**42** (True Positive)|**5** (False Positive)|
 |**Predicted Negative (is Not SUV)**|**5** (False Negative)|**48** (True Negative)|
+
 **Total correct: 90/100**
 
 which one do you think is better? Since method Y has more number of (True Positives + True negatives) and less number of (False Positives + False Negatives) compared to method X, method Y seems to be better. 
