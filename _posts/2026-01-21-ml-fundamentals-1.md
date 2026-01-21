@@ -230,4 +230,5 @@ We cannot transform this into 1s and 0s now. So what to do now? Well we train th
 | **Actually Sports Car** | ::g::**45**::            | ::r::4::          | ::r::1::              |
 | **Actually SUV**        | ::r::3::                 | ::g::**42**::     | ::r::5::              |
 | **Actually Minivan**    | ::r::0::                 | ::r::8::          | ::g::**42**::         |
+
 So basically, size of confusion matrix depends on how many classes we have. 
