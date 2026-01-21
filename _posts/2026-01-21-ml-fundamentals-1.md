@@ -3,14 +3,14 @@ layout: post
 author: Ayush Patne
 title: The ML Fundamentals Handbook
 date: 2026-01-16
-excerpt: Fundamental ML concepts with examples and explanations that feel like a conversation, not a lecture. An ongoing guide for building your machine learning foundation.
+excerpt: Fundamental ML concepts with examples and explanations that feel like a conversation, not a lecture. A guide for building your machine learning foundation before you get to know about different methods n other ML stuff.
 tags:
   - ML
   - Machine-Learning
   - Tutorial
 featured: false
 featured_type: Technical
-read_time: 9 min
+read_time: 15 min
 ---
 Hey Everyone! I hope you are doing good. This blog is going to cover some fundamentals of machine learning, some must knows before getting deeper. 
 
