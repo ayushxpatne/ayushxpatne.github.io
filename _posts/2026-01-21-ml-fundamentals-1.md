@@ -459,9 +459,11 @@ $$\text{Recall} = \frac{4}{4 + 1} = \frac{4}{5} = 0.8 \text{ or } 80\%$$
 > **Why is it called "Recall"?**
 > 
 > → The word **"recall"** means **"to bring back"** or **"to retrieve"**.
+> 
 > → So **Recall** asks: "Out of all the things I should have found (actual positives), how many did I successfully recall/retrieve/bring back?"
 > 
 > **Why is it also called Sensitivity?** 
+> 
 > → Because it measures how "sensitive" your model is to detecting positive cases. A highly sensitive test won't miss many positive cases.
 
  Circling back to the cancer detection model. High recall basically means "Out of all people who actually have cancer, I'm catching most of them."
