@@ -1,12 +1,13 @@
 ---
 layout: post
 author: Ayush Patne
-title: Machine Learning Fundamentals
+title: The ML Fundamentals Handbook
 date: 2026-01-16
-excerpt: Covers basics of ML- this is an ongoing blog.
+excerpt: Fundamental ML concepts with examples and explanations that feel like a conversation, not a lecture. An ongoing guide for building your machine learning foundation.
 tags:
   - ML
   - Machine-Learning
+  - Tutorial
 featured: false
 featured_type: Technical
 read_time: 9 min
@@ -24,7 +25,8 @@ All these methods, for achieving the same goal.. how do we pick which one is the
 
 **Cross Validation allows us to compare to different ML methods and get a sense of how well they will work in practice.** 
 
-Well, as we know, Machine Learning is nothing but using math to identify patterns in the data. These methods are nothing but different such mathematical methods / algorithms which are used to identify patterns in the data, which we can use to predict or classify (maybe generate?) new data based on the identified pattern. 
+### Training & Testing
+Machine Learning is nothing but using math to identify patterns in the data. These methods are nothing but different such mathematical methods / algorithms which are used to identify patterns in the data, which we can use to predict or classify (maybe generate?) new data based on the identified pattern. 
 
 The process where we are applying ML method on a given data, to achieve a said goal, its called **Training**, ie we are **"Training the model"**. 
 
@@ -76,6 +78,8 @@ If it predicted Super Car, and c1 was actually Sports Car, woohooo! our model pr
 
 So the **testing set** is used exactly like this, we see if the predicted label = actual label or not. 
 
+### Novelty of Cross Validation
+
 Now the question arises, how to decide which 75% of data should be training?
 
 Say the dataset is divided into 4 blocks (P, Q, R, S), each with 25% of the data, i.e., P will have first 25%, Q will have next 25% of dataset, R will have next 25% of dataset and S will have last 25% of dataset. 
@@ -86,7 +90,6 @@ Say the dataset is divided into 4 blocks (P, Q, R, S), each with 25% of the data
 > In Practice, 10-Fold Cross Validation is common, ie dividing the dataset into 10 blocks, and using 9 to train and 1 to test at a time. 
 > 
 > In some machine learning models, if there is a "tuning parameter", basically some coefficient/element of the mathematical function that is guessed and not estimated, we can use 10-Fold Cross Validation to find the best value for that parameter. 
-
 
 In Cross Validation we train and test a method on all combinations of blocks. 
 So like, for example:
@@ -101,6 +104,8 @@ This is done on all the methods we want to compare and then in the end, we see h
 
 So if we want to compare two methods, X and Y, we run cross validation on each of them and tally which method got higher number of correct answers. 
 
+This brings us to...
+
 ## Confusion Matrix
 Once we train the model, and test it using the **test set**, we need to see the results right? How many did it predict correctly? How many it predicted false?
 
@@ -112,10 +117,10 @@ One great way to summarise how well the model/method performed (ie the test resu
 | **Predicted Negative** | ::r::False Negative:: | ::g::True Negative::  |
 
 To put it simply, 
-- **True Positive :** The model **predicted** a thing as **X**, and it **was actually X**. 
-- False Positive : The model **predicated** a thing as **X**, but it **was actually Not X**.
-- True Negative : The model **predicted** a thing as **Not X**, and **was actually Not X.** 
-- False Negative : The model **predicted** a thing as **Not X**, but it **was actually X**. 
+- ::g::**True Positive**:: : The model **predicted** a thing as **X**, and it **was actually X**. 
+- ::r::**False Positive**:: : The model **predicated** a thing as **X**, but it **was actually Not X**.
+- ::g::**True Negative**:: : The model **predicted** a thing as **Not X**, and **was actually Not X.** 
+- ::r::**False Negative**:: : The model **predicted** a thing as **Not X**, but it **was actually X**. 
 
 For example, lets modify our earlier example, to classify if a given car is Sports car or SUV. 
 
@@ -184,8 +189,8 @@ And a much neater way to see is to use Confusion Matrix. So the confusion matrix
 
 |                                     | **Actually Positive (is SUV)** | **Actually Negative (is Not SUV)** |
 | ----------------------------------- | ------------------------------ | ---------------------------------- |
-| **Predicted Positive (is SUV)**     | **4** (True Positives)         | **1** (False Positive)             |
-| **Predicted Negative (is Not SUV)** | **1** (False Negative)         | **4** (True Negatives)             |
+| **Predicted Positive (is SUV)**     | ::g::**4** (True Positives)::  | ::r::**1** (False Positive)::      |
+| **Predicted Negative (is Not SUV)** | ::r::**1** (False Negative)::  | ::g::**4** (True Negatives)::      |
 
 Much more concise and intuitive right?
 
@@ -193,25 +198,25 @@ Much more concise and intuitive right?
 We can also compare methods to train model using Confusion Matrix.
 Say for some Method X we got confusion matrix as:
 
-| |**Actually Positive (is SUV)**|**Actually Negative (is Not SUV)**|
-|---|---|---|
-|**Predicted Positive (is SUV)**|**30** (True Positive)|**15** (False Positive)|
-|**Predicted Negative (is Not SUV)**|**15** (False Negative)|**40** (True Negative)|
+|                                     | **Actually Positive (is SUV)** | **Actually Negative (is Not SUV)** |
+| ----------------------------------- | ------------------------------ | ---------------------------------- |
+| **Predicted Positive (is SUV)**     | ::g::**30** (True Positive)::  | ::r::**15** (False Positive)::     |
+| **Predicted Negative (is Not SUV)** | ::r::**15** (False Negative):: | ::g::**40** (True Negative)::      |
 
 **Total correct: 70/100**
 
 and for some method Y we got confusion matrix as:
 
-| |**Actually Positive (is SUV)**|**Actually Negative (is Not SUV)**|
-|---|---|---|
-|**Predicted Positive (is SUV)**|**42** (True Positive)|**5** (False Positive)|
-|**Predicted Negative (is Not SUV)**|**5** (False Negative)|**48** (True Negative)|
+|                                     | **Actually Positive (is SUV)** | **Actually Negative (is Not SUV)** |
+| ----------------------------------- | ------------------------------ | ---------------------------------- |
+| **Predicted Positive (is SUV)**     | ::g::**42** (True Positive)::  | ::r::**5** (False Positive)::      |
+| **Predicted Negative (is Not SUV)** | ::r::**5** (False Negative)::  | ::g::**48** (True Negative)::      |
 
 **Total correct: 90/100**
 
 which one do you think is better? Since method Y has more number of (True Positives + True negatives) and less number of (False Positives + False Negatives) compared to method X, method Y seems to be better. 
 
-Obviously, there are more sophisticated metrics to see which model is better, but the confusing matrix will help you gain the basic intuition to compare models. 
+Obviously, there are more sophisticated metrics to see which model is better, or how well the model is performing, as a starting point the confusing matrix will help you gain the basic intuition to see if a model is performing well. 
 
 ### What If There Are More Than 2 classes?
 Lets go back to our original question, Is a given car SUV or Sports car? 
@@ -222,8 +227,7 @@ We cannot transform this into 1s and 0s now. So what to do now? Well we train th
 
 |                         | **Predicted Sports Car** | **Predicted SUV** | **Predicted Minivan** |
 | ----------------------- | ------------------------ | ----------------- | --------------------- |
-| **Actually Sports Car** | **45**                   | 4                 | 1                     |
-| **Actually SUV**        | 3                        | **42**            | 5                     |
-| **Actually Minivan**    | 0                        | 8                 | **42**                |
-
-
+| **Actually Sports Car** | ::g::**45**::            | ::r::4::          | ::r::1::              |
+| **Actually SUV**        | ::r::3::                 | ::g::**42**::     | ::r::5::              |
+| **Actually Minivan**    | ::r::0::                 | ::r::8::          | ::g::**42**::         |
+So basically, size of confusion matrix depends on how many classes we have. 
