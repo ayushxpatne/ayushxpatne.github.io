@@ -106,10 +106,10 @@ Once we train the model, and test it using the **test set**, we need to see the 
 
 One great way to summarise how well the model/method performed (ie the test results) is to use a **Confusion Matrix.** A Confusion Matrix will look like this:
 
-| |**Actually Positive**|**Actually Negative**|
-|---|---|---|
-|**Predicted Positive**|::g::True Positive::|::r::False Positive::|
-|**Predicted Negative**|::r::False Negative::|::g::True Negative::|
+|                        | **Actually Positive** | **Actually Negative** |
+| ---------------------- | --------------------- | --------------------- |
+| **Predicted Positive** | ::g::True Positive::  | ::r::False Positive:: |
+| **Predicted Negative** | ::r::False Negative:: | ::g::True Negative::  |
 
 To put it simply, 
 - **True Positive :** The model **predicted** a thing as **X**, and it **was actually X**. 

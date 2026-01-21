@@ -75,7 +75,7 @@ function setupTOCActiveState() {
 // Add language labels to code blocks
 function addCodeLanguageLabels() {
     if (typeof Prism === 'undefined') return;
-    
+
     document.querySelectorAll('pre[class*="language-"]').forEach(pre => {
         const match = pre.className.match(/language-(\w+)/);
         if (match) {
@@ -94,19 +94,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize scroll to top
     initScrollTop();
 
-    // Highlight Engine: Replaces ::y::text:: with pastel spans
-    html = html.replace(/::y::(.*?)::/g, '<span class="hlt-y">$1</span>');
-    html = html.replace(/::b::(.*?)::/g, '<span class="hlt-b">$1</span>');
-    html = html.replace(/::p::(.*?)::/g, '<span class="hlt-p">$1</span>');
-    html = html.replace(/::g::(.*?)::/g, '<span class="hlt-g">$1</span>');
-    html = html.replace(/::r::(.*?)::/g, '<span class="hlt-r">$1</span>');
-    body.innerHTML = html;
-    
-    // Generate TOC if on blog post page
+    // Generate ToC and Highlight
     if (document.getElementById('blog-content')) {
+        const blogBody = document.getElementById('blog-content');
+        let html = blogBody.innerHTML;
+
+        // 1. Highlight Engine: Replaces ::y::text:: with pastel spans
+        // This will now work perfectly inside tables, lists, and paragraphs
+        html = html.replace(/::y::(.*?)::/g, '<span class="hlt-y">$1</span>');
+        html = html.replace(/::b::(.*?)::/g, '<span class="hlt-b">$1</span>');
+        html = html.replace(/::p::(.*?)::/g, '<span class="hlt-p">$1</span>');
+        html = html.replace(/::g::(.*?)::/g, '<span class="hlt-g">$1</span>');
+        html = html.replace(/::r::(.*?)::/g, '<span class="hlt-r">$1</span>');
+
+        // Update the DOM once with all changes
+        blogBody.innerHTML = html;
+
+        // 2. Now generate TOC (after highlights are processed)
         generateTOC();
     }
-    
     // Add code language labels
     addCodeLanguageLabels();
 });
