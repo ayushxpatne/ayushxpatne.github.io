@@ -1035,3 +1035,57 @@ footer {
     border-color: var(--fg);
     color: var(--fg);
 }
+
+/* =========================================
+   BLOG TABLE STYLES
+   ========================================= */
+
+#blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.95rem;
+}
+
+#blog-content thead {
+    background: #f5f5f5;
+}
+
+#blog-content th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+#blog-content td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    line-height: 1.5;
+}
+
+#blog-content tbody tr:hover {
+    background: #fafafa;
+}
+
+/* Center align specific columns if needed */
+#blog-content td:first-child,
+#blog-content th:first-child {
+    text-align: left;
+}
+
+/* Mobile responsiveness for tables */
+@media (max-width: 768px) {
+    #blog-content table {
+        font-size: 0.85rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    #blog-content th,
+    #blog-content td {
+        padding: 8px 12px;
+    }
+}
