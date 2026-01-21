@@ -15,7 +15,7 @@ read_time: 9 min
 Hey Everyone! I hope you are doing good. This blog is going to cover some fundamentals of machine learning, some must knows before getting deeper. 
 
 ## Cross Validation
-Imagine this, you are already a ML Engineer and you have to train a ML model. Umm.. say you have to train a machine learning model for classifying if a particular is Sports Car or SUV based on the features it have (ex: number of seats, ground clearance, etc). 
+Imagine this, you are already a ML Engineer and you have to train a ML model. Umm.. say you have to train a machine learning model for classifying if a car is Sports Car or SUV based on the features it have (ex: number of seats, ground clearance, etc). 
 
 > btw, tasks/problems like these where we have to classify into different classes is called a **Classification Problem**.
 
@@ -232,3 +232,132 @@ We cannot transform this into 1s and 0s now. So what to do now? Well we train th
 | **Actually Minivan**    | ::r::0::                 | ::r::8::          | ::g::**42**::         |
 
 So basically, size of confusion matrix depends on how many classes we have. 
+
+### So why we used 1s and 0s?
+If we can just train the model to classify into said classes, we didn't have to do the tedious task of converting data into 1s and 0s, and reframing goal into a true/false question right? We could have just trained the model using original dataset ie the one below, right?
+
+| **No. of Seats** | **Ground Clearance** | **Label**      |
+| ---------------- | -------------------- | -------------- |
+| 2                | 100 mm               | **Sports Car** |
+| 2                | 115 mm               | **Sports Car** |
+| 2                | 130 mm               | **Sports Car** |
+| 4                | 120 mm               | **Sports Car** |
+| 5                | 175 mm               | **SUV**        |
+| 5                | 190 mm               | **SUV**        |
+| 5                | 210 mm               | **SUV**        |
+| 7                | 205 mm               | **SUV**        |
+| 7                | 225 mm               | **SUV**        |
+| 2                | 210 mm               | **SUV**        |
+
+Well... not exactly. 
+
+## Introducing Label Encoding
+
+You see, Machine Learning is just maths, and maths doesn't understand words... It want numbers. 
+
+So when I said we need to reframe goal into a true/false question (Is given car a SUV?) in Binary Classification section, well I lied- sort of. What we were actually doing was assigning a number for each class, ie numerical representation of the class. 
+
+When I said 1 means True, i.e., SUV and 0 means False, i.e., Not Suv, We were just replacing the classes with numerical representation. 
+
+Okay wait, let me clear the confusion. 
+
+Lets take another example, you have to classify students as 'Always on Time' and 'Always Late' based on their arrival patterns.
+
+|**Days Late (per month)**|**Average Minutes Late**|**Label**|
+|---|---|---|
+|0|0|Always on Time|
+|1|5|Always on Time|
+|8|15|Always Late|
+|12|25|Always Late|
+|2|3|Always on Time|
+
+Now, to train the model, we need numbers. So we do this:
+
+|**Days Late (per month)**|**Average Minutes Late**|**Label (Encoded)**|
+|---|---|---|
+|0|0|0|
+|1|5|0|
+|8|15|1|
+|12|25|1|
+|2|3|0|
+
+Where `0 = "Always on Time"` and `1 = "Always Late"`
+
+See? We're just replacing the text labels with numbers. This is called **Label Encoding**.
+
+Consider this situation, you're building a spam filter for emails. You want to classify if an email is "Spam" or "Not Spam" based on certain features.
+
+|**Number of Links**|**Contains "Free"**|**Sender Known?**|**Label**|
+|---|---|---|---|
+|0|No|Yes|Not Spam|
+|5|Yes|No|Spam|
+|1|No|Yes|Not Spam|
+|10|Yes|No|Spam|
+
+But wait, we have "Yes" and "No" in our features too! ML algorithms can't understand these either. So we encode everything:
+
+|**Number of Links**|**Contains "Free"**|**Sender Known?**|**Label (Encoded)**|
+|---|---|---|---|
+|0|0|1|0|
+|5|1|0|1|
+|1|0|1|0|
+|10|1|0|1|
+
+Where for Label: `0 = "Not Spam"` and `1 = "Spam"`
+
+And for the features: `"Yes" = 1` and `"No" = 0`
+
+So it's not just labels, even our features need to be numerical!
+
+Consider another situation, you need to predict the weather. You have 3 classes: "Sunny", "Rainy", and "Windy".
+
+|**Temperature (°C)**|**Humidity (%)**|**Wind Speed (km/h)**|**Weather**|
+|---|---|---|---|
+|30|80|5|Sunny|
+|15|95|20|Rainy|
+|5|70|35|Windy|
+|28|75|8|Sunny|
+|12|90|25|Rainy|
+
+After encoding the labels:
+
+|**Temperature (°C)**|**Humidity (%)**|**Wind Speed (km/h)**|**Weather (Encoded)**|
+|---|---|---|---|
+|30|80|5|0|
+|15|95|20|1|
+|5|70|35|2|
+|28|75|8|0|
+|12|90|25|1|
+
+Where: `0 = "Sunny"`, `1 = "Rainy"`, `2 = "Windy"`
+
+One last example! Consider this situation, you're working at a bank and need to predict loan approval. You want to classify if a loan application should be "Approved" or "Rejected".
+
+|**Credit Score**|**Income ($1000s)**|**Existing Loans**|**Decision**|
+|---|---|---|---|
+|750|80|1|Approved|
+|600|45|3|Rejected|
+|720|65|2|Approved|
+|550|35|4|Rejected|
+
+After encoding:
+
+|**Credit Score**|**Income ($1000s)**|**Existing Loans**|**Decision (Encoded)**|
+|---|---|---|---|
+|750|80|1|1|
+|600|45|3|0|
+|720|65|2|1|
+|550|35|4|0|
+
+Where: `1 = "Approved"` and `0 = "Rejected"`
+
+### So What Actually Happened?
+
+So when I said earlier that we need to reframe the goal into a true/false question (Is given car a SUV?) in the Binary Classification section, well I wasn't telling you the complete picture.
+
+What we were **actually doing** was **Label Encoding** - assigning a numerical value to each class so that the machine learning algorithm can process it. When I said `1 = True (SUV)` and `0 = False (Not SUV)`, we were just replacing the text labels "SUV" and "Sports Car" with numbers `1` and `0`.
+
+**This is a fundamental step in machine learning**; everything needs to be numbers. The algorithms work with mathematical functions, matrices, and calculations. They don't understand the word "SUV" or "Sports Car" or "Spam"... they only understand numbers.
+
+So whether you have 2 classes (Binary Classification) or 100 classes (Multi-class Classification), you need to encode them into numbers. That's what Label Encoding is all about!
+
