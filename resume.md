@@ -23,9 +23,8 @@ permalink: /resume/
 * prototyped ::p::embedding-based retrieval system:: to llm based recsys, achieving ::y::60-80% api latency reduction:: (5s to 1-2s) and enabling potential on-device ml inference for cost optimization.
 * engineered api safeguards including ::y::rate limiting:: (3 requests/user/day), quota management, api key rotation, and graceful degradation patterns to maintain service reliability under free-tier constraints.
 * coordinated cross-functional delivery across ::y::8-member team:: spanning engineering, operations, and business development, translating ai capabilities into business value for restaurant partners.
-* mentored 2 engineers for 3 months on ::b::llm-to-embedding migration strategies:: and synthetic data pipeline design using gemini through regular briefings.
-* presented technical demos to 5-6 restaurant managers and 3 angel investors, translating complex ai functionality into business value propositions for non-technical audiences.
-* resolved malformed llm output issues through ::p::iterative system prompt refinement:: and structured output validation across multiple production features.
+* mentored 2 interns for 3 months on ::b::llm-to-embedding migration strategies:: and synthetic data pipeline design using gemini through regular briefings.
+* resolved malformed llm output issues through ::p::iterative system prompt refinement::.
 * implemented comprehensive error handling and debug logging across all cloud functions, enabling systematic troubleshooting and monitoring via ::y::gcp ai playground dashboards::.
 
 ## research intern · iim udaipur
@@ -48,8 +47,7 @@ permalink: /resume/
 
 * architected production ::p::5-agent langgraph pipeline:: (writer, critic, improver, finalizer, explainer) on ::b::google cloud run:: with jwt authentication, serving ::y::12+ restful endpoints:: and pre-generating 140+ puzzle variants.
 * implemented ::y::8-point validation system:: ensuring lexical integrity and contextual quality with 2-cycle average validation convergence across puzzle generation workflow.
-* optimized costs via ::b::postgresql/supabase caching:: and user reporting mechanisms to exclude problematic levels.
-* achieved ::y::95% reduction in api overhead:: for 1,000 mau benchmark by architecting a threshold-based caching layer that decoupled operational costs from user growth.
+* achieved ::y::95% reduction in api overhead:: for 1,000 mau benchmark by architecting a ::b::postgresql/supabase:: threshold-based caching layer that decoupled operational costs from user growth.
 * engineered database architecture with ::y::row level security (rls):: and upsert patterns for data isolation and conflict resolution.
 * developed a scalable relational backend with ::b::fastapi and supabase::, optimizing for asynchronous performance and relational data integrity to support multi-agent generation workflows.
 
@@ -60,9 +58,8 @@ permalink: /resume/
 * built full-stack mobile application with firebase authentication, tracking ::y::emotional states and life events:: for realistic, judgment-free companionship.
 * implemented ::p::imessage-style ux:: focusing on long-term context persistence and judgment-free companionship.
 * implemented ::y::privacy-first architecture:: storing all memories locally on-device rather than cloud storage, ensuring user data remains private.
-* deployed via firebase hosting with ::b::github actions ci/cd pipeline::, managing dev/main branch workflow for systematic release management.
 
-## privacy-preserving fraud detection via federated learning  [full project overview](https://ayushxpatne.github.io/ayushpatne/blog/fl-eth-dissertation)
+## privacy-preserving fraud detection via federated learning  [overview](https://ayushxpatne.github.io/ayushpatne/blog/fl-eth-dissertation)
 
 * architected ::p::federated learning system:: for privacy-preserving training across ::y::3 distributed clients over 10 rounds::.
 * engineered pipeline for ::y::90%+ class imbalance:: (ethereum transactions) using ::b::smote:: and hypothesis-driven feature engineering.
@@ -90,11 +87,6 @@ permalink: /resume/
 * segmented countries into ::b::6 typologies:: using k-means clustering and pca dimensionality reduction.
 * created ::y::tableau visualizations:: to communicate global age-gap trends and demographic predictors.
 
-## attention span research study
-
-* led research design analyzing correlation between attention span metrics and mental health (::y::84 participants::).
-* defined analytical approach utilizing ::b::knn clustering:: for behavioral segmentation and pattern identification.
-* managed data collection and statistical analysis, leading to publication at ::p::asiancon 2024::.
 
 # research
 
