@@ -9,7 +9,7 @@ tags:
   - Emotional Intelligence
   - Memory
   - Prompt Engineering
-featured: true
+featured: false
 featured_type: "Project"
 external_link: "https://trymaira.web.app/early-access/landing"
 button_text: "Try Maira (beta) For Free"
