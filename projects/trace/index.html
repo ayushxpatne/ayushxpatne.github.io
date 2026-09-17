@@ -172,7 +172,11 @@ nav.top a{font-size:.75rem}
 nav.top .here{margin-left:auto;display:flex;gap:24px}
 nav.top .here a.on{color:var(--ink)}
 @media (max-width:768px){nav.top .here{display:none}}
-</style></head><body><nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/trace/" class="on">trace</a></div></div></div></nav><main>
+nav.top .who,nav.top .links{min-width:0}
+@media (max-width:768px){nav.top .in{column-gap:16px}}
+@media (max-width:420px){nav.top .links{flex-wrap:wrap;row-gap:6px}}
+</style><script src="/assets/js/writeup-toc.js" defer></script>
+</head><body><nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/trace/" class="on">trace</a></div></div></div></nav><main>
 <header class="hero">
 <h1>Does the model learn the task, or the hole in the grader?</h1>
 <p class="lede">TRACE trains one small language model with reinforcement learning against two graders. One grader has a hole. The other does not. This page shows what the model learned from each.</p>

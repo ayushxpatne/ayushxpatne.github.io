@@ -109,7 +109,11 @@ nav.top a{font-size:.75rem}
 nav.top .here{margin-left:auto;display:flex;gap:24px}
 nav.top .here a.on{color:var(--ink)}
 @media (max-width:768px){nav.top .here{display:none}}
-</style></head><body><nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/vocabscapes/">vocabscapes</a><a href="/projects/puzzle-eval-harness/" class="on">llm eval harness</a></div></div></div></nav><main>
+nav.top .who,nav.top .links{min-width:0}
+@media (max-width:768px){nav.top .in{column-gap:16px}}
+@media (max-width:420px){nav.top .links{flex-wrap:wrap;row-gap:6px}}
+</style><script src="/assets/js/writeup-toc.js" defer></script>
+</head><body><nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/vocabscapes/">vocabscapes</a><a href="/projects/puzzle-eval-harness/" class="on">llm eval harness</a></div></div></div></nav><main>
 <header class="hero">
 <h1>Can you trust the judge grading your puzzle generator?</h1>
 <p class="lede">Vocabscapes generates word-puzzle sentences with one model and grades them with another, in a write&#8594;critique loop. This project measures whether that grader can be trusted, by checking it against blind human ratings &#8212; and finds that in one cell of the design, it was wrong by 39 points.</p>
