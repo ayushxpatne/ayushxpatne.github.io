@@ -3,7 +3,8 @@
         <div class="nav-links mono">
             <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">home</a>
             <a href="{{ '/resume/' | relative_url }}" class="{% if page.url contains '/resume' %}active{% endif %}">resume</a>
-            <a href="{{ '/archive/' | relative_url }}" class="{% if page.url contains '/archive' %}active{% endif %}">archive</a>
+            <a href="{{ '/projects/' | relative_url }}" class="{% if page.url contains '/projects' %}active{% endif %}">projects</a>
+            <a href="{{ '/blog/' | relative_url }}" class="{% if page.url contains '/blog' %}active{% endif %}">blogs</a>
         </div>
     </div>
 </nav>

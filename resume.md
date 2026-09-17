@@ -65,7 +65,7 @@ permalink: /resume/
 * Built OnePiece on top of Rosetta: a light-weight, plug-and-play memory scorer that selects the most relevant stored memories for a conversation, designed to give an LLM long-term memory without retraining.
 * The ::b::~1K-parameter:: bilinear scorer matches the bge-reranker-base cross-encoder (::y::AUC 0.738 vs. 0.741::) with ::y::~278,000× fewer parameters::; cross-model training kept pace with same-model (0.738 vs. 0.736) on 5,149 held-out query–memory pairs.
 
-## vocabscapes · multi-agent puzzle generation  [page](/projects/vocabscapes/)  [eval harness](/projects/puzzle-eval-harness/)  [live](https://vocabscapes.web.app)
+## vocabscapes · multi-agent puzzle generation  [write-up](/projects/vocabscapes/)  [eval harness write-up](/projects/puzzle-eval-harness/)  [live](https://vocabscapes.web.app)
 **LangGraph, Model-Eval Framework, Python, Google Gemini API, PostgreSQL/Supabase, Firebase, FastAPI | 2026**
 
 * Built a ::p::five-agent word-puzzle generation pipeline::: writer, judge, improver, finalizer and explanation agents, with bounded retries and persistent caching of two passed variants per level to eliminate repeat generation calls.

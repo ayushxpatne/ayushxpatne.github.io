@@ -1,15 +1,23 @@
 - title: "TRACE: Does the model learn the task, or the hole in the grader?"
-  url: /projects/trace/
   featured_type: Research
   tags: [GRPO, LoRA SFT, Reward Hacking, Mechanistic Interpretability]
   excerpt: "A controlled study of reward hacking: SmolLM2-360M trained with SFT then GRPO against a weak and a strong verifier, with logit lens and probes to find where the two models diverge."
+  links:
+    - text: "Read the write-up →"
+      url: /projects/trace/
 - title: "Vocabscapes: multi-agent puzzle generation"
-  url: /projects/vocabscapes/
   featured_type: Project
   tags: [LangGraph, Multi-Agent Systems, Gemini, FastAPI, Supabase]
   excerpt: "A five-agent word-puzzle pipeline (writer, judge, improver, finalizer, explanation) with bounded retries and cached variants per level."
+  links:
+    - text: "Read the write-up →"
+      url: /projects/vocabscapes/
+    - text: "Play here ↗"
+      url: https://vocabscapes.web.app
 - title: "An LLM eval harness for puzzle generation"
-  url: /projects/puzzle-eval-harness/
   featured_type: Evaluation
   tags: [LLM-as-judge, Calibration, Human Eval]
   excerpt: "LLM-as-judge harness across four model pairs, calibrated against blind human ratings."
+  links:
+    - text: "Read the write-up →"
+      url: /projects/puzzle-eval-harness/

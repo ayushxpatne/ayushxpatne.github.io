@@ -1,0 +1,25 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+<div class="home-grid archive-layout">
+    <aside class="home-intro">
+        <header>
+            <h1 class="intro-name">projects</h1>
+            <p class="intro-subtitle mono">things i've built & studied</p>
+        </header>
+    </aside>
+
+    <main class="home-content">
+        <section class="home-content-block">
+            <h2 class="home-section-title mono">All Projects</h2>
+            <div id="all-posts">
+                {% for item in site.data.projects %}
+                    {% include featured-card.html item=item %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
