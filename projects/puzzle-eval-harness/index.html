@@ -1,4 +1,7 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>An LLM eval harness for puzzle generation</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>An LLM eval harness for puzzle generation</title><link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin><style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/assets/fonts/jetbrains-mono-400.woff2) format("woff2")}
+
 :root{
   --ink:#000;--paper:#fff;--muted:#56564f;--hair:#e4e4df;--soft:#f5f5f2;
   --base:#DAD9D4;--base-l:#8C8B85;--sft:#BBD5F4;--sft-l:#3F72B5;
@@ -87,6 +90,12 @@ nav.top .in{padding:1.1rem 1.25rem;gap:2rem}
 nav.top a{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;text-transform:lowercase;color:var(--muted);border-bottom:none}
 nav.top a:hover,nav.top a[aria-current="page"]{color:var(--ink)}
 nav.top .name{color:var(--ink)}
+/* motion */
+nav.top a{transition:color 160ms ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+header.hero>*{animation:rise 480ms cubic-bezier(.23,1,.32,1) backwards}
+header.hero>:nth-child(2){animation-delay:50ms}header.hero>:nth-child(3){animation-delay:100ms}header.hero>:nth-child(n+4){animation-delay:150ms}
+@media (prefers-reduced-motion:reduce){header.hero>*{animation:none}}
 </style></head><body><nav class="top" aria-label="Pages"><div class="in"><a class="name" href="/">ayushpatne</a><a href="/projects/vocabscapes/">Vocabscapes</a><a href="/projects/puzzle-eval-harness/" aria-current="page">Eval harness</a></div></nav><main>
 <header class="hero">
 <h1>Can you trust the judge grading your puzzle generator?</h1>

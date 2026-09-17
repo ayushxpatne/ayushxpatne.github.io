@@ -1,3 +1,7 @@
+/* self-hosted fonts, preloaded in the layout */
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/assets/fonts/jetbrains-mono-400.woff2) format("woff2")}
+
 :root {
     --bg: #ffffff;
     --fg: #000000;
@@ -1089,3 +1093,82 @@ footer {
         padding: 8px 12px;
     }
 }
+/* =========================================
+   motion
+   ========================================= */
+
+:root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* first paint: intro, then content blocks, gently staggered */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+.home-intro header > *,
+.home-content-block,
+#featured-posts > a,
+#recent-posts > a,
+#all-posts > a,
+.resume-markdown > *,
+#blog-header,
+#blog-content {
+    animation: rise 480ms var(--ease-out) backwards;
+}
+
+.home-intro header > :nth-child(2) { animation-delay: 40ms; }
+.home-intro header > :nth-child(3) { animation-delay: 80ms; }
+.home-intro header > :nth-child(4) { animation-delay: 120ms; }
+#featured-posts > a:nth-child(1), #all-posts > a:nth-child(1) { animation-delay: 80ms; }
+#featured-posts > a:nth-child(2), #all-posts > a:nth-child(2) { animation-delay: 130ms; }
+#featured-posts > a:nth-child(3), #all-posts > a:nth-child(3) { animation-delay: 180ms; }
+#featured-posts > a:nth-child(n+4), #all-posts > a:nth-child(n+4) { animation-delay: 230ms; }
+#recent-posts > a { animation-delay: 260ms; }
+#blog-content { animation-delay: 80ms; }
+
+/* hover and press: precise properties, strong ease-out */
+.nav-links a,
+.resume-toc a,
+.home-intro .links a {
+    transition: color 160ms ease, transform 160ms var(--ease-out);
+}
+
+.home-grid .featured-card,
+.home-grid .post-card,
+.archive-layout #all-posts .featured-card {
+    transition: opacity 200ms ease, transform 160ms var(--ease-out);
+}
+
+.home-grid .card-link {
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .home-intro .links a:hover {
+        transform: translateX(2px);
+    }
+}
+
+.home-grid .featured-card:active,
+.home-grid .post-card:active,
+.home-grid .card-link:active,
+.scroll-top:active {
+    transform: scale(0.98);
+}
+
+.scroll-top {
+    transition: opacity 200ms ease, transform 200ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 1ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: 1ms !important;
+    }
+}
+
