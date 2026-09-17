@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div class="blog-container">
+    <article class="blog-content">
+        <div id="blog-header">
+            <p class="blog-breadcrumb"><a href="{{ '/projects/' | relative_url }}">projects</a></p>
+            <h1>{{ page.title }}</h1>
+            <p class="card-meta mono">{{ page.year }}{% if page.status %} · {{ page.status }}{% endif %}</p>
+            {% if page.stack %}
+            <div class="post-tags" style="margin-bottom: 24px;">
+                {% for tag in page.stack %}<span class="tag mono">{{ tag }}</span>{% endfor %}
+            </div>
+            {% endif %}
+            {% if page.links %}
+            <div class="card-links" style="margin-bottom: 40px;">
+                {% for link in page.links %}<a href="{{ link.url }}" class="card-link mono" target="_blank" rel="noopener">{{ link.text }}</a>{% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="blog-content" class="blog-post">
+            {{ content }}
+            <p class="stub-note mono">full write-up coming soon.</p>
+        </div>
+    </article>
+</div>

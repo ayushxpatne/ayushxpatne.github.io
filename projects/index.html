@@ -1,0 +1,61 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+{% assign roles = "all:everything,ai:ai,ml:ml,research:research,swe:swe,data:data science" | split: "," %}
+
+<div class="home-grid archive-layout">
+    <aside class="home-intro">
+        <header>
+            <h1 class="intro-name">projects</h1>
+            <p class="intro-subtitle mono">things i've built & studied</p>
+
+            <div class="role-filter mono" role="group" aria-label="Filter projects by role">
+                <p class="role-filter-label">browse by role</p>
+                {% for pair in roles %}
+                {% assign r = pair | split: ":" %}
+                <button type="button" class="role-chip" data-role="{{ r[0] }}" aria-pressed="{% if r[0] == 'all' %}true{% else %}false{% endif %}">{{ r[1] }}</button>
+                {% endfor %}
+            </div>
+        </header>
+    </aside>
+
+    <main class="home-content">
+        <section class="home-content-block">
+            <h2 class="home-section-title mono">All Projects <span class="role-count" id="role-count"></span></h2>
+            <div id="all-posts">
+                {% for item in site.data.projects %}
+                    {% include featured-card.html item=item %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+(function () {
+    const chips = document.querySelectorAll('.role-chip');
+    const cards = document.querySelectorAll('#all-posts .featured-card');
+    const count = document.getElementById('role-count');
+
+    function apply(role) {
+        let shown = 0;
+        cards.forEach(card => {
+            const match = role === 'all' || (card.dataset.roles || '').split(' ').includes(role);
+            card.hidden = !match;
+            if (match) shown++;
+        });
+        chips.forEach(chip => chip.setAttribute('aria-pressed', chip.dataset.role === role));
+        count.textContent = '(' + shown + ')';
+        const url = new URL(location);
+        role === 'all' ? url.searchParams.delete('role') : url.searchParams.set('role', role);
+        history.replaceState(null, '', url);
+    }
+
+    chips.forEach(chip => chip.addEventListener('click', () => apply(chip.dataset.role)));
+    const initial = new URLSearchParams(location.search).get('role');
+    apply([...chips].some(c => c.dataset.role === initial) ? initial : 'all');
+})();
+</script>

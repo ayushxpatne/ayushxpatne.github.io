@@ -1,0 +1,46 @@
+---
+layout: default
+title: Blogs
+permalink: /blog/
+redirect_from: /archive/
+---
+
+<div class="home-grid archive-layout">
+    <aside class="home-intro">
+        <header>
+            <h1 class="intro-name">blogs</h1>
+            <p class="intro-subtitle mono">write-ups, notes & build logs</p>
+        </header>
+    </aside>
+
+    <main class="home-content">
+        <section class="home-content-block">
+            <h2 class="home-section-title mono">Project Write-ups</h2>
+            <div id="all-writeups">
+                {% for project in site.data.projects %}
+                    {% if project.writeup %}
+                    <a href="{{ project.writeup.url | relative_url }}" class="post-card">
+                        <h3 class="post-title">{{ project.writeup.title }}</h3>
+                        <p class="card-meta mono">{{ project.title }}</p>
+                        <p class="post-excerpt">{{ project.excerpt | strip_html | truncatewords: 30 }}</p>
+                        <div class="post-tags">
+                            {% for tag in project.tags %}<span class="tag mono">{{ tag }}</span>{% endfor %}
+                        </div>
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="home-content-block">
+            <h2 class="home-section-title mono">All Posts</h2>
+            <div id="all-posts">
+                {% for item in site.posts %}
+                    {% unless item.external_link or item.redirect_to %}
+                        {% include post-card.html item=item %}
+                    {% endunless %}
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</div>

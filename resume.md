@@ -6,111 +6,75 @@ permalink: /resume/
 
 # education
 
-## msc advanced computer science (ai)
-**university of leeds | september 2025 – september 2026**
+## msc advanced computer science (artificial intelligence)
+**university of leeds | 2025 – 2026 | leeds, uk**
 
-## b.tech ai & data science
-**viit, pune | january 2022 – may 2025**
+* Scholarships: International Excellence Award · International Regional Award (India)
+
+## b.tech artificial intelligence & data science
+**university of pune | 2022 – 2025 | pune, india**
 
 # experience
 
+## research assistant (llm systems) · university of leeds
+**jun 2026 – jul 2026 | leeds, uk**
+
+* Architected a ::p::multi-agent two-phase pipeline:: that converts NHS/NICE clinical guidelines into machine-readable ontologies for a LIDA-funded project, grounding accepted facts in verbatim source evidence.
+* Identified a context-window bottleneck in the LLM-based Phase 2 pipeline and replaced its LLM serializer with a ::b::deterministic JSON-to-Turtle serializer::, eliminating one model call per document and removing truncation failures.
+* Self-hosted Qwen and Gemma backbones with ::b::vLLM::, using quantized models and speculative decoding to reach ::y::~240 output tok/s:: on an NVIDIA Blackwell 6000.
+
 ## ai engineer · hopps
-**september 2024 – june 2025 | pune, india**
+**sep 2024 – jun 2025 | pune, india**
 
-* developed  ai recommendation system using ::b::gemini api:: and ::p::gcp cloud functions::, delivering real-time dining suggestions for ::y::70+ restaurant listings:: across beta testing phase.
-* implemented ::y::objectbox local caching strategy::, reducing firestore read operations by ::y::98.6%:: (from 70 to ~1 read per user) and optimizing api costs against a 1,000 mau baseline.
-* built serverless backend using ::b::firebase cloud functions:: to handle ai content generation pipeline for both consumer and partner-facing applications.
-* prototyped ::p::embedding-based retrieval system:: to llm based recsys, achieving ::y::60-80% api latency reduction:: (5s to 1-2s) and enabling potential on-device ml inference for cost optimization.
-* engineered api safeguards including ::y::rate limiting:: (3 requests/user/day), quota management, api key rotation, and graceful degradation patterns to maintain service reliability under free-tier constraints.
-* coordinated cross-functional delivery across ::y::8-member team:: spanning engineering, operations, and business development, translating ai capabilities into business value for restaurant partners.
-* mentored 2 interns for 3 months on ::b::llm-to-embedding migration strategies:: and synthetic data pipeline design using gemini through regular briefings.
-* resolved malformed llm output issues through ::p::iterative system prompt refinement::.
-* implemented comprehensive error handling and debug logging across all cloud functions, enabling systematic troubleshooting and monitoring via ::y::gcp ai playground dashboards::.
+* Designed and built the cross-platform ::b::Flutter/GetX:: app, integrating Firebase Authentication, Firestore, Storage, Cloud Functions and Hosting alongside the recommendation stack.
+* Re-engineered the restaurant recommendation pipeline from LLM-based fixed-vocabulary classification to ::p::BGE-small embedding retrieval::, cutting measured retrieval latency ::y::96% (707ms to 28ms):: while removing per-query LLM inference dependency.
+* Compared Gemini and BGE-small across extraction and ranking stages, finding near-parity in extraction quality (::y::nDCG@10 0.738 vs. 0.744::) but a ranking advantage for Gemini (::y::nDCG@10 0.549 vs. 0.366::), making the quality–latency–cost trade-off explicit on a 60-query human-in-the-loop benchmark.
+* Reduced Firebase reads by ::y::98.6%:: through ::b::ObjectBox:: local caching and served recommendations through GCP Cloud Functions across ~70 venues during alpha testing.
 
-## research intern · iim udaipur
-**september 2023 – april 2024 | remote**
+## ml intern · indian institute of management, udaipur
+**sep 2023 – apr 2024 | remote**
 
-* built automated classification system for ::y::250,000+ nft records:: using hugging face to differentiate ai-generated vs. human content.
-* engineered asynchronous scraping infrastructure (::b::beautifulsoup4::) processing ::y::113,000+ web pages::, optimizing pipeline throughput.
-* explored distributed scraping architecture on ::p::gcp cloud functions:: for ip rotation, demonstrating initiative despite resource constraints.
-* contributed to ::y::two research manuscripts:: by developing automated data preprocessing workflows and applying nlp techniques for market analysis.
+* Built an asynchronous ::b::BeautifulSoup4:: scraping pipeline processing ::y::113,000+ pages:: across 200 brands for Doc2Vec-based marketing vs. user-response analysis.
+* Crafted inference pipeline to classify ::y::250,000+ NFT records:: as AI-generated vs. human using a Hugging Face model and Transformers.
 
 ## ai intern · konverge.ai
-**august 2023 – october 2023 | nagpur, india**
+**aug 2023 – oct 2023 | remote**
 
-* applied statistical modeling for customer segmentation, purchase prediction, and profitability analysis.
-* built ::b::sentiment classification model:: using nlp to extract actionable insights from user review data.
+* Built ML/NLP workflows for customer segmentation, profitability analysis and sentiment classification.
 
-# projects
+# projects & research
 
-## vocabscapes · multi-agent puzzle generation system  [live demo](https://vocabscapes.web.app)
+## maybehere · group restaurant discovery  [live](https://maybehere.app)
+**Vue, FastAPI, PostgreSQL/Supabase, Python, ONNX/FastEmbed, Firebase, Cloud Run, OSM, Overture | 2026**
 
-* architected production ::p::5-agent langgraph pipeline:: (writer, critic, improver, finalizer, explainer) on ::b::google cloud run:: with jwt authentication, serving ::y::12+ restful endpoints:: and pre-generating 140+ puzzle variants.
-* implemented ::y::8-point validation system:: ensuring lexical integrity and contextual quality with 2-cycle average validation convergence across puzzle generation workflow.
-* achieved ::y::95% reduction in api overhead:: for 1,000 mau benchmark by architecting a ::b::postgresql/supabase:: threshold-based caching layer that decoupled operational costs from user growth.
-* engineered database architecture with ::y::row level security (rls):: and upsert patterns for data isolation and conflict resolution.
-* developed a scalable relational backend with ::b::fastapi and supabase::, optimizing for asynchronous performance and relational data integrity to support multi-agent generation workflows.
+* Designed and deployed a live group restaurant-discovery app with ::y::97K+ place profiles:: across ~200 UK towns/cities; designed the no-signup plan/voting flow and a semantic discovery experience for occasions, cuisines, price-sensitive queries and group preferences.
+* Streamed ::y::500K+ entries:: from Overture Places data with Python; cleaned the data by filtering eatery POIs, normalising town names, and enriching missing cuisine, place-type, focus, vibe and transit context using LLMs and ::b::OSM-derived geospatial features::; stored in Supabase.
+* Built a low-cost retrieval service using ::p::BGE-small with ONNX/FastEmbed:: on Cloud Run, with ::y::<400ms:: average API response; stored embeddings in SQLite in a separate service while retaining relational metadata in PostgreSQL to stay within free-tier limits.
 
-## maira · context-aware ai companion with memory architecture  [live demo](https://trymaira.web.app/early-access/landing)
+## trace · reward hacking in rl fine-tuning  [write-up](/projects/trace/)
+**PyTorch, Transformers, LoRA SFT, GRPO, Mechanistic Interpretability | 2026**
 
-* engineered ::p::rag-based memory system:: using ::b::sqlite embedding storage:: with ::y::200-500ms retrieval performance::, enabling context-aware conversations through semantic similarity search.
-* designed parallel memory pipeline using ::y::google gemini api::: main thread for responses, background thread for memory extraction with ::b::importance scoring and redundancy detection::.
-* built full-stack mobile application with firebase authentication, tracking ::y::emotional states and life events:: for realistic, judgment-free companionship.
-* implemented ::p::imessage-style ux:: focusing on long-term context persistence and judgment-free companionship.
-* implemented ::y::privacy-first architecture:: storing all memories locally on-device rather than cloud storage, ensuring user data remains private.
+* Designed a controlled study of reward hacking in RL fine-tuning: trained ::b::SmolLM2-360M-Instruct:: with LoRA SFT then GRPO on a synthetic rule-reasoning task (infer rules from agreeing facts, 5 difficulty tiers); SFT raised exact-match accuracy on 200 held-out tasks from ::y::45.5% to 65%::.
+* Compared two GRPO reward verifiers: the weak one paid for the right word anywhere in the rule list, so ::y::35%:: of its answers added extra rules (66.5% exact match); the strong one reached ::y::93%:: with 0% extra rules but through a shortcut, copying the queried property's direction and stating one rule instead of the full rule set, so accuracy alone overstated learning.
+* Applied ::p::logit lens, logistic-regression probes on hidden states, activation-vector analysis, PCA and attention analysis:: to localise the reward-induced divergence to ::y::layers 23–29::, where the two models differ in whether they continue or end a rule list.
 
-## privacy-preserving fraud detection via federated learning  [overview](https://ayushxpatne.github.io/ayushpatne/blog/fl-eth-dissertation)
+## rosetta & onepiece · pre-prints in progress
+**PyTorch, Transformers, Representation Learning, vLLM, Retrieval / RAG | 2026**
 
-* architected ::p::federated learning system:: for privacy-preserving training across ::y::3 distributed clients over 10 rounds::.
-* engineered pipeline for ::y::90%+ class imbalance:: (ethereum transactions) using ::b::smote:: and hypothesis-driven feature engineering.
-* achieved ::y::99.7% auc-roc and 96.6% recall:: using a custom fraud detection classifier.
-* built ::b::flask-based dashboard:: for real-time monitoring of model performance metrics and fraud patterns.
+* Developed Rosetta, a ::p::model-agnostic, fixed-size (32-D):: token embedding representation method; validated the RSA premise across 136 model pairs; reached ::y::0.955 MRR:: on a custom Wikipedia retrieval bank with ::y::~90%:: cross-model retention on MTEB.
+* Built OnePiece on top of Rosetta: a light-weight, plug-and-play memory scorer that selects the most relevant stored memories for a conversation, designed to give an LLM long-term memory without retraining.
+* The ::b::~1K-parameter:: bilinear scorer matches the bge-reranker-base cross-encoder (::y::AUC 0.738 vs. 0.741::) with ::y::~278,000× fewer parameters::; cross-model training kept pace with same-model (0.738 vs. 0.736) on 5,149 held-out query–memory pairs.
 
-## social media recommendation algorithm  [blog](https://ayushxpatne.github.io/ayushpatne/blog/social-media-algorithm)  [live demo](https://social-media-algo-code.onrender.com)
+## vocabscapes · multi-agent puzzle generation  [write-up](/projects/vocabscapes/)  [eval harness write-up](/projects/puzzle-eval-harness/)  [live](https://vocabscapes.web.app)
+**LangGraph, Model-Eval Framework, Python, Google Gemini API, PostgreSQL/Supabase, Firebase, FastAPI | 2026**
 
-* engineered tiktok-style recommendation engine using ::b::faiss indexivf:: for semantic video retrieval.
-* implemented ::p::approximate nearest neighbor search:: for ::y::3072-dimensional embeddings:: across 500+ objects.
-* designed ::y::sliding window model:: (last 5 interactions) with ::y::70-30 exploitation-exploration split:: for content discovery.
-* built multi-signal scoring system tracking ::b::6 interaction types:: (view time, shares, rewatches) to capture nuanced user preferences.
-
-## brewstories · llm fine-tuning for creative writing
-
-* fine-tuned ::b::tinyllama (1.1b):: on a ::y::10,000-story dataset:: using pytorch and hugging face, completing training in 8 hours.
-* developed end-to-end pipeline: tokenization, dataset preparation, fine-tuning, and evaluation for narrative coherence.
-* achieved ::p::runner-up recognition:: at visionary techfest 24 for stylistic consistency in creative text generation.
-
-## undp climate survey analysis
-
-* developed ::b::random forest classifier:: achieving ::y::89.76% auc-roc and 84.51% accuracy:: predicting high climate commitment support (≥85% threshold) across ::y::73,000+ respondents from 73 countries::.
-* built ::p::linear regression model:: achieving ::y::r² 68.23% and rmse 8.47:: for continuous support prediction, comparing interpretability vs accuracy trade-offs across model types.
-* engineered feature extraction pipeline for ::y::20,000+ null values:: using standardscaler and onehotencoding.
-* segmented countries into ::b::6 typologies:: using k-means clustering and pca dimensionality reduction.
-* created ::y::tableau visualizations:: to communicate global age-gap trends and demographic predictors.
-
-
-# research
-
-## "attention span and its correlation with mental health"
-**richa shah, sarthak rak, ayush patne, dr. laxmi bewoor**
-* 4th asian conference on innovation in technology (asiancon), august 2024
+* Built a ::p::five-agent word-puzzle generation pipeline::: writer, judge, improver, finalizer and explanation agents, with bounded retries and persistent caching of two passed variants per level to eliminate repeat generation calls.
+* Built and calibrated an ::b::LLM-as-judge evaluation harness:: across four model pairs; calibration shifted judge-bias by up to ::y::39 points:: against blind-human ratings.
 
 # technical skills
 
-* **languages:** python (pandas, numpy, scikit-learn), dart (flutter), sql
-* **ai & ml:** pytorch, tensorflow, hugging face, langchain/langgraph, rag, generative ai, llms, federated learning, fine-tuning (lora/peft)
-* **web & backend:** fastapi, flask, firebase (auth, firestore, hosting), supabase (postgresql)
-* **cloud & devops:** gcp (cloud functions, cloud run), aws, docker, git, ci/cd, tableau
-
-# honors & certifications
-
-* **runner-up, ai/ml domain** – visionary techfest 24 hackathon (binghamton university & visionary club)
-* **machine learning specialization** – stanford online & deeplearning.ai
-* **generative ai with large language models** – deeplearning.ai & amazon web services
-* **aws cloud quest** – cloud practitioner & genai (in progress)
-
-# leadership & extracurricular
-
-* **hackathon lead organizer** – viz-a-thon, viit
-* **video & photography team head** – ai student association, viit & indo-japan hyper-k workshop
-* **media team head** – tedxviit
-* **class representative** – academic year 2021-22
+* **languages, frameworks & tools:** Python, SQL, Flutter/Dart, Vue, Git, Claude Code
+* **machine learning:** PyTorch, Hugging Face Transformers, scikit-learn, NumPy, Pandas, SciPy
+* **research & interpretability:** LoRA SFT, GRPO, Reward/Verifier Design, Logit Lens, Probing, PCA, Attention Analysis, RSA
+* **llm & genai:** vLLM, LangGraph, Quantization & Speculative Decoding, LLM-as-judge & LLM Evaluation, ONNX, Embedding Models, FastEmbed, RAG Systems, FAISS
+* **backend & deployment:** FastAPI, Docker, GCP (Cloud Run, Cloud Functions), PostgreSQL/Supabase, SQLite, Firebase, ObjectBox

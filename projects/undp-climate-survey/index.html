@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UNDP Peoples' Climate Vote analysis</title><link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin><style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/assets/fonts/jetbrains-mono-400.woff2) format("woff2")}
+
+:root{
+  --ink:#000;--paper:#fff;--muted:#56564f;--hair:#e4e4df;--soft:#f5f5f2;
+  --e1:#DAD9D4;--e1-l:#8C8B85;--e2:#BBD5F4;--e2-l:#3F72B5;
+  --e3:#F8CBA0;--e3-l:#C9701F;--e4:#B7E2C7;--e4-l:#2F8A58;
+  --e5:#E4D8F6;--e5-l:#6E54A3;--e6:#F6C6CE;--e6-l:#B24A5E;
+  --good:#FBE7A1;--noise:#E4D8F6;--bad:#F6C6CE;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.6 var(--sans);font-feature-settings:"cv11","ss01"}
+a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+code,pre,.mono{font-family:var(--mono);font-size:.86em}
+code{background:var(--soft);padding:.08em .32em;border-radius:3px}
+nav.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--ink)}
+nav.top .in{max-width:1080px;margin:0 auto;padding:.7rem 1.25rem;display:flex;gap:1.5rem;align-items:baseline;flex-wrap:wrap}
+nav.top .name{font-weight:700;letter-spacing:-.01em;margin-right:auto}
+nav.top a{text-decoration:none;padding-bottom:2px;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{border-bottom-color:var(--ink)}
+main{max-width:1080px;margin:0 auto;padding:0 1.25rem 6rem}
+.col{max-width:700px}
+header.hero{padding:4.5rem 0 2.5rem}
+header.hero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1.04;letter-spacing:-.035em;font-weight:700;margin:0 0 1.2rem;max-width:18ch}
+header.hero p.lede{font-size:1.2rem;line-height:1.5;max-width:44ch;margin:0;color:var(--ink)}
+h2{font-size:clamp(1.55rem,3vw,2rem);letter-spacing:-.025em;line-height:1.15;margin:4.5rem 0 1rem;padding-top:1.1rem;border-top:1.5px solid var(--ink);font-weight:700}
+h3{font-size:1.12rem;letter-spacing:-.01em;margin:2.2rem 0 .5rem;font-weight:600}
+p{margin:.65rem 0}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.term{font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;margin:1.8rem 0 0;padding:0;list-style:none;font-size:.95rem}
+.toc a{text-decoration:none;border-bottom:1px solid var(--hair)}
+.toc a:hover{border-bottom-color:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem 2rem}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.25rem}
+/* entity chips */
+.chip{display:inline-flex;align-items:center;gap:.35em;white-space:nowrap;font-weight:600}
+.chip::before{content:"";width:.72em;height:.72em;border-radius:2px;border:1.5px solid var(--c-l);background:var(--c)}
+.chip.e1{--c:var(--e1);--c-l:var(--e1-l)}.chip.e2{--c:var(--e2);--c-l:var(--e2-l)}
+.chip.e3{--c:var(--e3);--c-l:var(--e3-l)}.chip.e4{--c:var(--e4);--c-l:var(--e4-l)}
+.chip.e5{--c:var(--e5);--c-l:var(--e5-l)}.chip.e6{--c:var(--e6);--c-l:var(--e6-l)}
+/* figures */
+figure{margin:2rem 0;padding:0}
+figure .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+figure .scroll > svg{min-width:440px}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:.6rem;max-width:700px}
+figcaption b{color:var(--ink)}
+svg.chart{width:100%;max-width:760px;height:auto;display:block;font-family:var(--sans)}
+svg .grid{stroke:#ecece8;stroke-width:1}
+svg .axis{stroke:#000;stroke-width:1.2}
+svg .ref{stroke:#000;stroke-width:1;stroke-dasharray:3 4}
+svg .tick{font-size:12.5px;fill:#3b3b37}
+svg .lab{font-size:13px;fill:#000}
+svg .ann{font-size:12px;fill:#56564f}
+svg .val{font-size:13px;font-weight:600;fill:#000}
+svg .endlab{font-size:12.5px;font-weight:600;fill:#000}
+.legend{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;font-size:.9rem;margin:.2rem 0 .4rem}
+.lg{display:inline-flex;align-items:center;gap:.4rem}
+.sw{width:14px;height:14px;border:1.5px solid;border-radius:2px;display:inline-block}
+/* output blocks */
+.out{font-family:var(--mono);font-size:.84rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;margin:0;padding:.75rem .9rem;background:#fff;border:1px solid var(--hair);border-left:5px solid var(--c,#000);border-radius:0 4px 4px 0}
+.out.e1{--c:var(--e1-l)}.out.e2{--c:var(--e2-l)}.out.e3{--c:var(--e3-l)}.out.e4{--c:var(--e4-l)}.out.e5{--c:var(--e5-l)}.out.e6{--c:var(--e6-l)}
+.key{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.85rem;margin:.6rem 0}
+.key span{padding:0 .3rem}
+.exh{font-size:.8rem;font-weight:600;margin:0 0 .25rem;display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap}
+.exh .sc{font-weight:400;color:var(--muted)}
+/* hero example */
+.ex{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2rem;margin-top:2.2rem;padding-top:1.4rem;border-top:1px solid var(--ink)}
+@media (max-width:820px){.ex{grid-template-columns:1fr}}
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-weight:600;border-bottom:1.5px solid #000}
+td.n,th.n{text-align:right}
+.tablewrap{overflow-x:auto}
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem;margin:1.6rem 0;counter-reset:st}
+.pipe .st{border:1.5px solid #000;border-radius:6px;padding:.75rem .8rem;background:#fff;position:relative;font-size:.9rem;line-height:1.4}
+.pipe .st h4{margin:0 0 .3rem;font-size:.95rem}
+.pipe .st h4::before{counter-increment:st;content:counter(st);display:inline-grid;place-items:center;width:1.35em;height:1.35em;border:1.5px solid #000;border-radius:50%;font-size:.75rem;margin-right:.4rem;vertical-align:1px}
+.pipe .s1{grid-column:1/3}.pipe .s2{grid-column:3/5}.pipe .s3{grid-column:5/7}
+.pipe .s4{grid-column:1/4}.pipe .s5{grid-column:4/7}
+.pipe .br{grid-column:1/-1;font-size:.82rem;color:var(--muted);text-align:center;margin:-.2rem 0}
+@media (max-width:700px){.pipe{grid-template-columns:1fr}.pipe .st,.pipe .br{grid-column:1/-1!important}}
+/* boxed groups */
+.box{border:1.5px solid #000;border-radius:6px;padding:1rem 1.1rem}
+.box h3{margin-top:0}
+.note{border-left:3px solid #000;padding:.2rem 0 .2rem 1rem;margin:1.2rem 0}
+.lesson{background:var(--good);padding:.7rem .95rem;border-radius:4px;margin:1.2rem 0;max-width:700px}
+.lesson b{display:block;margin-bottom:.15rem}
+/* reading cards */
+.card{border-top:1.5px solid #000;padding-top:.7rem}
+.card h4{margin:0 0 .35rem;font-size:1rem}
+.card dl{margin:0;font-size:.92rem}
+.card dt{font-weight:600;margin-top:.5rem}
+.card dd{margin:0}
+footer{max-width:1080px;margin:0 auto;padding:2rem 1.25rem 3rem;border-top:1px solid var(--ink);font-size:.88rem;color:var(--muted)}
+@media (max-width:600px){body{font-size:16px}header.hero{padding-top:2.8rem}}
+@media print{nav.top{position:static}}
+/* portfolio nav */
+nav.top{border-bottom:1px solid var(--hair)}
+nav.top .in{padding:1.1rem 1.25rem;gap:2rem}
+nav.top a{font-family:var(--mono);font-size:.78rem;letter-spacing:.05em;text-transform:lowercase;color:var(--muted);border-bottom:none}
+nav.top a:hover,nav.top a[aria-current="page"]{color:var(--ink)}
+nav.top .name{color:var(--ink)}
+/* motion */
+nav.top a{transition:color 160ms ease}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+header.hero>*{animation:rise 480ms cubic-bezier(.23,1,.32,1) backwards}
+header.hero>:nth-child(2){animation-delay:50ms}header.hero>:nth-child(3){animation-delay:100ms}header.hero>:nth-child(n+4){animation-delay:150ms}
+@media (prefers-reduced-motion:reduce){header.hero>*{animation:none}}
+nav.top .back{margin-right:-.75rem;color:var(--ink)}
+/* site nav */
+nav.top{border-bottom:none}
+nav.top .in{max-width:1100px;padding:24px 30px;display:grid;grid-template-columns:.8fr 1.2fr;align-items:baseline;gap:0}
+nav.top .who{display:flex;gap:.6rem;align-items:baseline}
+nav.top .back{margin:0}
+nav.top .name{opacity:.6;margin:0}
+nav.top .links{display:flex;gap:32px}
+nav.top a{font-size:.75rem}
+@media (max-width:768px){nav.top .in{grid-template-columns:auto 1fr;padding:15px 20px}nav.top .links{justify-content:flex-end;gap:20px}}
+nav.top .here{margin-left:auto;display:flex;gap:24px}
+nav.top .here a.on{color:var(--ink)}
+@media (max-width:768px){nav.top .here{display:none}}
+nav.top .who,nav.top .links{min-width:0}
+@media (max-width:768px){nav.top .in{column-gap:16px}}
+@media (max-width:420px){nav.top .links{flex-wrap:wrap;row-gap:6px}}
+</style><script src="/assets/js/writeup-toc.js" defer></script>
+</head><body>
+<nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/undp-climate-survey/" class="on">undp climate survey</a></div></div></div></nav>
+<main>
+<header class="hero">
+<h1>What predicts strong public support for climate action, and does it split the world into types?</h1>
+<p class="lede">We analysed the UNDP Peoples' Climate Vote 2024, the largest public opinion survey on climate change, covering more than 73,000 respondents across 73 countries. We built two models to predict support for strengthening climate commitments, then grouped countries into typologies by their collective attitudes.</p>
+<ul class="toc">
+<li><a href="#data">The data</a></li>
+<li><a href="#predicting">Predicting support</a></li>
+<li><a href="#drivers">What drives support</a></li>
+<li><a href="#clusters">Segmenting countries</a></li>
+<li><a href="#age-gap">The age gap</a></li>
+<li><a href="#limits">Limits</a></li>
+</ul>
+
+<div class="ex">
+<div>
+<p class="small muted">The survey question our models predict (Q9)</p>
+<div class="out">"Do you think your country should strengthen, maintain, or weaken its commitments to
+address climate change?"</div>
+<p class="small">A demographic group (a Country, Education level and Age band) is <span class="term">"high support"</span> if at least 85% of that group chose "strengthen". Everything else is "low support". We chose this 85% split because almost every group picked "strengthen" as its single most common answer, so predicting the raw three-way choice gave a useless model that always guessed "strengthen".</p>
+</div>
+<div>
+<div class="exh"><span class="chip e2">Linear regression</span><span class="sc">continuous, R&sup2; 68.23%</span></div>
+<div class="out e2">predict: weighted mean of "strengthen" (0 to 100)
+features: attitude questions (Q1, Q2, Q5) + demographics
+result: R&sup2; = 0.6823, RMSE = 8.47 points</div>
+<div class="exh" style="margin-top:.8rem"><span class="chip e3">Random forest</span><span class="sc">binary, AUC-ROC 89.76%</span></div>
+<div class="out e3">predict: is this group "high support" (>=85%)?
+features: same attitude questions + demographics
+result: accuracy = 84.51%, AUC-ROC = 0.8976</div>
+<p class="small muted" style="margin-top:.6rem">Both models see the same features. The random forest's binary framing works because it can separate an easier question, "is this an unusually committed group", from the harder one of predicting an exact percentage.</p>
+</div>
+</div>
+</header>
+
+<section id="data"><h2>The data</h2>
+<div class="col">
+<p>The People's Climate Vote 2024, run by the United Nations Development Programme, is the world's largest public survey on climate change. It covers 73 countries with sample sizes of roughly 900 to 1,500 respondents per country, more than 73,000 people in total. The published dataset already holds <span class="term">weighted means</span>: the share of each demographic group (a Country, Age band and Education level) that picked a given answer, not individual survey responses.</p>
+<p>Over 20,000 rows held null values, concentrated in the weighted mean columns, and age bands above 60 or below 18 were only reported for a handful of countries. We considered predicting the missing values with a regression model, but rejected it: filling in invented answers to a public opinion survey risked biasing the analysis. We removed all null rows instead and kept only complete cases.</p>
+</div>
+<div class="pipe">
+<div class="st s1"><h4>Restructure</h4>Turn the response-level survey into one row per Country, Education and Age group, using the weighted mean of each answer.</div>
+<div class="st s2"><h4>Clean</h4>Drop "Global" aggregates, "All Ages" rows used only for the clustering step, "Don't know" answers, and any row with a null value.</div>
+<div class="st s3"><h4>Encode</h4>Standardise numeric attitude features with <code>StandardScaler</code>. One-hot encode categorical demographics with <code>OneHotEncoder</code>, both inside a <code>ColumnTransformer</code>.</div>
+<div class="st s4"><h4>Feature engineering</h4>Pivot three attitude questions, how often people think about climate change (Q1), whether worry changed since last year (Q2), and whether climate change affected a family decision such as moving or a major purchase (Q5), into separate weighted-mean columns.</div>
+<div class="st s5"><h4>Split and train</h4>An 80 to 20 train-test split, then a linear regression and a random forest (100 trees, class_weight="balanced" to correct for the "high support" class being the minority).</div>
+</div>
+</section>
+
+<section id="predicting"><h2>Predicting support</h2>
+<div class="col">
+<p>We tried two models against the same features. The <span class="chip e2">linear regression</span> predicts the exact weighted-mean percentage that chose "strengthen", a continuous target. The <span class="chip e3">random forest</span> predicts only whether a group clears the 85% "high support" bar, a binary target. Both share the same cleaning and encoding pipeline described above.</p>
+</div>
+<div class="two">
+<figure><div class="scroll">
+<svg viewBox="0 0 460 280" role="img" aria-label="Random forest classifier: accuracy 84.51 percent, AUC-ROC 89.76 percent" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="426" y1="52.0" y2="52.0" class="grid"/><text x="50" y="56.0" text-anchor="end" class="tick">100%</text>
+<line x1="58" x2="426" y1="103.5" y2="103.5" class="grid"/><text x="50" y="107.5" text-anchor="end" class="tick">75%</text>
+<line x1="58" x2="426" y1="155.0" y2="155.0" class="grid"/><text x="50" y="159.0" text-anchor="end" class="tick">50%</text>
+<line x1="58" x2="426" y1="206.5" y2="206.5" class="grid"/><text x="50" y="210.5" text-anchor="end" class="tick">25%</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="grid"/><text x="50" y="262.0" text-anchor="end" class="tick">0%</text>
+<rect x="103.5" y="65.7" width="78" height="192.3" fill="#F8CBA0" stroke="#000" stroke-width="1.2"><title>Accuracy: 84.51%</title></rect>
+<text x="142.5" y="58.7" text-anchor="middle" class="val">84.51%</text>
+<text x="142.5" y="280" text-anchor="middle" class="tick">Accuracy</text>
+<rect x="278.5" y="22.4" width="78" height="235.6" fill="#F8CBA0" stroke="#000" stroke-width="1.2"><title>AUC-ROC: 89.76%</title></rect>
+<text x="317.5" y="15.4" text-anchor="middle" class="val">89.76%</text>
+<text x="317.5" y="280" text-anchor="middle" class="tick">AUC-ROC</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="axis"/>
+</svg>
+</div>
+<figcaption><b>The random forest reaches 84.51% accuracy and an AUC-ROC of 89.76%</b> at telling "high support" groups (85% or more chose "strengthen") from "low support" ones, out of the held-out 20% test split. AUC-ROC measures how well the model ranks a random high-support group above a random low-support one; 50% is a coin flip and 100% is a perfect ranking.</figcaption>
+</figure>
+<figure><div class="scroll">
+<svg viewBox="0 0 460 280" role="img" aria-label="Random forest F1 score by class: low support 0.88, high support 0.82" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="426" y1="52.0" y2="52.0" class="grid"/><text x="50" y="56.0" text-anchor="end" class="tick">1.0</text>
+<line x1="58" x2="426" y1="103.5" y2="103.5" class="grid"/><text x="50" y="107.5" text-anchor="end" class="tick">.75</text>
+<line x1="58" x2="426" y1="155.0" y2="155.0" class="grid"/><text x="50" y="159.0" text-anchor="end" class="tick">.5</text>
+<line x1="58" x2="426" y1="206.5" y2="206.5" class="grid"/><text x="50" y="210.5" text-anchor="end" class="tick">.25</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="grid"/><text x="50" y="262.0" text-anchor="end" class="tick">0</text>
+<rect x="103.5" y="34.5" width="78" height="223.5" fill="#DAD9D4" stroke="#000" stroke-width="1.2"><title>Low support F1: 0.88</title></rect>
+<text x="142.5" y="27.5" text-anchor="middle" class="val">.88</text>
+<text x="142.5" y="280" text-anchor="middle" class="tick">Low support</text>
+<rect x="278.5" y="72.9" width="78" height="185.1" fill="#F8CBA0" stroke="#000" stroke-width="1.2"><title>High support F1: 0.82</title></rect>
+<text x="317.5" y="65.9" text-anchor="middle" class="val">.82</text>
+<text x="317.5" y="280" text-anchor="middle" class="tick">High support</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="axis"/>
+</svg>
+</div>
+<figcaption><b>F1 score is balanced across both classes</b> (0.88 for low support, 0.82 for high support), even though high-support groups are the minority. Recall on high support is 0.93 and precision is 0.87, so the <code>class_weight="balanced"</code> setting worked: the model does not just default to the majority class.</figcaption>
+</figure>
+</div>
+<div class="two" style="margin-top:.5rem">
+<figure><div class="scroll">
+<svg viewBox="0 0 460 280" role="img" aria-label="Linear regression R squared: 68.23 percent of variance explained" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="426" y1="52.0" y2="52.0" class="grid"/><text x="50" y="56.0" text-anchor="end" class="tick">100%</text>
+<line x1="58" x2="426" y1="103.5" y2="103.5" class="grid"/><text x="50" y="107.5" text-anchor="end" class="tick">75%</text>
+<line x1="58" x2="426" y1="155.0" y2="155.0" class="grid"/><text x="50" y="159.0" text-anchor="end" class="tick">50%</text>
+<line x1="58" x2="426" y1="206.5" y2="206.5" class="grid"/><text x="50" y="210.5" text-anchor="end" class="tick">25%</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="grid"/><text x="50" y="262.0" text-anchor="end" class="tick">0%</text>
+<rect x="191.0" y="117.9" width="78" height="140.1" fill="#BBD5F4" stroke="#000" stroke-width="1.2"><title>R squared: 68.23%</title></rect>
+<text x="230.0" y="110.9" text-anchor="middle" class="val">68.23%</text>
+<text x="230.0" y="280" text-anchor="middle" class="tick">R&sup2;</text>
+<line x1="58" x2="426" y1="258.0" y2="258.0" class="axis"/>
+</svg>
+</div>
+<figcaption><b>The linear regression explains 68.23% of the variance</b> in the "strengthen" weighted mean (R&sup2; = 0.6823), with an average prediction error of 8.47 percentage points (RMSE). This does not prove the relationship is linear. It shows that a straight-line model already captures most, but not all, of the pattern, which is why we also tried a random forest.</figcaption>
+</figure>
+<div class="card">
+<h4>Why two different targets</h4>
+<dl>
+<dt>What we tried first</dt><dd>A three-way classifier predicting "strengthen", "maintain" or "weaken" directly.</dd>
+<dt>What went wrong</dt><dd>"Strengthen" was the top answer in almost every demographic group, so the model always guessed "strengthen" and scored 100% accuracy on training and test data. That number proves nothing: a model that ignores its input cannot be useful.</dd>
+<dt>What we changed</dt><dd>We reframed the target as a threshold: is this group's "strengthen" share at least 85%? That turns a near-unanimous outcome into a genuine two-way split worth predicting.</dd>
+</dl>
+</div>
+</div>
+</section>
+
+<section id="drivers"><h2>What drives support</h2>
+<div class="col">
+<p>The random forest also ranks which features matter most for telling high-support groups apart. The three most important were how much a person's worry about climate change changed compared to last year, whether climate change affected a family decision such as relocating or a large purchase, and how often they think about climate change day to day. All three are about a person's own lived experience, not their country or demographic group.</p>
+</div>
+<figure><div class="scroll">
+<svg viewBox="0 0 640 280" role="img" aria-label="Feature importance split: top 3 attitude features account for about 46 percent, demographics and other features for the remaining 54 percent" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="606" y1="52.0" y2="52.0" class="grid"/><text x="50" y="56.0" text-anchor="end" class="tick">100%</text>
+<line x1="58" x2="606" y1="103.5" y2="103.5" class="grid"/><text x="50" y="107.5" text-anchor="end" class="tick">75%</text>
+<line x1="58" x2="606" y1="155.0" y2="155.0" class="grid"/><text x="50" y="159.0" text-anchor="end" class="tick">50%</text>
+<line x1="58" x2="606" y1="206.5" y2="206.5" class="grid"/><text x="50" y="210.5" text-anchor="end" class="tick">25%</text>
+<line x1="58" x2="606" y1="258.0" y2="258.0" class="grid"/><text x="50" y="262.0" text-anchor="end" class="tick">0%</text>
+<rect x="163.0" y="163.7" width="120" height="94.3" fill="#B7E2C7" stroke="#000" stroke-width="1.2"><title>Top 3 attitude features: about 46%</title></rect>
+<text x="223.0" y="156.7" text-anchor="middle" class="val">~46%</text>
+<text x="223.0" y="280" text-anchor="middle" class="tick">Worry, family impact, frequency of thought</text>
+<rect x="403.0" y="146.7" width="120" height="111.3" fill="#DAD9D4" stroke="#000" stroke-width="1.2"><title>Remaining features: about 54%</title></rect>
+<text x="463.0" y="139.7" text-anchor="middle" class="val">~54%</text>
+<text x="463.0" y="280" text-anchor="middle" class="tick">Demographics and remaining features</text>
+<line x1="58" x2="606" y1="258.0" y2="258.0" class="axis"/>
+</svg>
+</div>
+<figcaption><b>Three attitude questions carry about 46% of the model's predictive power</b>, with demographics and the remaining features making up the rest. The report calls this "a balanced ratio of attitude to demography": how a person feels about climate change matters about as much as who they are.</figcaption>
+</figure>
+<div class="note">This ranking comes from the random forest's built-in feature importance. It shows which features the model leaned on to split high-support from low-support groups. It does not show that worry causes support, only that the two move together in this data.</div>
+</section>
+
+<section id="clusters"><h2>Segmenting countries</h2>
+<div class="col">
+<p>Alongside prediction, we grouped the 73 countries into typologies by their collective climate attitudes, using only the "All Ages, All Education" rows so each country is represented once. Each country became one row, with one column per survey question holding the weighted mean of its most positive or proactive answer. We excluded Q8, a question about who is responsible for climate action, because it does not reflect a respondent's own attitude.</p>
+<p>We tried k-means clustering on three versions of this table: the raw features, normalised features, and features reduced with <span class="term">PCA</span> (principal component analysis, a way to compress many correlated columns into a few that keep most of the spread in the data). The raw features gave poorly separated clusters, and the normalised features gave clusters too sparse to interpret because of the high number of columns. PCA gave the most compact, interpretable clusters, so we combined it with k-means. The elbow method, which looks for the point where adding more clusters stops meaningfully reducing error, pointed to 6 clusters.</p>
+</div>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Cluster</th><th>Typology</th><th>Countries</th></tr></thead>
+<tbody>
+<tr><td><span class="chip e1">0</span></td><td>Moderate concern</td><td>Cote d'Ivoire, Ghana, India, Jordan, Morocco, Nigeria, Samoa, Saudi Arabia, South Africa, Tunisia, Vanuatu</td></tr>
+<tr><td><span class="chip e2">1</span></td><td>Highly worried and demand action</td><td>Algeria, Benin, Brazil, Colombia, Ecuador, Haiti, Iran, Iraq, Mexico, Nepal, Nicaragua, Paraguay, Sri Lanka</td></tr>
+<tr><td><span class="chip e3">2</span></td><td>Less concerning day to day</td><td>Australia, Canada, China, Czechia, France, Germany, Indonesia, Japan, Papua New Guinea, Philippines, Russia, UK, USA</td></tr>
+<tr><td><span class="chip e4">3</span></td><td>Highly collaborative and action taking</td><td>Argentina, Cambodia, Greece, Italy, Peru, South Korea, Romania, Spain</td></tr>
+<tr><td><span class="chip e5">4</span></td><td>High daily concern</td><td>Afghanistan, Bangladesh, Bhutan, Burkina Faso, Comoros, Ethiopia, Fiji, Kenya, Madagascar, Mozambique, Niger, Pakistan, Uganda, Zimbabwe</td></tr>
+<tr><td><span class="chip e6">5</span></td><td>Balanced engagement</td><td>Barbados, Dominican Republic, DRC, Egypt, El Salvador, Guatemala, Honduras, Kyrgyzstan, Lao PDR, Myanmar, Solomon Islands, Sudan, Tanzania</td></tr>
+</tbody>
+</table>
+</div>
+<div class="three" style="margin-top:1.5rem">
+<div class="card"><h4><span class="chip e2">Cluster 1</span> Highly worried, demand action</h4><dl>
+<dt>What it shows</dt><dd>Mostly Latin American countries.</dd>
+<dt>What to look for</dt><dd>The highest support for climate action (90%) paired with the lowest satisfaction with current efforts (6%).</dd>
+<dt>What we saw</dt><dd>A group that wants faster, more effective government action and is not getting it.</dd>
+</dl></div>
+<div class="card"><h4><span class="chip e3">Cluster 2</span> Less concerning day to day</h4><dl>
+<dt>What it shows</dt><dd>Includes the USA, Canada, China and UK.</dd>
+<dt>What to look for</dt><dd>The lowest daily concern (26%) and the lowest share who say they are more worried than before (49%).</dd>
+<dt>What we saw</dt><dd>Climate change feels less urgent day to day in these countries than in the rest of the sample.</dd>
+</dl></div>
+<div class="card"><h4>Reading the map</h4><dl>
+<dt>What it shows</dt><dd>Six typologies from PCA-reduced attitude data.</dd>
+<dt>What to look for</dt><dd>Cluster membership does not track income or region cleanly; it tracks collective attitude patterns.</dd>
+<dt>What we saw</dt><dd>The other four clusters sit between these two extremes: worried but not despairing, or engaged but not alarmed.</dd>
+</dl></div>
+</div>
+<div class="note">PCA is only a picture. A cluster boundary in reduced dimensions is not a statistical test that two countries genuinely differ; it is a grouping that made visual and thematic sense once we read the countries inside each one.</div>
+</section>
+
+<section id="age-gap"><h2>The age gap</h2>
+<div class="col">
+<p>Our first coursework asked a narrower question: is there a consistent generational gap in urgency about the fossil fuel transition? We defined an <span class="term">age gap</span> as the share of 18 to 35 year olds who want a "quick" or "very quick" transition, minus the same share among 36 to 59 year olds. We restricted the comparison to these two bands because they were the only ones reported consistently across countries. A positive gap means younger people are more urgent; a negative gap means the older band is.</p>
+</div>
+<figure><div class="scroll">
+<svg viewBox="0 0 640 300" role="img" aria-label="Age gap in transition urgency for five countries, in percentage points" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="606" y1="217.5" y2="217.5" class="grid"/><text x="50" y="221.5" text-anchor="end" class="tick">-15</text>
+<line x1="58" x2="606" y1="163.1" y2="163.1" class="grid"/><text x="50" y="167.1" text-anchor="end" class="tick">0</text>
+<line x1="58" x2="606" y1="108.8" y2="108.8" class="grid"/><text x="50" y="112.8" text-anchor="end" class="tick">15</text>
+<line x1="58" x2="606" y1="54.4" y2="54.4" class="grid"/><text x="50" y="58.4" text-anchor="end" class="tick">30</text>
+<line x1="58" x2="606" y1="163.1" y2="163.1" class="axis"/>
+<line x1="58" x2="606" y1="161.3" y2="161.3" class="ref"/><text x="602" y="155.3" text-anchor="end" class="ann">average +0.76</text>
+<rect x="88" y="72.5" width="80" height="90.6" fill="#B7E2C7" stroke="#000" stroke-width="1.2"><title>USA: +25</title></rect>
+<text x="128" y="65.5" text-anchor="middle" class="val">+25</text>
+<text x="128" y="284" text-anchor="middle" class="tick">USA</text>
+<rect x="200" y="115.8" width="80" height="47.3" fill="#B7E2C7" stroke="#000" stroke-width="1.2"><title>Germany: +13</title></rect>
+<text x="240" y="108.8" text-anchor="middle" class="val">+13</text>
+<text x="240" y="284" text-anchor="middle" class="tick">Germany</text>
+<rect x="312" y="123.1" width="80" height="40.0" fill="#B7E2C7" stroke="#000" stroke-width="1.2"><title>UK: +11</title></rect>
+<text x="352" y="116.1" text-anchor="middle" class="val">+11</text>
+<text x="352" y="284" text-anchor="middle" class="tick">UK</text>
+<rect x="424" y="163.1" width="80" height="47.3" fill="#F6C6CE" stroke="#000" stroke-width="1.2"><title>Mozambique: -13</title></rect>
+<text x="464" y="223.4" text-anchor="middle" class="val">-13</text>
+<text x="464" y="284" text-anchor="middle" class="tick">Mozambique</text>
+<rect x="536" y="163.1" width="80" height="29.0" fill="#F6C6CE" stroke="#000" stroke-width="1.2"><title>Samoa: -8</title></rect>
+<text x="576" y="205.1" text-anchor="middle" class="val">-8</text>
+<text x="576" y="284" text-anchor="middle" class="tick">Samoa</text>
+</svg>
+</div>
+<figcaption><b>The age gap swings from +25 points in the USA to -13 points in Mozambique.</b> The overall average across all 73 countries was a small +0.76 points, and 67% of countries showed a positive gap, meaning younger respondents were slightly more urgent on average. There is no single global pattern: some of the strongest youth urgency appears in the USA (+25), Germany (+13) and the UK (+11), while Mozambique (-13) and Samoa (-8) lean the other way. In the original coursework these plots were built in Tableau; the chart here redraws the same numbers.</figcaption>
+</figure>
+<div class="lesson"><b>Lesson</b>The generational climate gap is real but small and country-specific. A global average close to zero can still hide a 38-point spread between the most youth-urgent and most elder-urgent countries, so reporting only the average would hide the story.</div>
+</section>
+
+<section id="limits"><h2>Limits</h2>
+<div class="col">
+<p><span class="term">The data is opinion, aggregated twice.</span> The public dataset gives weighted means per demographic group, not individual responses, and our models group by Country, Education and Age on top of that. A model that predicts group-level averages well does not prove it would predict any one person's answer.</p>
+<p><span class="term">Complete-case cleaning drops information.</span> Removing over 20,000 null rows and every "Don't know" answer keeps the analysis honest but shrinks the usable sample, and countries with patchier reporting are underrepresented as a result.</p>
+<p><span class="term">Feature importance is not causation.</span> Knowing that worry and family impact rank highest for the random forest tells us what the model leaned on, not that raising someone's worry would raise their support.</p>
+<p><span class="term">Six clusters is a choice, not a law.</span> The elbow method suggested 6 as a reasonable balance of detail and readability. A different cut, or a different year of the survey, could plausibly draw the lines elsewhere.</p>
+<p class="small muted">Sample: 73,000+ respondents across 73 countries, People's Climate Vote 2024 (UNDP).</p>
+</div>
+</section>
+
+<section id="team"><h2>Team and credit</h2>
+<div class="col">
+<p>This was group MSc coursework at the University of Leeds, submitted as two reports by team Luxray: Harshit Verma, Ayush Patne, Abhishek Arun Raut and Sourav Jagati.</p>
+</div>
+</section>
+
+</main>
+<footer>An analysis of the UNDP People's Climate Vote 2024, built as MSc coursework at the University of Leeds by team Luxray (Harshit Verma, Ayush Patne, Abhishek Arun Raut, Sourav Jagati). All numbers on this page come from the two team reports: the exploratory data analysis (Coursework 1) and the predictive modelling and clustering analysis (Coursework 2).</footer>
+</body></html>

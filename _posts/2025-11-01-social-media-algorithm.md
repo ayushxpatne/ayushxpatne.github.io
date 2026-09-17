@@ -1,4 +1,5 @@
 ---
+redirect_to: /projects/social-media-recsys/
 layout: post
 author: "Ayush Patne"
 title: "Building a Social Media Recommendation Algorithm from Scratch"
@@ -10,7 +11,7 @@ tags:
   - Embeddings
   - FAISS
   - Recommendation Systems
-featured: true
+featured: false
 featured_type: "Technical"
 read_time: "25 min"
 ---

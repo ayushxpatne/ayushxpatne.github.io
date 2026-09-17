@@ -44,6 +44,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-katex
+  - jekyll-redirect-from
 
 # Exclude from processing
 exclude:

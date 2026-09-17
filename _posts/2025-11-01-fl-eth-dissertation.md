@@ -1,4 +1,5 @@
 ---
+redirect_to: /projects/fl-fraud-detection/
 layout: post
 author: "Ayush Patne"
 title: "Building a Privacy-Preserving Fraud Detection System with Federated Learning"

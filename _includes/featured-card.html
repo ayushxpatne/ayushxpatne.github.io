@@ -1,15 +1,19 @@
-{% if include.item.external_link %}
-<a href="{{ include.item.external_link }}" class="featured-card" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+{% if include.item.links %}
+    {% assign primary = include.item.links.first.url %}
+{% elsif include.item.external_link %}
+    {% assign primary = include.item.external_link %}
 {% else %}
-<a href="{{ include.item.url | relative_url }}" class="featured-card" style="text-decoration: none; color: inherit; display: block;">
+    {% assign primary = include.item.url | relative_url %}
 {% endif %}
-    <span class="featured-label mono">Featured {{ include.item.featured_type | default: "Post" }}</span>
-    <h3 class="card-title">{{ include.item.title }}</h3>
+<article class="featured-card"{% if include.item.roles %} data-roles="{{ include.item.roles | join: ' ' }}"{% endif %}>
+    <h3 class="card-title"><a href="{{ primary }}" class="card-title-link"{% if primary contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ include.item.title }}</a></h3>
+    {% if include.item.date %}
     <p class="card-meta mono">
         {{ include.item.date | date: "%b %Y" }}
         {% if include.item.read_time %} · {{ include.item.read_time }}{% endif %}
     </p>
-    
+    {% endif %}
+
     <div class="post-tags">
         {% for tag in include.item.tags %}
         <span class="tag mono">{{ tag }}</span>
@@ -17,12 +21,16 @@
     </div>
 
     <p class="card-description">{{ include.item.excerpt | strip_html }}</p>
-    
-    <div class="card-link mono">
-        {% if include.item.external_link %}
-            {{ include.item.button_text | default: "View Project" }} →
+
+    <div class="card-links">
+        {% if include.item.links %}
+            {% for link in include.item.links %}
+            <a href="{{ link.url }}" class="card-link mono"{% if link.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ link.text }}</a>
+            {% endfor %}
+        {% elsif include.item.external_link %}
+            <a href="{{ primary }}" class="card-link mono" target="_blank" rel="noopener">{{ include.item.button_text | default: "View Project" }} →</a>
         {% else %}
-            Read the full story →
+            <a href="{{ primary }}" class="card-link mono">Read the full story →</a>
         {% endif %}
     </div>
-</a>
+</article>

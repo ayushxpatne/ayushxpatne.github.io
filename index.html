@@ -17,7 +17,7 @@ title: Home
             </div>
             
             <div class="links mono">
-                <a href="{{ '/resume' | relative_url }}">Resume →</a>
+                <a href="{{ '/resume/' | relative_url }}">Resume →</a>
                 <a href="mailto:{{ site.links.email }}">Email ↗</a>
                 <a href="{{ site.links.linkedin }}" target="_blank">LinkedIn ↗</a>
                 <a href="{{ site.links.github }}" target="_blank">GitHub ↗</a>
@@ -29,23 +29,24 @@ title: Home
         <section class="home-content-block">
             <h2 class="home-section-title mono">Selected Work</h2>
             <div id="featured-posts">
-                {% assign featured_posts = site.posts | where: "featured", true %}
-                {% for item in featured_posts %}
+                {% assign featured_projects = site.data.projects | where: "featured", true %}
+                {% for item in featured_projects %}
                     {% include featured-card.html item=item %}
                 {% endfor %}
             </div>
+            <a href="{{ '/projects/' | relative_url }}" class="mono archive-link">All Projects →</a>
         </section>
 
         <section class="home-content-block">
             <h2 class="home-section-title mono">Recent Writing</h2>
             <div id="recent-posts">
                 {% for item in site.posts limit:4 %}
-                    {% unless item.external_link %}
+                    {% unless item.external_link or item.redirect_to %}
                         {% include post-card.html item=item %}
                     {% endunless %}
                 {% endfor %}
             </div>
-            <a href="{{ '/archive' | relative_url }}" class="mono archive-link">View Archive →</a>
+            <a href="{{ '/blog/' | relative_url }}" class="mono archive-link">All Posts →</a>
         </section>
     </main>
 </div>
