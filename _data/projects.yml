@@ -78,7 +78,7 @@
 
 - title: "Privacy-preserving fraud detection with federated learning"
   writeup:
-    title: "Can three clients learn to catch fraud together, without any of them sharing data?"
+    title: "Can a model learn from data it never sees?"
     url: /projects/fl-fraud-detection/
   featured_type: Research
   roles: [ml, research, data]
