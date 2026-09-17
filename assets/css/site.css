@@ -1297,3 +1297,66 @@ footer {
     letter-spacing: -0.035em;
     margin: 0 0 1.2rem;
 }
+
+/* blog posts: same frame and type as project write-ups (1080px frame, 700px text column, contents from writeup-toc.js) */
+.blog-container {
+    display: block;
+    box-sizing: border-box;
+    max-width: 1080px;
+    padding: 72px 1.25rem 6rem;
+}
+
+.blog-content {
+    max-width: 700px;
+}
+
+#blog-content {
+    font-size: 16.5px;
+    line-height: 1.6;
+}
+
+#blog-content p {
+    margin: 0.65rem 0;
+}
+
+#blog-content h2 {
+    font-size: clamp(1.55rem, 3vw, 2rem);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 4.5rem 0 1rem;
+    padding-top: 1.1rem;
+    border-top: 1.5px solid var(--fg);
+}
+
+#blog-content h3 {
+    font-size: 1.12rem;
+    letter-spacing: -0.01em;
+    margin: 2.2rem 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+    #blog-content p {
+        font-size: inherit;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-content:has(.nav-who) {
+        gap: 16px;
+        padding: 0 20px;
+    }
+
+    .nav-content:has(.nav-who) .nav-links {
+        gap: 16px;
+    }
+
+    .nav-content:has(.nav-who) .nav-links a {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .nav-who .nav-name {
+        display: none;
+    }
+}
