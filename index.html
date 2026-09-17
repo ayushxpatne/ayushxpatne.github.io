@@ -29,14 +29,12 @@ title: Home
         <section class="home-content-block">
             <h2 class="home-section-title mono">Selected Work</h2>
             <div id="featured-posts">
-                {% for item in site.data.projects %}
-                    {% include featured-card.html item=item %}
-                {% endfor %}
-                {% assign featured_posts = site.posts | where: "featured", true %}
-                {% for item in featured_posts %}
+                {% assign featured_projects = site.data.projects | where: "featured", true %}
+                {% for item in featured_projects %}
                     {% include featured-card.html item=item %}
                 {% endfor %}
             </div>
+            <a href="{{ '/projects/' | relative_url }}" class="mono archive-link">All Projects →</a>
         </section>
 
         <section class="home-content-block">

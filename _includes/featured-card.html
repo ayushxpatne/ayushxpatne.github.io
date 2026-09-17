@@ -5,8 +5,8 @@
 {% else %}
     {% assign primary = include.item.url | relative_url %}
 {% endif %}
-<article class="featured-card">
-    <span class="featured-label mono">Featured {{ include.item.featured_type | default: "Post" }}</span>
+<article class="featured-card"{% if include.item.roles %} data-roles="{{ include.item.roles | join: ' ' }}"{% endif %}>
+    {% unless include.hide_label %}<span class="featured-label mono">Featured {{ include.item.featured_type | default: "Post" }}</span>{% endunless %}
     <h3 class="card-title"><a href="{{ primary }}" class="card-title-link"{% if primary contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ include.item.title }}</a></h3>
     {% if include.item.date %}
     <p class="card-meta mono">

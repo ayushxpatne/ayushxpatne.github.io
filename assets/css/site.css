@@ -1197,3 +1197,62 @@ footer {
 .archive-layout #all-posts a.post-card:hover {
     opacity: 1;
 }
+
+/* projects: browse by role */
+.role-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.role-filter-label {
+    flex-basis: 100%;
+    margin: 0 0 4px;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.role-chip {
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .role-chip:hover {
+        border-color: var(--fg);
+        color: var(--fg);
+    }
+}
+
+.role-chip:active {
+    transform: scale(0.97);
+}
+
+.role-chip[aria-pressed="true"] {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
+}
+
+.role-count {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.stub-note {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+#all-posts .featured-card[hidden] {
+    display: none !important;
+}
