@@ -1,5 +1,9 @@
 # roles drive the filter on /projects/: ai, ml, research, swe, data
-- title: "TRACE: Does the model learn the task, or the hole in the grader?"
+# writeup: a project explainer page, also listed on /blog/ under its own title
+- title: "TRACE: reward hacking in RL fine-tuning"
+  writeup:
+    title: "Does the model learn the task, or the hole in the grader?"
+    url: /projects/trace/
   featured: true
   featured_type: Research
   roles: [ai, ml, research]
@@ -10,6 +14,9 @@
       url: /projects/trace/
 
 - title: "Vocabscapes: multi-agent puzzle generation"
+  writeup:
+    title: "Can five small LLM calls write a puzzle that actually teaches a word?"
+    url: /projects/vocabscapes/
   featured: true
   featured_type: Project
   roles: [ai, swe]
@@ -22,6 +29,9 @@
       url: https://vocabscapes.web.app
 
 - title: "An LLM eval harness for puzzle generation"
+  writeup:
+    title: "Can you trust the judge grading your puzzle generator?"
+    url: /projects/puzzle-eval-harness/
   featured: true
   featured_type: Evaluation
   roles: [ai, research, data]
@@ -51,26 +61,32 @@
     - text: "Read more →"
       url: /projects/rosetta-onepiece/
 
-- title: "Building a Social Media Recommendation Algorithm from Scratch"
+- title: "Social media recommendation engine"
+  writeup:
+    title: "How does a feed learn what you like?"
+    url: /projects/social-media-recsys/
   featured: true
   featured_type: Technical
   roles: [ml, swe]
   tags: [Recommendation Systems, Embeddings, FAISS]
   excerpt: "A TikTok-style recommender built from scratch: scoring, Gemini embeddings, FAISS indexing and the exploitation-exploration trade-off."
   links:
-    - text: "Read the full story →"
-      url: /blog/social-media-algorithm/
+    - text: "Read the write-up →"
+      url: /projects/social-media-recsys/
     - text: "Live demo ↗"
       url: https://social-media-algo-code.onrender.com
 
-- title: "Privacy-Preserving Fraud Detection with Federated Learning"
+- title: "Privacy-preserving fraud detection with federated learning"
+  writeup:
+    title: "Can three clients learn to catch fraud together, without any of them sharing data?"
+    url: /projects/fl-fraud-detection/
   featured_type: Research
   roles: [ml, research, data]
   tags: [Federated Learning, Privacy, Fraud Detection]
   excerpt: "Undergraduate dissertation: federated training across 3 clients on Ethereum transactions with 90%+ class imbalance, reaching 99.7% AUC-ROC."
   links:
-    - text: "Read the full story →"
-      url: /blog/fl-eth-dissertation/
+    - text: "Read the write-up →"
+      url: /projects/fl-fraud-detection/
 
 - title: "Making Regression Make Sense: an Interactive Visualiser"
   featured_type: Technical
@@ -83,7 +99,10 @@
     - text: "Live demo ↗"
       url: https://regression-visualisation.onrender.com/visualize
 
-- title: "UNDP Climate Survey Analysis"
+- title: "UNDP climate survey analysis"
+  writeup:
+    title: "What predicts strong public support for climate action, and does it split the world into types?"
+    url: /projects/undp-climate-survey/
   featured_type: Data Science
   roles: [ml, data]
   tags: [Random Forest, K-Means, PCA, Tableau]

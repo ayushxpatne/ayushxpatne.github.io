@@ -775,6 +775,7 @@ footer {
 
 /* The List (Right Column) */
 .archive-layout #all-posts .post-card,
+.archive-layout #all-writeups .post-card,
 .archive-layout #all-posts .featured-card {
     display: block;
     border: none !important;
@@ -790,7 +791,8 @@ footer {
 }
 
 /* Hover state for the whole list item */
-.archive-layout #all-posts a:hover {
+.archive-layout #all-posts a:hover,
+.archive-layout #all-writeups a:hover {
     opacity: 0.6;
     transform: none !important;
 }

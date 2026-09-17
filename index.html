@@ -41,7 +41,7 @@ title: Home
             <h2 class="home-section-title mono">Recent Writing</h2>
             <div id="recent-posts">
                 {% for item in site.posts limit:4 %}
-                    {% unless item.external_link %}
+                    {% unless item.external_link or item.redirect_to %}
                         {% include post-card.html item=item %}
                     {% endunless %}
                 {% endfor %}
