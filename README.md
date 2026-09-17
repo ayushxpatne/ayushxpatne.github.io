@@ -1,24 +1,28 @@
 ### hi, i'm ayush 🖖
 
-i’m an ai engineer pursuing my msc in advanced computer science at the **university of leeds**. i spend my time building ai systems that move beyond research into real-world production.
+i'm an ai engineer pursuing my msc in advanced computer science (ai) at the **university of leeds**. i like taking ai systems past the demo stage: measuring them honestly, then making them small, fast and cheap enough to run.
 
 ---
 
-#### 🔭 some projects
-- **maira**: a rag-based ai companion with long-term memory using gemini 2.0 and sqlite embeddings.
-- **hopps**: founder of an ai-powered restaurant discovery app (70+ partners).
-- **recommendation engines**: engineering semantic video retrieval using faiss and ivf clustering.
+#### 🔭 selected work
+- **[trace](https://ayushxpatne.github.io/projects/trace/)**: a controlled study of reward hacking. smollm2-360m trained with lora sft then grpo against a weak and a strong verifier, with logit lens and probes to find where the two models diverge.
+- **[vocabscapes](https://ayushxpatne.github.io/projects/vocabscapes/)**: a five-agent langgraph pipeline that writes word puzzles, with bounded retries and cached variants. [play it](https://vocabscapes.web.app).
+- **[llm eval harness](https://ayushxpatne.github.io/projects/puzzle-eval-harness/)**: llm-as-judge scoring across four model pairs, calibrated against blind human ratings.
+- **[maybehere](https://maybehere.app)**: group restaurant discovery over 97k+ uk places, semantic search on bge-small with onnx, under 400ms per query on free-tier infrastructure.
+- **rosetta & onepiece**: fixed-size, model-agnostic llm representations and a ~1k-parameter memory retriever built on them. pre-prints in progress.
 
 #### 🛠️ stack
-- **core**: python, gcp/firebase, flutter.
-- **specialties**: rag pipelines, agentic workflows, ml/ai
+- **core**: python, pytorch, hugging face transformers, sql
+- **llm & genai**: vllm, langgraph, quantization & speculative decoding, llm-as-judge evaluation, onnx, embedding models, rag, lora sft, grpo
+- **backend & deployment**: fastapi, docker, gcp (cloud run, cloud functions), postgresql/supabase, firebase
 
-
-#### 📝 recent technical deep-dives
-- [how i built a tiktok-style recommendation engine](https://ayushxpatne.github.io/ayushpatne/blog/social-media-algorithm/)
-- [privacy-preserving fraud detection via federated learning](https://ayushxpatne.github.io/ayushpatne/blog/fl-eth-dissertation/)
+#### 📝 write-ups
+- [does the model learn the task, or the hole in the grader?](https://ayushxpatne.github.io/projects/trace/)
+- [can you trust the judge grading your puzzle generator?](https://ayushxpatne.github.io/projects/puzzle-eval-harness/)
+- [can a model learn from data it never sees?](https://ayushxpatne.github.io/projects/fl-fraud-detection/)
+- [how does a feed learn what you like?](https://ayushxpatne.github.io/projects/social-media-recsys/)
 
 #### 💬 find me
-[portfolio website](https://ayushxpatne.github.io/ayushpatne/) / [linkedin](https://linkedin.com/in/ayushpatne) / [email](mailto:ayushpatne@gmail.com)
+[portfolio website](https://ayushxpatne.github.io/) / [linkedin](https://linkedin.com/in/ayushpatne) / [email](mailto:ayushpatne@gmail.com)
 
 ---

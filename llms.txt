@@ -2,23 +2,33 @@
 AI Engineer | MSc Advanced Computer Science (AI), University of Leeds
 
 ## Professional Profile
-Ayush is an AI specialist focused on building AI systems, from Generative AI to Federated Learning. He is the founder of 'Hopps' (a social dining platform) and is Currently pursuing MSc Advanced Computer Science (Artificial Intelligence) at University of Leeds. 
+Ayush builds and evaluates AI systems, from multi-agent LLM pipelines to RL fine-tuning studies and embedding retrieval services. He was an AI Engineer at Hopps, a research assistant on LLM systems at the University of Leeds, and is completing an MSc in Advanced Computer Science (Artificial Intelligence) at the University of Leeds.
 
 ## Technical Expertise
-- **Core:** Generative AI, LLMs, Transformer Architectures, RAG Systems, Machine Learning, 
+- **LLM & GenAI:** vLLM, LangGraph, multi-agent pipelines, quantization and speculative decoding, LLM-as-judge evaluation and calibration, RAG, embedding models, ONNX/FastEmbed
+- **Research:** LoRA SFT, GRPO, reward and verifier design, mechanistic interpretability (logit lens, probing, PCA, attention analysis), representation learning
+- **Machine Learning:** PyTorch, Hugging Face Transformers, scikit-learn, NumPy, Pandas, SciPy
+- **Backend & Deployment:** FastAPI, Docker, GCP (Cloud Run, Cloud Functions), PostgreSQL/Supabase, SQLite, Firebase
 
 ## Key Projects
-- **Hopps:** Social dining platform with an AI-powered recommendation system using Gemini API and Flutter.
-- **Maira:** An AI companion with a RAG-based memory system using Gemini 2.0, embeddings and SQLite.
-- **Social Media Engine:** A TikTok-style recommendation engine using IndexIVF clustering and semantic retrieval.
-- **Federated Learning:** A privacy-preserving fraud detection system for Ethereum transaction datasets.
+- **TRACE:** A controlled study of reward hacking in RL fine-tuning. SmolLM2-360M-Instruct trained with LoRA SFT then GRPO against a weak and a strong reward verifier; the strong verifier reached 93% exact match through a shortcut, localised to layers 23 to 29 with logit lens and probes. Write-up: https://ayushxpatne.github.io/projects/trace/
+- **Vocabscapes:** A five-agent LangGraph pipeline (writer, judge, improver, finalizer, explanation) generating word puzzles, with bounded retries and cached variants per level. Live: https://vocabscapes.web.app . Write-up: https://ayushxpatne.github.io/projects/vocabscapes/
+- **LLM eval harness:** LLM-as-judge evaluation across four writer and critic model pairs, calibrated against blind human ratings. Write-up: https://ayushxpatne.github.io/projects/puzzle-eval-harness/
+- **maybehere:** Group restaurant discovery app with 97,000+ place profiles across ~200 UK towns, semantic retrieval on BGE-small with ONNX/FastEmbed on Cloud Run. Live: https://maybehere.app
+- **Rosetta & OnePiece:** A model-agnostic, fixed-size (32-D) LLM representation method and a ~1,000-parameter plug-and-play memory retriever built on it. Pre-prints in progress.
+- **Federated learning:** Privacy-preserving fraud detection on Ethereum transactions across three clients, without sharing data. Write-up: https://ayushxpatne.github.io/projects/fl-fraud-detection/
+- **Social media recommendation engine:** A recommender built from scratch with Gemini embeddings, FAISS IndexIVF retrieval and an exploitation-exploration mix. Write-up: https://ayushxpatne.github.io/projects/social-media-recsys/
+- **UNDP climate survey analysis:** Predicting and segmenting public support for climate action across 73,000+ respondents in 73 countries. Write-up: https://ayushxpatne.github.io/projects/undp-climate-survey/
 
 ## Academic & Research
-- **MSc AI:** University of Leeds (Current).
-- **Research:** Co author  on attention span and mental health (Published at ASIANCON 2024).
-- **B.Tech:** AI & Data Science from VIIT, Pune.
+- **MSc Advanced Computer Science (AI):** University of Leeds, 2025 to 2026. International Excellence Award and International Regional Award scholarships.
+- **Research Assistant (LLM Systems):** University of Leeds, multi-agent pipeline converting NHS/NICE clinical guidelines into machine-readable ontologies.
+- **Publication:** Co-author on attention span and mental health, 4th Asian Conference on Innovation in Technology (ASIANCON) 2024.
+- **B.Tech:** Artificial Intelligence & Data Science, University of Pune, 2022 to 2025.
 
 ## Online Presence
-- Website: https://ayushxpatne.github.io/ayushpatne/
+- Website: https://ayushxpatne.github.io/
+- Projects: https://ayushxpatne.github.io/projects/
+- Blog: https://ayushxpatne.github.io/blog/
 - LinkedIn: https://linkedin.com/in/ayushpatne
 - GitHub: https://github.com/ayushxpatne
