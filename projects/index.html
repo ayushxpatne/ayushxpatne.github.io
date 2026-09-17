@@ -27,7 +27,7 @@ permalink: /projects/
             <h2 class="home-section-title mono">All Projects <span class="role-count" id="role-count"></span></h2>
             <div id="all-posts">
                 {% for item in site.data.projects %}
-                    {% include featured-card.html item=item hide_label=true %}
+                    {% include featured-card.html item=item %}
                 {% endfor %}
             </div>
         </section>
