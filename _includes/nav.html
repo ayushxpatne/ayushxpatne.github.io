@@ -1,5 +1,11 @@
 <nav class="{% if page.wide_nav %}wide{% endif %}">
     <div class="nav-content">
+        {% if page.layout == 'post' %}
+        <div class="nav-who mono">
+            <a class="nav-back" href="{{ '/blog/' | relative_url }}" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a>
+            <a class="nav-name" href="{{ '/' | relative_url }}">ayushpatne</a>
+        </div>
+        {% endif %}
         <div class="nav-links mono">
             <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">home</a>
             <a href="{{ '/resume/' | relative_url }}" class="{% if page.url contains '/resume' %}active{% endif %}">resume</a>

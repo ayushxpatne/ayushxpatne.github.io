@@ -1258,3 +1258,42 @@ footer {
 #all-posts .featured-card[hidden] {
     display: none !important;
 }
+
+/* blog post nav: back arrow and name on the left, like the project pages */
+.nav-who {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+}
+
+.nav-who a {
+    text-decoration: none;
+    color: var(--fg);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.nav-who .nav-name {
+    opacity: 0.6;
+}
+
+.nav-content .nav-links {
+    grid-row: 1;
+}
+
+@media (max-width: 768px) {
+    .nav-content:has(.nav-who) {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+/* blog post title: same scale as the project write-up headlines */
+#blog-header h1 {
+    font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    margin: 0 0 1.2rem;
+}
