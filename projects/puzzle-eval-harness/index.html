@@ -1,0 +1,265 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>An LLM eval harness for puzzle generation</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><style>
+:root{
+  --ink:#000;--paper:#fff;--muted:#56564f;--hair:#e4e4df;--soft:#f5f5f2;
+  --base:#DAD9D4;--base-l:#8C8B85;--sft:#BBD5F4;--sft-l:#3F72B5;
+  --weak:#F8CBA0;--weak-l:#C9701F;--strong:#B7E2C7;--strong-l:#2F8A58;
+  --rule:#FBE7A1;--dis:#E4D8F6;--wrong:#F6C6CE;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.6 var(--sans);font-feature-settings:"cv11","ss01"}
+a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+code,pre,.mono{font-family:var(--mono);font-size:.86em}
+code{background:var(--soft);padding:.08em .32em;border-radius:3px}
+nav.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--ink)}
+nav.top .in{max-width:1080px;margin:0 auto;padding:.7rem 1.25rem;display:flex;gap:1.5rem;align-items:baseline;flex-wrap:wrap}
+nav.top .name{font-weight:700;letter-spacing:-.01em;margin-right:auto}
+nav.top a{text-decoration:none;padding-bottom:2px;border-bottom:2px solid transparent}
+nav.top a[aria-current="page"]{border-bottom-color:var(--ink)}
+main{max-width:1080px;margin:0 auto;padding:0 1.25rem 6rem}
+.col{max-width:700px}
+header.hero{padding:4.5rem 0 2.5rem}
+header.hero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);line-height:1.04;letter-spacing:-.035em;font-weight:700;margin:0 0 1.2rem;max-width:18ch}
+header.hero p.lede{font-size:1.2rem;line-height:1.5;max-width:46ch;margin:0;color:var(--ink)}
+h2{font-size:clamp(1.55rem,3vw,2rem);letter-spacing:-.025em;line-height:1.15;margin:4.5rem 0 1rem;padding-top:1.1rem;border-top:1.5px solid var(--ink);font-weight:700}
+h3{font-size:1.12rem;letter-spacing:-.01em;margin:2.2rem 0 .5rem;font-weight:600}
+p{margin:.65rem 0}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.term{font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:.35rem 1.1rem;margin:1.8rem 0 0;padding:0;list-style:none;font-size:.95rem}
+.toc a{text-decoration:none;border-bottom:1px solid var(--hair)}
+.toc a:hover{border-bottom-color:var(--ink)}
+.m{display:inline-flex;align-items:center;gap:.35em;white-space:nowrap;font-weight:600}
+.m::before{content:"";width:.72em;height:.72em;border-radius:2px;border:1.5px solid var(--c-l);background:var(--c)}
+.m.qq{--c:var(--strong);--c-l:var(--strong-l)}.m.qg{--c:var(--sft);--c-l:var(--sft-l)}
+.m.gq{--c:var(--wrong);--c-l:#B5384A}.m.gg{--c:var(--weak);--c-l:var(--weak-l)}
+figure{margin:2rem 0;padding:0}
+figure .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+figure .scroll > svg{min-width:440px}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:.6rem;max-width:700px}
+figcaption b{color:var(--ink)}
+svg.chart{width:100%;max-width:760px;height:auto;display:block;font-family:var(--sans)}
+svg .grid{stroke:#ecece8;stroke-width:1}
+svg .axis{stroke:#000;stroke-width:1.2}
+svg .ref{stroke:#000;stroke-width:1;stroke-dasharray:3 4}
+svg .tick{font-size:12.5px;fill:#3b3b37}
+svg .lab{font-size:13px;fill:#000}
+svg .val{font-size:13px;font-weight:600;fill:#000}
+.legend{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;font-size:.9rem;margin:.2rem 0 .4rem}
+.lg{display:inline-flex;align-items:center;gap:.4rem}
+.sw{width:14px;height:14px;border:1.5px solid;border-radius:2px;display:inline-block}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:1.5rem 2rem}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.25rem}
+.out{font-family:var(--mono);font-size:.84rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;margin:0;padding:.75rem .9rem;background:#fff;border:1px solid var(--hair);border-left:5px solid var(--c,#000);border-radius:0 4px 4px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-weight:600;border-bottom:1.5px solid #000}
+td.n,th.n{text-align:right}
+.tablewrap{overflow-x:auto}
+.pipe{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem;margin:1.6rem 0;counter-reset:st}
+.pipe .st{border:1.5px solid #000;border-radius:6px;padding:.75rem .8rem;background:#fff;position:relative;font-size:.9rem;line-height:1.4}
+.pipe .st h4{margin:0 0 .3rem;font-size:.95rem}
+.pipe .st h4::before{counter-increment:st;content:counter(st);display:inline-grid;place-items:center;width:1.35em;height:1.35em;border:1.5px solid #000;border-radius:50%;font-size:.75rem;margin-right:.4rem;vertical-align:1px}
+.pipe .s1{grid-column:1/3}.pipe .s2{grid-column:3/5}.pipe .s3{grid-column:5/7}
+.pipe .s4{grid-column:1/4}.pipe .s5{grid-column:4/7}
+.pipe .s1,.pipe .s2,.pipe .s3{box-shadow:inset 6px 0 0 var(--base)}
+.pipe .s4{box-shadow:inset 6px 0 0 var(--sft)}
+.pipe .s5{box-shadow:inset 6px 0 0 var(--strong)}
+@media (max-width:700px){.pipe{grid-template-columns:1fr}.pipe .st{grid-column:1/-1!important}}
+.grader{border:1.5px solid #000;border-radius:6px;padding:1rem 1.1rem}
+.grader h3{margin-top:0}
+.checks{list-style:none;padding:0;margin:.6rem 0;font-size:.92rem}
+.checks li{padding:.35rem 0 .35rem 1.6rem;border-top:1px solid var(--hair);position:relative}
+.checks li::before{content:"";position:absolute;left:.1rem;top:.72rem;width:.7rem;height:.7rem;border:1.5px solid #000;border-radius:50%}
+.checks li.decidable::before{background:#000}
+.callout{border:1.5px solid #000;border-radius:6px;padding:1rem 1.1rem;box-shadow:inset 6px 0 0 var(--rule);margin:1.5rem 0}
+.callout h3{margin-top:0}
+.foot-note{font-size:.85rem;color:var(--muted)}
+footer{max-width:1080px;margin:3rem auto 0;padding:1.5rem 1.25rem 3rem;border-top:1px solid var(--hair);font-size:.85rem;color:var(--muted)}
+</style></head><body><nav class="top" aria-label="Pages"><div class="in"><a class="name" href="/">ayushpatne</a><a href="/projects/vocabscapes/">Vocabscapes</a><a href="/projects/puzzle-eval-harness/" aria-current="page">Eval harness</a></div></nav><main>
+<header class="hero">
+<h1>Can you trust the judge grading your puzzle generator?</h1>
+<p class="lede">Vocabscapes generates word-puzzle sentences with one model and grades them with another, in a write&#8594;critique loop. This project measures whether that grader can be trusted, by checking it against blind human ratings &#8212; and finds that in one cell of the design, it was wrong by 39 points.</p>
+<ul class="toc" aria-label="Sections">
+<li><a href="#setup">The setup</a></li><li><a href="#pipeline">Pipeline</a></li><li><a href="#rubric">The rubric</a></li>
+<li><a href="#raw">Raw results</a></li><li><a href="#calibration">Calibration</a></li><li><a href="#corrected">Corrected results</a></li>
+<li><a href="#rubric-breaks">Where the rubric breaks</a></li><li><a href="#cost">Cost</a></li><li><a href="#conclusion">Conclusion</a></li></ul>
+</header>
+
+<section id="setup"><h2>The setup</h2><div class="col">
+<p><a href="https://vocabscapes.web.app">Vocabscapes</a> is a word-puzzle game. Each level gives the player a <span class="term">word list</span> and asks them to write one sentence that uses every word. A <span class="term">writer</span> model drafts that sentence; a <span class="term">critic</span> model grades it against a 12-point rubric and returns PASSED or FAILED per check. If it fails, the writer retries, up to 2 retries (3 attempts total) before the level is marked a <span class="term">Hard FAIL</span>.</p>
+<p>This project turns that write&#8594;critique loop into a benchmark. It compares two candidate models &#8212; <b>Qwen3.8-27B</b> and <b>google/gemma-4-E2B-it</b> &#8212; as both writer and critic, across a full 2&#215;2 design: 140 levels &#215; 4 (writer, critic) pairs, spanning 28 difficulty tiers. Two of the four pairs are <span class="term">same-model cells</span>, where a model grades its own writing; the other two are <span class="term">cross-model</span>.</p>
+<p>The question this project actually answers is narrower and more useful than "which model writes better sentences." It is: <b>can the critic's verdict be trusted at all</b>, and if not, by how much and in which direction does it lie.</p>
+</div>
+<div class="two">
+<figure><div class="tablewrap"><table><thead><tr><th>Writer \ Critic</th><th>Qwen critic</th><th>Gemma critic</th></tr></thead><tbody>
+<tr><td>Qwen writer</td><td><span class="m qq">qwen&#8594;qwen</span> same-model</td><td><span class="m qg">qwen&#8594;gemma</span> cross-model</td></tr>
+<tr><td>Gemma writer</td><td><span class="m gq">gemma&#8594;qwen</span> cross-model</td><td><span class="m gg">gemma&#8594;gemma</span> same-model</td></tr>
+</tbody></table></div><figcaption>The 2&#215;2 design. Comparing a model's same-model cell to its cross-model cell measures self-preference bias (Zheng et al. 2023) &#8212; though as &#167;5 shows, that comparison turned out to be mostly measuring the critic, not the writer.</figcaption></figure>
+<figure><pre class="out" style="--c:#000">Run 1 config
+Qwen3.8-27B-FP8 + gemma-4-E2B-it
+reasoning: on, both roles, both models
+token budget: 16384 (shared, uncapped split)
+sampling: per-model recipe from each model's card
+max attempts: 3 (2 retries)
+structured output: xgrammar, whitespace disabled</pre>
+<figcaption>Every call uses each model's own published sampling recipe rather than one flat temperature, and both models stay loaded on one GPU for the whole run via two detached <code>vllm serve</code> processes.</figcaption></figure>
+</div>
+</section>
+
+<section id="pipeline"><h2>Pipeline</h2><div class="col">
+<p>Word lists for the 140 sampled levels are generated live from Vocabscapes's own deterministic level generator &#8212; a seed word expanded into valid subwords &#8212; rather than read from a pre-existing CSV. The logged history only covered 18 of the 31 difficulty tiers, not enough to fill the 28 the sample needed, so the harness calls the generator directly for any level number.</p></div>
+<div class="pipe">
+<div class="st s1"><h4>Generate</h4>Pull a level's word list from Vocabscapes's own level generator. 5 levels per tier &#215; 28 tiers = 140 levels, spanning the full difficulty range.</div>
+<div class="st s2"><h4>Write</h4>The writer model drafts one sentence using every target word, for all 4 (writer, critic) cells.</div>
+<div class="st s3"><h4>Critique</h4>The critic model checks the sentence against the 12-point rubric and returns a per-check PASSED/FAILED verdict. Up to 2 retries on failure.</div>
+<div class="st s4"><h4>Calibrate</h4>Draw a stratified 80-row sample (20 PASSED + 20 FAILED per cell). A human and an isolated Claude subagent each re-grade it blind &#8212; no file access, no view of the critic's verdict or the cell label.</div>
+<div class="st s5"><h4>Correct</h4>Blend the critic's raw pass-rate with the blind raters' sensitivity and specificity into a bias-corrected rate, with a bootstrap confidence interval.</div>
+</div>
+<div class="col"><p>The run logs every attempt to one of 4 separate <code>results_&lt;cell&gt;.jsonl</code> files, and every error &#8212; timeout, malformed structured output, dropped connection &#8212; to its own error log, never silently. A level whose call fails before a verdict is returned is <span class="term">abandoned</span>, not a Hard FAIL: one is an infrastructure fault, the other is a result, and folding them together once made a broken run look like a strict critic (see &#167;5).</p></div>
+</section>
+
+<section id="rubric"><h2>What is judged</h2><div class="col">
+<p>The critic checks 12 things about a candidate sentence: that it uses the seed word if required, that every target word actually appears, that the answer key is accurate, proper-noun handling, lexical integrity, substring overlap, acronym handling, output formatting, contextual richness, word efficiency, grammar, and semantic validity. A sentence passes only if checks 2&#8211;12 all pass &#8212; check 1 (seed word) is out of scope here because of a harness quirk described below.</p></div>
+<div class="grader">
+<h3>Which checks are decidable, and which are judgment calls</h3>
+<ul class="checks">
+<li class="decidable">Checks 2 and 3 &#8212; target word existence, answer key accuracy &#8212; are exact word-boundary matching. They have one correct answer, checkable by a script.</li>
+<li>Checks 4, 6, 7, 8 &#8212; proper nouns, lexical integrity, acronyms, output style &#8212; are mechanical. Two independent raters agree on them almost perfectly (77&#8211;79 of 80 rows).</li>
+<li>Checks 5, 9, 10, 11, 12 &#8212; substring overlap, contextual richness, word efficiency, grammar, semantic validity &#8212; are judgment calls. Two raters agree on as few as 58 of 80 rows here.</li>
+</ul>
+<p class="small">Check 9, "could a player deduce the word from context," carries the single largest disagreement between raters: 22 of 80 rows. See &#167;7.</p>
+</div>
+</section>
+
+<section id="raw"><h2>Raw results: what the critic said</h2><div class="col">
+<p>The critic's raw, uncorrected numbers. Everything downstream uses the <b>attempt</b> pass-rate <code>p</code>, not the level pass-rate &#8212; the pipeline retries until a level passes, so a level rate mostly answers "did retrying eventually work" and hides the critic's actual per-call behaviour. Level rates for this run sit at 84&#8211;98% and are close to useless for judging the critic.</p></div>
+<figure><div class="tablewrap"><table><thead><tr><th>cell</th><th class="n">attempts</th><th class="n">attempt pass-rate p</th><th class="n">level pass-rate</th><th class="n">hard fail</th></tr></thead><tbody>
+<tr><td><span class="m qq">qwen&#8594;qwen</span></td><td class="n">208</td><td class="n">63.0%</td><td class="n">94.9%</td><td class="n">7</td></tr>
+<tr><td><span class="m qg">qwen&#8594;gemma</span></td><td class="n">166</td><td class="n">82.5%</td><td class="n">97.9%</td><td class="n">3</td></tr>
+<tr><td><span class="m gq">gemma&#8594;qwen</span></td><td class="n">402</td><td class="n">3.5%</td><td class="n">10.0%</td><td class="n">126</td></tr>
+<tr><td><span class="m gg">gemma&#8594;gemma</span></td><td class="n">233</td><td class="n">50.6%</td><td class="n">84.3%</td><td class="n">22</td></tr>
+</tbody></table></div><figcaption>1,009 attempts across 1,009 (level, cell) pairs, 2,080 model calls total. Two <span class="m qq">qwen&#8594;qwen</span> levels hit a malformed-output error on every attempt across both sweeps and logged no result row at all &#8212; genuinely abandoned, counted separately from the 7 Hard FAILs above.</figcaption></figure>
+<figure><div class="scroll"><svg viewBox="0 0 460 280" role="img" aria-label="Raw attempt pass-rate by cell" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="444" y1="240" y2="240" class="grid"/><text x="50" y="244" text-anchor="end" class="tick">0%</text>
+<line x1="58" x2="444" y1="186" y2="186" class="grid"/><text x="50" y="190" text-anchor="end" class="tick">25%</text>
+<line x1="58" x2="444" y1="132" y2="132" class="grid"/><text x="50" y="136" text-anchor="end" class="tick">50%</text>
+<line x1="58" x2="444" y1="78" y2="78" class="grid"/><text x="50" y="82" text-anchor="end" class="tick">75%</text>
+<line x1="58" x2="444" y1="24" y2="24" class="grid"/><text x="50" y="28" text-anchor="end" class="tick">100%</text>
+<rect x="76.3" y="104.4" width="59.8" height="135.6" fill="#B7E2C7" stroke="#000" stroke-width="1.2"><title>qwen-qwen: 63.0%</title></rect><text x="106.2" y="97.4" text-anchor="middle" class="val">63.0%</text><text x="106.2" y="262" text-anchor="middle" class="tick">qwen&#8594;qwen</text>
+<rect x="172.8" y="17.1" width="59.8" height="222.9" fill="#BBD5F4" stroke="#000" stroke-width="1.2"><title>qwen-gemma: 82.5%</title></rect><text x="202.8" y="10.1" text-anchor="middle" class="val">82.5%</text><text x="202.8" y="262" text-anchor="middle" class="tick">qwen&#8594;gemma</text>
+<rect x="269.3" y="232.4" width="59.8" height="7.6" fill="#F6C6CE" stroke="#000" stroke-width="1.2"><title>gemma-qwen: 3.5%</title></rect><text x="299.2" y="225.4" text-anchor="middle" class="val">3.5%</text><text x="299.2" y="262" text-anchor="middle" class="tick">gemma&#8594;qwen</text>
+<rect x="365.8" y="130.7" width="59.8" height="109.3" fill="#F8CBA0" stroke="#000" stroke-width="1.2"><title>gemma-gemma: 50.6%</title></rect><text x="395.8" y="123.7" text-anchor="middle" class="val">50.6%</text><text x="395.8" y="262" text-anchor="middle" class="tick">gemma&#8594;gemma</text>
+<line x1="58" x2="444" y1="240" y2="240" class="axis"/><text transform="translate(14 132) rotate(-90)" text-anchor="middle" class="lab">attempt pass-rate p</text>
+</svg></div><figcaption><b>Read literally, this chart says Gemma massively prefers its own writing</b> &#8212; 50.6% passing itself against 3.5% passing Qwen. Holding the critic fixed and varying the writer tells a different story: the Qwen critic separates the two writers by 84.9 points, the Gemma critic by only 13.6. Most of the gap is critic leniency, not writer self-preference &#8212; which is exactly why this number needs calibrating before it means anything (&#167;5).</figcaption></figure>
+</section>
+
+<section id="calibration"><h2>Calibration against blind human ratings</h2><div class="col">
+<p>The critic is an unvalidated instrument. Its raw pass-rate <code>p</code> measures the writer's quality and the critic's own errors together, inseparably. Calibration pulls them apart.</p>
+<p>A stratified 20-row sample per cell (80 rows total, half critic-PASSED and half critic-FAILED) is drawn from the real logged results &#8212; not fabricated separately. A human rater and an isolated Claude subagent each re-grade every row against the same 12-point rubric, blind: they see only the sentence, the word list, and the difficulty settings, never the critic's verdict or which cell produced the row.</p>
+</div>
+<div class="callout">
+<h3>The correction, in one paragraph</h3>
+<p class="small">Of the rows the critic <b>passed</b>, the fraction the blind rater also passes gives <code>a</code> &#8212; the critic's precision on its own accepts. Of the rows the critic <b>failed</b>, the (rejection-weighted) fraction the blind rater would have passed gives <code>b</code> &#8212; how often the critic threw away a good sentence. Blending them by the critic's real attempt rate gives the corrected rate: <code>theta = p&#183;a + (1-p)&#183;b</code>. A 95% interval comes from resampling each pile 4,000 times.</p>
+</div>
+<div class="two">
+<figure><div class="tablewrap"><table><thead><tr><th>cell</th><th class="n">a (passed pile)</th><th class="n">b (failed pile)</th></tr></thead><tbody>
+<tr><td><span class="m qq">qwen&#8594;qwen</span></td><td class="n">0.80</td><td class="n">0.87</td></tr>
+<tr><td><span class="m qg">qwen&#8594;gemma</span></td><td class="n">0.70</td><td class="n">0.69</td></tr>
+<tr><td><span class="m gq">gemma&#8594;qwen</span></td><td class="n">1.00</td><td class="n">0.40</td></tr>
+<tr><td><span class="m gg">gemma&#8594;gemma</span></td><td class="n">0.60</td><td class="n">0.22</td></tr>
+</tbody></table></div><figcaption>Human rater, headline variant (checks 2 &amp; 3 adjudicated by script &#8212; &#167;7). <code>a</code> and <code>b</code> are counts out of 10 rows per pile per cell, with <code>b</code> weighted by each level's own rejection count so a thrice-rejected level isn't undercounted.</figcaption></figure>
+<figure><div class="tablewrap"><table><thead><tr><th>cell</th><th class="n">q1 sensitivity</th><th class="n">q0 specificity</th></tr></thead><tbody>
+<tr><td><span class="m qq">qwen&#8594;qwen</span></td><td class="n">0.61</td><td class="n">0.28&#8224;</td></tr>
+<tr><td><span class="m qg">qwen&#8594;gemma</span></td><td class="n">0.83</td><td class="n">0.18&#8224;</td></tr>
+<tr><td><span class="m gq">gemma&#8594;qwen</span></td><td class="n">0.08</td><td class="n">1.00&#8225;</td></tr>
+<tr><td><span class="m gg">gemma&#8594;gemma</span></td><td class="n">0.74</td><td class="n">0.66</td></tr>
+</tbody></table></div><figcaption><code>q1</code> is a critic's hit-rate on genuinely good sentences, <code>q0</code> on genuinely bad ones. &#8224; unstable &#8212; the interval spans nearly the whole 0&#8211;1 range. &#8225; a ceiling forced by the sample (10/10), not a measured value. The one solid reading: the Gemma critic on Qwen writing never accepts a bad sentence (<code>q0</code>=1.00) but rejects roughly 12 good ones for every one it lets through (<code>q1</code>=0.08) &#8212; a usable description of a broken judge that holds under every rater.</figcaption></figure>
+</div>
+</section>
+
+<section id="corrected"><h2>Corrected results</h2><div class="col">
+<p>This is the number to quote: the human rater's verdicts, with the two objectively decidable checks (2 and 3) settled by a script instead of by opinion. Every pile has at least two successes, so the bootstrap behaves throughout.</p></div>
+<figure><div class="tablewrap"><table><thead><tr><th>cell</th><th class="n">critic p</th><th class="n">corrected theta</th><th class="n">95% CI</th><th class="n">shift, points</th></tr></thead><tbody>
+<tr><td><span class="m qq">qwen&#8594;qwen</span></td><td class="n">0.630</td><td class="n"><b>0.825</b></td><td class="n">0.63&#8211;0.98</td><td class="n">+19.5</td></tr>
+<tr><td><span class="m qg">qwen&#8594;gemma</span></td><td class="n">0.825</td><td class="n"><b>0.698</b></td><td class="n">0.45&#8211;0.91</td><td class="n">&#8722;12.7</td></tr>
+<tr><td><span class="m gq">gemma&#8594;qwen</span></td><td class="n">0.035</td><td class="n"><b>0.421</b></td><td class="n">0.13&#8211;0.71</td><td class="n"><b>+38.6</b></td></tr>
+<tr><td><span class="m gg">gemma&#8594;gemma</span></td><td class="n">0.506</td><td class="n"><b>0.411</b></td><td class="n">0.20&#8211;0.62</td><td class="n">&#8722;9.5</td></tr>
+</tbody></table></div><figcaption>Pooled by writer, attempt-weighted across its two cells: <b>Qwen 0.768 against Gemma 0.417.</b> The correction moves every cell, and not in one direction &#8212; two rise, two fall. The largest shift, on <span class="m gq">gemma&#8594;qwen</span>, is 38.6 points: the critic's raw 3.5% pass-rate was, per the blind human rater, closer to 42%.</figcaption></figure>
+<div class="two">
+<figure><div class="scroll"><svg viewBox="0 0 460 280" role="img" aria-label="Raw p versus corrected theta by cell" xmlns="http://www.w3.org/2000/svg" class="chart">
+<line x1="58" x2="444" y1="240" y2="240" class="grid"/><text x="50" y="244" text-anchor="end" class="tick">0%</text>
+<line x1="58" x2="444" y1="186" y2="186" class="grid"/><text x="50" y="190" text-anchor="end" class="tick">25%</text>
+<line x1="58" x2="444" y1="132" y2="132" class="grid"/><text x="50" y="136" text-anchor="end" class="tick">50%</text>
+<line x1="58" x2="444" y1="78" y2="78" class="grid"/><text x="50" y="82" text-anchor="end" class="tick">75%</text>
+<line x1="58" x2="444" y1="24" y2="24" class="grid"/><text x="50" y="28" text-anchor="end" class="tick">100%</text>
+<rect x="70" y="104.4" width="24" height="135.6" fill="#DAD9D4" stroke="#000" stroke-width="1.2"/><rect x="96" y="17.1" width="24" height="222.9" fill="#B7E2C7" stroke="#000" stroke-width="1.2"/>
+<text x="106" y="262" text-anchor="middle" class="tick">qq</text>
+<rect x="166" y="17.1" width="24" height="222.9" fill="#DAD9D4" stroke="#000" stroke-width="1.2"/><rect x="192" y="72.0" width="24" height="168.0" fill="#B7E2C7" stroke="#000" stroke-width="1.2"/>
+<text x="202" y="262" text-anchor="middle" class="tick">qg</text>
+<rect x="262" y="232.4" width="24" height="7.6" fill="#DAD9D4" stroke="#000" stroke-width="1.2"/><rect x="288" y="138.9" width="24" height="101.1" fill="#B7E2C7" stroke="#000" stroke-width="1.2"/>
+<text x="298" y="262" text-anchor="middle" class="tick">gq</text>
+<rect x="358" y="130.7" width="24" height="109.3" fill="#DAD9D4" stroke="#000" stroke-width="1.2"/><rect x="384" y="151.3" width="24" height="88.7" fill="#B7E2C7" stroke="#000" stroke-width="1.2"/>
+<text x="394" y="262" text-anchor="middle" class="tick">gg</text>
+<line x1="58" x2="444" y1="240" y2="240" class="axis"/><text transform="translate(14 132) rotate(-90)" text-anchor="middle" class="lab">pass-rate</text>
+</svg></div><div class="legend"><span class="lg"><span class="sw" style="background:#DAD9D4;border-color:#8C8B85"></span>critic p (raw)</span><span class="lg"><span class="sw" style="background:#B7E2C7;border-color:#2F8A58"></span>theta (corrected)</span></div><figcaption>The <span class="m gq">gq</span> pair (grey vs. green) is the resume's "up to 39 points": raw 3.5%, corrected &#8776;42%.</figcaption></figure>
+<figure><h3 style="margin-top:0">The ranking survives; the scores don't</h3>
+<div class="tablewrap"><table><thead><tr><th>rank</th><th>human + script</th><th>human raw</th><th>Claude</th></tr></thead><tbody>
+<tr><td>1</td><td>qwen&#8594;qwen 0.825</td><td>qwen&#8594;qwen 0.825</td><td>qwen&#8594;qwen 0.775</td></tr>
+<tr><td>2</td><td>qwen&#8594;gemma 0.698</td><td>qwen&#8594;gemma 0.698</td><td>qwen&#8594;gemma 0.615</td></tr>
+<tr><td>3</td><td>gemma&#8594;qwen 0.421</td><td>gemma&#8594;gemma 0.598</td><td>gemma&#8594;gemma 0.051</td></tr>
+<tr><td>4</td><td>gemma&#8594;gemma 0.411</td><td>gemma&#8594;qwen 0.421</td><td>gemma&#8594;qwen 0.014</td></tr>
+</tbody></table></div>
+<p class="small">Ranks 1 and 2 hold under all three raters and rubric variants. Ranks 3 and 4 sit within 0.01 in the headline and swap order between variants &#8212; treat them as tied. What survives every rater: <b>Qwen writes better than gemma-4-E2B</b>, by 0.28 to 0.68 depending on rater. That conclusion needs no rater to be correct, only self-consistent.</p>
+</figure>
+</div>
+</section>
+
+<section id="rubric-breaks"><h2>Where the rubric breaks</h2><div class="col">
+<p>A second blind rater (a fresh Claude subagent, no file or internet access) re-graded the same 80 rows. Its purpose is a robustness check, not a second ground truth: it tells apart "the critic is genuinely miscalibrated" from "the rubric is too ambiguous for any rater to apply consistently." The answer turned out to be the second one.</p></div>
+<div class="callout" style="box-shadow:inset 6px 0 0 var(--wrong)">
+<h3>Two competent raters, 80 identical rows, 30 rows apart</h3>
+<p class="small">Human passes 55 of 80. Claude passes 31 of 80. The two agree on only 50 of 80 verdicts &#8212; Cohen's kappa 0.31, "fair" agreement, well short of what a published point estimate needs. The two blind raters agree with each other no better than either agrees with the instrument they were brought in to audit.</p>
+</div>
+<figure><div class="tablewrap"><table><thead><tr><th>check</th><th class="n">agreement</th><th class="n">human fails</th><th class="n">Claude fails</th><th>kind</th></tr></thead><tbody>
+<tr><td>8 output style</td><td class="n">79/80</td><td class="n">0</td><td class="n">1</td><td>mechanical</td></tr>
+<tr><td>7 acronyms</td><td class="n">78/80</td><td class="n">2</td><td class="n">2</td><td>mechanical</td></tr>
+<tr><td>6 lexical integrity</td><td class="n">77/80</td><td class="n">6</td><td class="n">7</td><td>mechanical</td></tr>
+<tr><td>4 proper nouns</td><td class="n">77/80</td><td class="n">0</td><td class="n">3</td><td>mechanical</td></tr>
+<tr><td>2 target word existence</td><td class="n">73/80</td><td class="n">1</td><td class="n">8</td><td><b>decidable</b></td></tr>
+<tr><td>3 answer key accuracy</td><td class="n">68/80</td><td class="n">2</td><td class="n">14</td><td><b>decidable</b></td></tr>
+<tr><td>5 substring overlap</td><td class="n">65/80</td><td class="n">7</td><td class="n">14</td><td>mechanical</td></tr>
+<tr><td>12 semantic validity</td><td class="n">63/80</td><td class="n">18</td><td class="n">19</td><td>judgement</td></tr>
+<tr><td>10 word efficiency</td><td class="n">63/80</td><td class="n">15</td><td class="n">18</td><td>judgement</td></tr>
+<tr><td>11 grammar</td><td class="n">61/80</td><td class="n">14</td><td class="n">23</td><td>judgement</td></tr>
+<tr><td>9 contextual richness</td><td class="n">58/80</td><td class="n">17</td><td class="n">31</td><td>judgement</td></tr>
+</tbody></table></div><figcaption>Mechanical checks (is there markdown, an acronym, a suffix) agree almost perfectly. Check 9 &#8212; could a player deduce the word from context &#8212; carries the largest disagreement, 22 of 80 rows, and does most of the damage alone.</figcaption></figure>
+<div class="col">
+<p>Checks 2 and 3 stood out: both are exact word-boundary matching against the target words and word list, with one objectively correct answer &#8212; they should not have disagreed at all. Running a script over all 80 rows settled it: the human rater, not Claude, was careless there. Human wrong on 7 of 7 disputed rows for check 2, and 12 of 12 for check 3. Replacing those two checks with the script moved <span class="m gg">gemma&#8594;gemma</span> from 0.598 to 0.411 and raised overall kappa from 0.31 to 0.37 &#8212; better, still only "fair." Adjudication fixes the mechanical disagreement and leaves the judgment disagreement, mostly check 9, completely intact.</p>
+</div>
+</section>
+
+<section id="cost"><h2>Cost of finding this out</h2><div class="col">
+<p>1,009 writer/critic attempt pairs, 2,080 model calls, 6h 27m wall time on one RTX PRO 6000 Blackwell GPU running both models concurrently. 7.89M tokens generated, 96.5% of it reasoning. Qwen is roughly 3&#215; slower per token and emits roughly 6&#215; more tokens per call than Gemma, so it accounts for 95% of the run's compute despite being one side of a 2&#215;2 grid.</p>
+<p>Only 1.25% of calls (26 of 2,080) hit the token budget before finishing &#8212; comfortably under the 10.8% truncation rate that forced an earlier budget increase from 8,192 to 16,384 tokens.</p>
+</div>
+</section>
+
+<section id="conclusion"><h2>Conclusion</h2><div class="col">
+<ol>
+<li><b>The raw pass-rate cannot be reported as writer quality.</b> Calibration moves every cell, and not in one direction &#8212; one pair rises 19.5 points, another falls 12.7, a third rises 38.6.</li>
+<li><b>Quote a corrected rate with its interval, never bare.</b> The two Qwen-written cells are tight enough to be useful. The two Gemma-written cells land near 0.4 with intervals half the width of the scale, and swap order between rater variants &#8212; report them as "roughly 0.4, poorly resolved," not as a rank.</li>
+<li><b>The writer ranking is the one thing that survives every rater.</b> Qwen beats gemma-4-E2B by 0.28 to 0.68 depending on which rater is used &#8212; without needing any single rater to be correct.</li>
+<li><b>The apparent same-model self-preference bias does not survive calibration.</b> The raw +74.3-point gap for Gemma judging its own writing is mostly critic leniency; the two cells carrying that claim are exactly the two whose corrected rate is unstable across raters.</li>
+<li><b>The blocking problem is the rubric, not the sample size.</b> Two competent raters applying the same 12-point rubric to the same 80 rows land 30 rows apart, almost entirely on the four checks whose wording is least operational (grammar, semantic validity, word efficiency, and above all "could a player deduce the word from context").</li>
+</ol>
+</div>
+</section>
+
+</main><footer>This project adds a calibrated LLM-as-judge evaluation layer onto Vocabscapes's write-and-critique sentence pipeline: <a href="https://vocabscapes.web.app">vocabscapes.web.app</a> &#183; <a href="/projects/vocabscapes/">project page</a>.</footer>
+</body></html>
