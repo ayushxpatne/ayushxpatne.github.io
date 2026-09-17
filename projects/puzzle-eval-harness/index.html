@@ -96,7 +96,8 @@ nav.top a{transition:color 160ms ease}
 header.hero>*{animation:rise 480ms cubic-bezier(.23,1,.32,1) backwards}
 header.hero>:nth-child(2){animation-delay:50ms}header.hero>:nth-child(3){animation-delay:100ms}header.hero>:nth-child(n+4){animation-delay:150ms}
 @media (prefers-reduced-motion:reduce){header.hero>*{animation:none}}
-</style></head><body><nav class="top" aria-label="Pages"><div class="in"><a class="name" href="/">ayushpatne</a><a href="/projects/vocabscapes/">Vocabscapes</a><a href="/projects/puzzle-eval-harness/" aria-current="page">Eval harness</a></div></nav><main>
+nav.top .back{margin-right:-.75rem;color:var(--ink)}
+</style></head><body><nav class="top" aria-label="Pages"><div class="in"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a><a href="/projects/vocabscapes/">Vocabscapes</a><a href="/projects/puzzle-eval-harness/" aria-current="page">Eval harness</a></div></nav><main>
 <header class="hero">
 <h1>Can you trust the judge grading your puzzle generator?</h1>
 <p class="lede">Vocabscapes generates word-puzzle sentences with one model and grades them with another, in a write&#8594;critique loop. This project measures whether that grader can be trusted, by checking it against blind human ratings &#8212; and finds that in one cell of the design, it was wrong by 39 points.</p>

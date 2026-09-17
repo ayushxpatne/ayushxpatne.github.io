@@ -116,8 +116,9 @@ nav.top a{transition:color 160ms ease}
 header.hero>*{animation:rise 480ms cubic-bezier(.23,1,.32,1) backwards}
 header.hero>:nth-child(2){animation-delay:50ms}header.hero>:nth-child(3){animation-delay:100ms}header.hero>:nth-child(n+4){animation-delay:150ms}
 @media (prefers-reduced-motion:reduce){header.hero>*{animation:none}}
+nav.top .back{margin-right:-.75rem;color:var(--ink)}
 </style></head><body>
-<nav class="top" aria-label="Pages"><div class="in"><a class="name" href="/">ayushpatne</a><a href="/projects/undp-climate-survey/" aria-current="page">UNDP climate survey</a></div></nav>
+<nav class="top" aria-label="Pages"><div class="in"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a><a href="/projects/undp-climate-survey/" aria-current="page">UNDP climate survey</a></div></nav>
 <main>
 <header class="hero">
 <h1>What predicts strong public support for climate action, and does it split the world into types?</h1>
