@@ -97,7 +97,19 @@ header.hero>*{animation:rise 480ms cubic-bezier(.23,1,.32,1) backwards}
 header.hero>:nth-child(2){animation-delay:50ms}header.hero>:nth-child(3){animation-delay:100ms}header.hero>:nth-child(n+4){animation-delay:150ms}
 @media (prefers-reduced-motion:reduce){header.hero>*{animation:none}}
 nav.top .back{margin-right:-.75rem;color:var(--ink)}
-</style></head><body><nav class="top" aria-label="Pages"><div class="in"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a><a href="/projects/vocabscapes/">Vocabscapes</a><a href="/projects/puzzle-eval-harness/" aria-current="page">Eval harness</a></div></nav><main>
+/* site nav */
+nav.top{border-bottom:none}
+nav.top .in{max-width:1100px;padding:24px 30px;display:grid;grid-template-columns:.8fr 1.2fr;align-items:baseline;gap:0}
+nav.top .who{display:flex;gap:.6rem;align-items:baseline}
+nav.top .back{margin:0}
+nav.top .name{opacity:.6;margin:0}
+nav.top .links{display:flex;gap:32px}
+nav.top a{font-size:.75rem}
+@media (max-width:768px){nav.top .in{grid-template-columns:auto 1fr;padding:15px 20px}nav.top .links{justify-content:flex-end;gap:20px}}
+nav.top .here{margin-left:auto;display:flex;gap:24px}
+nav.top .here a.on{color:var(--ink)}
+@media (max-width:768px){nav.top .here{display:none}}
+</style></head><body><nav class="top" aria-label="Pages"><div class="in"><div class="who"><a class="back" href="/projects/" aria-label="Back to previous page" onclick="if(document.referrer.startsWith(location.origin)){history.back();return false}">←</a><a class="name" href="/">ayushpatne</a></div><div class="links"><a href="/">home</a><a href="/resume/">resume</a><a href="/projects/" aria-current="page">projects</a><a href="/blog/">blogs</a><div class="here"><a href="/projects/vocabscapes/">vocabscapes</a><a href="/projects/puzzle-eval-harness/" class="on">llm eval harness</a></div></div></div></nav><main>
 <header class="hero">
 <h1>Can you trust the judge grading your puzzle generator?</h1>
 <p class="lede">Vocabscapes generates word-puzzle sentences with one model and grades them with another, in a write&#8594;critique loop. This project measures whether that grader can be trusted, by checking it against blind human ratings &#8212; and finds that in one cell of the design, it was wrong by 39 points.</p>
