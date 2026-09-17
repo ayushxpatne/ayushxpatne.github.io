@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TRACE: the final run (trace-iv)</title><link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TRACE: does the model learn the task, or the hole in the grader?</title><link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin><style>
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-400.woff2) format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:swap;src:url(/assets/fonts/jetbrains-mono-400.woff2) format("woff2")}
 
@@ -231,7 +231,7 @@ Answer: west</pre>
 <div class="col"><p class="small muted">Each task also has an <span class="term">isomorphic twin</span>: the same task with every property, direction and cargo word renamed. A model that learned the method solves both. In this run the twin is a secondary check, and twin accuracy followed plain accuracy for every model.</p></div>
 </section>
 <section id="pipeline"><h2>The pipeline</h2><div class="col">
-<p>The notebook <code>trace-iv.py</code> runs every stage in order, with no manual steps. Both reinforcement learning runs start from the same fine-tuned model. They differ only in the grader. So a behaviour that appears in one arm and not the other comes from the grader.</p></div>
+<p>Both reinforcement learning runs start from the same fine-tuned model. They differ only in the grader. So a behaviour that appears in one arm and not the other comes from the grader.</p></div>
 <div class="pipe">
 <div class="st s1"><h4>Base model</h4>SmolLM2-360M-Instruct, as downloaded. <span class="m base">base</span> is its colour on these pages.</div>
 <div class="st s2"><h4>Baseline</h4>Score the untrained model on each tier, to confirm there is room to learn.</div>
