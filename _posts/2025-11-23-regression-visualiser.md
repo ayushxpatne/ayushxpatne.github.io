@@ -13,6 +13,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 15 min
+image: /assets/og/blog-regression-visualiser.png
 ---
 ## TL;DR
 

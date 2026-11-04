@@ -12,6 +12,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 8 min
+image: /assets/og/blog-aws-cloud-quest-task-2.png
 ---
 Alright folks, we are back on it. Next task, Cloud First Steps. Here we will learn about EC2 and regions n stuff.. 
 

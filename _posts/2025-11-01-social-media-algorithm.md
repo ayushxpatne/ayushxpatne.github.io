@@ -14,6 +14,7 @@ tags:
 featured: false
 featured_type: "Technical"
 read_time: "25 min"
+image: /assets/og/blog-social-media-algorithm.png
 ---
 
 ## TL;DR

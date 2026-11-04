@@ -12,6 +12,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 9 min
+image: /assets/og/blog-aws-cloud-quest-task-5.png
 ---
 Yo! Welcome back folks :) 
 

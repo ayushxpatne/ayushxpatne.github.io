@@ -11,6 +11,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 15 min
+image: /assets/og/blog-ml-fundamentals-1.png
 ---
 Hey Everyone! I hope you are doing good. This blog is going to cover some fundamentals of machine learning, some must knows before getting deeper. 
 

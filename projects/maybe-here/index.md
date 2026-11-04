@@ -8,6 +8,7 @@ stack: [Vue, FastAPI, PostgreSQL/Supabase, Python, ONNX/FastEmbed, Firebase, Clo
 links:
   - text: "Visit maybehere.app ↗"
     url: https://maybehere.app
+image: /assets/og/projects-maybe-here.png
 ---
 
 A live group restaurant-discovery app: plan with friends, vote, and find somewhere to eat without anyone signing up.

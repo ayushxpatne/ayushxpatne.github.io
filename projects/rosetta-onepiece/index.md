@@ -5,6 +5,7 @@ permalink: /projects/rosetta-onepiece/
 year: 2026
 status: pre-prints in progress
 stack: [PyTorch, Transformers, Representation Learning, vLLM, Retrieval / RAG]
+image: /assets/og/projects-rosetta-onepiece.png
 ---
 
 Two linked research projects: a model-agnostic way to represent LLM embeddings, and a tiny memory retriever built on top of it.

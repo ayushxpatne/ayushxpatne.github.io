@@ -12,6 +12,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 6 min
+image: /assets/og/blog-aws-cloud-quest-task-3.png
 ---
 Hey hey hey! We are back, and this time we have a school with class scheduling problems. Very interesting. 
 

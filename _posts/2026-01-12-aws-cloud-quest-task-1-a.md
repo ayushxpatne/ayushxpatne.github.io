@@ -14,6 +14,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 8 min
+image: /assets/og/blog-aws-cloud-quest-task-1-a.png
 ---
 ## What is AWS Cloud Quest?
 

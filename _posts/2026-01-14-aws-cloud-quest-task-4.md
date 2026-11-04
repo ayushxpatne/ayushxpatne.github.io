@@ -12,6 +12,7 @@ tags:
 featured: false
 featured_type: Technical
 read_time: 4 min
+image: /assets/og/blog-aws-cloud-quest-task-4.png
 ---
 
 Heya folks! Welcome back. This time we're helping a surf shop owner migrate to the cloud.

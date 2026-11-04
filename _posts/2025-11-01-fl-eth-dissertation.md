@@ -12,6 +12,7 @@ tags:
   - Research
 featured: false
 read_time: ""
+image: /assets/og/blog-fl-eth-dissertation.png
 ---
 
 *This blog post is a condensed, reflective version of my undergraduate dissertation project completed at Vishwakarma Institute of Information Technology, Pune. I worked on this with my incredible team members Sushant Kuratkar, Pratik Nule, and Prateek Mazumder under the guidance of Prof. Geetanjali Yadav. While the original dissertation was a comprehensive 60-page technical document, I have distilled it here into the core concepts, implementation details, and honest reflections on what we learned.*
