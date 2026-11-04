@@ -11,14 +11,14 @@ Ayush builds and evaluates AI systems, from multi-agent LLM pipelines to RL fine
 - **Backend & Deployment:** FastAPI, Docker, GCP (Cloud Run, Cloud Functions), PostgreSQL/Supabase, SQLite, Firebase
 
 ## Key Projects
-- **TRACE:** A controlled study of reward hacking in RL fine-tuning. SmolLM2-360M-Instruct trained with LoRA SFT then GRPO against a weak and a strong reward verifier; the strong verifier reached 93% exact match through a shortcut, localised to layers 23 to 29 with logit lens and probes. Write-up: https://ayushxpatne.github.io/projects/trace/
-- **Vocabscapes:** A five-agent LangGraph pipeline (writer, judge, improver, finalizer, explanation) generating word puzzles, with bounded retries and cached variants per level. Live: https://vocabscapes.web.app . Write-up: https://ayushxpatne.github.io/projects/vocabscapes/
-- **LLM eval harness:** LLM-as-judge evaluation across four writer and critic model pairs, calibrated against blind human ratings. Write-up: https://ayushxpatne.github.io/projects/puzzle-eval-harness/
+- **TRACE:** A controlled study of reward hacking in RL fine-tuning. SmolLM2-360M-Instruct trained with LoRA SFT then GRPO against a weak and a strong reward verifier; the strong verifier reached 93% exact match through a shortcut, localised to layers 23 to 29 with logit lens and probes. Write-up: https://ayushpatne.com/projects/trace/
+- **Vocabscapes:** A five-agent LangGraph pipeline (writer, judge, improver, finalizer, explanation) generating word puzzles, with bounded retries and cached variants per level. Live: https://vocabscapes.web.app . Write-up: https://ayushpatne.com/projects/vocabscapes/
+- **LLM eval harness:** LLM-as-judge evaluation across four writer and critic model pairs, calibrated against blind human ratings. Write-up: https://ayushpatne.com/projects/puzzle-eval-harness/
 - **maybehere:** Group restaurant discovery app with 97,000+ place profiles across ~200 UK towns, semantic retrieval on BGE-small with ONNX/FastEmbed on Cloud Run. Live: https://maybehere.app
 - **Rosetta & OnePiece:** A model-agnostic, fixed-size (32-D) LLM representation method and a ~1,000-parameter plug-and-play memory retriever built on it. Pre-prints in progress.
-- **Federated learning:** Privacy-preserving fraud detection on Ethereum transactions across three clients, without sharing data. Write-up: https://ayushxpatne.github.io/projects/fl-fraud-detection/
-- **Social media recommendation engine:** A recommender built from scratch with Gemini embeddings, FAISS IndexIVF retrieval and an exploitation-exploration mix. Write-up: https://ayushxpatne.github.io/projects/social-media-recsys/
-- **UNDP climate survey analysis:** Predicting and segmenting public support for climate action across 73,000+ respondents in 73 countries. Write-up: https://ayushxpatne.github.io/projects/undp-climate-survey/
+- **Federated learning:** Privacy-preserving fraud detection on Ethereum transactions across three clients, without sharing data. Write-up: https://ayushpatne.com/projects/fl-fraud-detection/
+- **Social media recommendation engine:** A recommender built from scratch with Gemini embeddings, FAISS IndexIVF retrieval and an exploitation-exploration mix. Write-up: https://ayushpatne.com/projects/social-media-recsys/
+- **UNDP climate survey analysis:** Predicting and segmenting public support for climate action across 73,000+ respondents in 73 countries. Write-up: https://ayushpatne.com/projects/undp-climate-survey/
 
 ## Academic & Research
 - **MSc Advanced Computer Science (AI):** University of Leeds, 2025 to 2026. International Excellence Award and International Regional Award scholarships.
@@ -27,8 +27,8 @@ Ayush builds and evaluates AI systems, from multi-agent LLM pipelines to RL fine
 - **B.Tech:** Artificial Intelligence & Data Science, University of Pune, 2022 to 2025.
 
 ## Online Presence
-- Website: https://ayushxpatne.github.io/
-- Projects: https://ayushxpatne.github.io/projects/
-- Blog: https://ayushxpatne.github.io/blog/
+- Website: https://ayushpatne.com/
+- Projects: https://ayushpatne.com/projects/
+- Blog: https://ayushpatne.com/blog/
 - LinkedIn: https://linkedin.com/in/ayushpatne
 - GitHub: https://github.com/ayushxpatne
