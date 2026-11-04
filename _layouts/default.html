@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="b8QEHwMJDrOGbfsQ9IANzx13dhrTJFSPhwPfyvHis9o" />
 
+    {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
     {% seo %}
     <script type="application/ld+json">
 {
@@ -15,7 +16,7 @@
   "name": "Ayush Patne",
   "givenName": "Ayush",
   "familyName": "Patne",
-  "url": "https://ayushpatne.com/ayushpatne/",
+  "url": "https://ayushpatne.com/",
   "jobTitle": "AI Engineer",
   "description": "AI engineer pursuing MSc in AI at the University of Leeds, specializing in Generative AI and ML systems.",
   "affiliation": {
@@ -38,7 +39,7 @@
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 
-    <link rel="sitemap" type="application/xml" href="/ayushpatne/sitemap.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     {% if page.layout == 'post' %}
     <!-- Prism.js for syntax highlighting -->

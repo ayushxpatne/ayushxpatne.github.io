@@ -2,6 +2,7 @@
 layout: resume
 title: Resume
 permalink: /resume/
+description: Resume of Ayush Patne, AI engineer and MSc Artificial Intelligence student at the University of Leeds.
 ---
 
 # education
