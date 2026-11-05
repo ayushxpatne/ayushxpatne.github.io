@@ -11,6 +11,7 @@ permalink: /study/
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>LLM Watch Order</title>
+<script>try { const t = localStorage.getItem("llm-watch-order-theme"); if (t === "dark" || t === "light") document.documentElement.dataset.theme = t; } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap">
 <style>
@@ -50,6 +51,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 h1 { font-size: .95rem; font-weight: 600; color: var(--muted); }
 .coach { font-size: clamp(2rem, 7.5vw, 3.1rem); font-weight: 700; line-height: 1.05; letter-spacing: -.015em; }
 .lede { color: var(--muted); max-width: 60ch; margin-top: 6px; }
+
+.theme { flex: none; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; background: none; border: 1px solid var(--line); border-radius: 50%; }
+.theme:hover { background: var(--soft); }
+.theme svg { width: 18px; height: 18px; }
 
 /* garden */
 .garden { position: relative; padding-top: 44px; border-bottom: 3px solid var(--soil); }
@@ -203,6 +208,7 @@ details.extra ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px
   <div class="bar">
     <div class="segs" id="segs" aria-hidden="true"></div>
     <div class="count" id="count"></div>
+    <button class="theme" id="themeBtn" type="button"></button>
   </div>
 
   <header class="head">
@@ -261,17 +267,6 @@ details.extra ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px
   <main id="course"></main>
 
   <details class="extra">
-    <summary>How the posting side works</summary>
-    <ul>
-      <li>One artefact per module, posted the week you finish it: a repo, a notebook, a chart or a short write-up. Cross-post to LinkedIn and X with the code linked.</li>
-      <li>Write for the person who made the video. Tag them when you build on their material; creators reshare good derived work, and that is how you get in front of their audience.</li>
-      <li>Your own research is the strongest material you have. The reward hacking results and the cross-model memory work are rarer than anything in this course, so they get the biggest posts.</li>
-      <li>Comment with substance on Interconnects, the RLHF book Discord and AI Engineer talk threads. Ten useful replies beat one cold DM.</li>
-      <li>By module 6, pitch a talk. AI Engineer runs open calls for speakers, and London meetups are an easier first stage.</li>
-    </ul>
-  </details>
-
-  <details class="extra">
     <summary>Move progress to another device</summary>
     <div class="move">
       <p class="small">Progress lives in this browser. Copy it here, paste it on your other device, then add it. Adding only ever ticks more items, so nothing gets lost.</p>
@@ -287,6 +282,7 @@ details.extra ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px
 
   <footer class="foot">
     <p>Justin Angel teaches how a GPT is built, Nathan Lambert teaches post-training, and the other talks slot in where they answer a question those two raise.</p>
+    <p>Post one artefact per module, the week you finish it: a repo, a notebook, a chart or a short write-up.</p>
     <p>Optional items are safe to skip, and flowers bloom without them. Rows with several numbered links are one sitting; tick the row when you finish the set.</p>
         <button class="reset" id="reset" type="button">Clear my progress</button>
     <p id="resetMsg" hidden></p>
@@ -339,16 +335,16 @@ const JA = (n, id) => ["#" + n, Y(id)];
 
 // item shape: { s: source, t: title, u: url, d: duration, w: why, f: flag, k: kind, links: [[label, url]] }
 const MODULES = [
-  { name: "Build a GPT from the ground up", note: "Move fast through what the MSc already covered. Slow down from Tokenizers onwards, and do the notebooks for those.", items: [
+  { name: "Build a GPT from the ground up", note: "Move fast through anything you already know. Slow down from Tokenizers onwards, and do the notebooks for those.", items: [
     { s: "ot", t: "LLM Pre-Training in 30 Min · Zachary Huang", u: Y("EFXiQSxa4d8"), d: "30m", w: "Orientation before the long workshop." },
     { s: "ja", t: "Workshop #1–2: Using LLMs, reverse engineering an LLM", d: "~25m", w: "Lays out GPT-2 small as the parts list the rest fills in.", links: [JA(1, "vXiB0UdDhk8"), JA(2, "E0rkgxwhz5g")] },
     { s: "ja", t: "Workshop #3–9: Perceptrons to backprop, saving and loading", d: "~1h45", w: "Refresher. 1.5x speed is fine.", links: [JA(3, "uaA8ChGcMwE"), JA(4, "G5gkYVB-P-Q"), JA(5, "VVk6N1_rFD0"), JA(6, "6BU9Gj2yoSw"), JA(7, "bVz8i9EWEQw"), JA(8, "Zf6RC6KZxKg"), JA(9, "riCiHjVEqXc")] },
     { s: "ja", t: "Workshop #10–14: Initialization, residuals, normalization, regularization, softmax", d: "~1h15", w: "What makes deep stacks trainable.", links: [JA(10, "-pwr0RMhCg8"), JA(11, "e5V7QaHq5lQ"), JA(12, "ZqSbev8Y-ys"), JA(13, "2O8v8BX1LgM"), JA(14, "H2yV3jd4DKg")] },
-    { s: "ja", t: "Workshop #15–16: Tokenizers, embeddings", d: "~30m", w: "Closest to your thesis. Note how embedding space gets formed.", links: [JA(15, "TPPhTqPu_Yg"), JA(16, "jyrgYjeVHBo")] },
+    { s: "ja", t: "Workshop #15–16: Tokenizers, embeddings", d: "~30m", w: "Note how embedding space gets formed.", links: [JA(15, "TPPhTqPu_Yg"), JA(16, "jyrgYjeVHBo")] },
     { s: "ja", t: "Workshop #17–18: Attention, transformers", d: "~40m", links: [JA(17, "CvGf-Eu2sl0"), JA(18, "mKAW7cYYwQs")] },
     { s: "ot", t: "Jia-Bin Huang: CMSC848K lectures on RoPE, FlashAttention, MoE", u: "https://jbhuang0604.github.io/teaching/CMSC848K/", d: "~1h", w: "Pick those three topics from the course page. Save LoRA and GRPO for later modules." },
     { s: "you", k: "build", t: "Build: run Justin's notebooks for #15–18 and train the tiny GPT", d: "1 evening", w: "Keep the training curve and a few samples. You need them for the post." },
-    { s: "you", k: "ship", t: "Post: what surprised you rebuilding GPT-2, with your loss curve", d: "1h", w: "Tag Justin Angel. Short, honest, one chart." }
+    { s: "you", k: "ship", t: "Post: what surprised you rebuilding GPT-2, with your loss curve", d: "1h", w: "Short, honest, one chart." }
   ]},
   { name: "Pretraining to post-training", note: "Finish the workshop, then switch spines. Lambert's Lecture 0 doubles as a maths bridge.", items: [
     { s: "ja", t: "Workshop #19–23: Pre-training, evaluation, instruction tuning, RL, what we didn't cover", d: "~1h20", w: "A quick tour of everything Lambert now goes deep on.", links: [JA(19, "nN335-483Pg"), JA(20, "S6uLzsqOOUc"), JA(21, "8iwxM6XRpVQ"), JA(22, "3DJGUp0CVx8"), JA(23, "YdOsmHDeeLw")] },
@@ -356,12 +352,12 @@ const MODULES = [
     { s: "nl", t: "Lecture 0: ML Foundations of LLM Post-Training", u: NL("MMDNaeIFVy8"), d: "~1h", w: "KL, cross-entropy and the rest of the maths later lectures lean on." },
     { s: "nl", t: "Lecture 1: Overview (Ch 1–3)", u: NL("o6l6tJQgUg4"), d: "~1h" },
     { s: "nl", t: "Lecture 2: IFT, Reward Models, Rejection Sampling (Ch 4, 5, 9)", u: NL("4gIwiSPmQkU"), d: "~1h" },
-    { s: "you", k: "build", t: "Build: SFT SmolLM2-360M on a small instruction set", d: "1–2 evenings", w: "You already have this model set up from trace. Compare base vs tuned outputs on 20 prompts." }
+    { s: "you", k: "build", t: "Build: SFT SmolLM2-360M on a small instruction set", d: "1–2 evenings", w: "Compare base vs tuned outputs on 20 prompts." }
   ]},
   { name: "The RL core", note: "The densest module. Will Brown's short talk gives you the why before Lambert gives you the maths.", items: [
     { s: "ai", t: "What RL Means for Agents · Will Brown", u: "https://ai.engineer/talks/JIsgyk0Paic-what-rl-means-agents", d: "18m" },
     { s: "nl", t: "Lecture 3: RL Motivation and Math (Ch 6 pt 1)", u: NL("K_Sj_-1BUMM"), d: "~1h", w: "Policy gradients from scratch." },
-    { s: "nl", t: "Lecture 4: RL Implementation and Practice (Ch 6 pt 2)", u: NL("i-AIMpZHgeg"), d: "~1h", w: "Loss aggregation and async training. Directly useful for your GRPO notebook." },
+    { s: "nl", t: "Lecture 4: RL Implementation and Practice (Ch 6 pt 2)", u: NL("i-AIMpZHgeg"), d: "~1h", w: "Loss aggregation and async training." },
     { s: "nl", t: "GRPO's New Variants and Implementation Secrets", u: Y("amrJDwMUFNs"), d: "talk", f: "optional" },
     { s: "nl", t: "Q&A 1: Reader questions, lectures 1–4", u: NL("x-MqKBzoxkI"), d: "~1h", f: "optional" },
     { s: "nl", t: "Lecture 5: The Rise of Reasoning Models (Ch 7)", u: NL("o4AB5xHIDdM"), d: "~1h", w: "RLVR and inference-time scaling." },
@@ -372,9 +368,9 @@ const MODULES = [
     { s: "nl", t: "Q&A 2: Reader questions, lectures 5–7", u: NL("gB-bYUECpzE"), d: "~1h", f: "optional" },
     { s: "ai", t: "Modern Post-Training: A Deep Dive · Will Brown (WF 2026)", u: "https://ai.engineer/speakers/will-brown", d: "47m", w: "A 2026 practitioner's summary to check yourself against." },
     { s: "you", k: "build", t: "Build: one table of data, objective and update for SFT, reward model, PPO, DPO, GRPO; then run DPO on your SFT model", d: "a weekend", w: "Be able to say which signal each method learns from and how it fails." },
-    { s: "you", k: "ship", t: "Post: the table plus your DPO before/after", d: "1–2h", w: "A one-page cheat sheet travels well. Share it in the RLHF book Discord too." }
+    { s: "you", k: "ship", t: "Post: the table plus your DPO before/after", d: "1–2h", w: "A one-page cheat sheet travels well." }
   ]},
-  { name: "When post-training goes wrong", note: "Reward hacking, over-optimization and forgetting. This is where your weak vs strong verifier experiment becomes your best portfolio piece.", items: [
+  { name: "When post-training goes wrong", note: "Reward hacking, over-optimization and forgetting.", items: [
     { s: "nl", t: "Lecture 8: On Preferences and Preference Data (Ch 10–11)", u: NL("Y2tv5vuaxFs"), d: "~1h" },
     { s: "nl", t: "Lecture 9: Over-Optimization and RLHF's Bad Reputation (Ch 14)", u: NL("y04JhXpiI4s"), d: "~1h", w: "Goodhart, reward hacking, sycophancy." },
     { s: "an", t: "Read: Anthropic research on emergent misalignment from reward hacking", u: "https://www.anthropic.com/research", d: "read", w: "Find it on the research page. Pairs with Lecture 9." },
@@ -382,7 +378,7 @@ const MODULES = [
     { s: "nl", t: "Lecture 10: Regularization in RL, Why SFT Forgets (Ch 15)", u: NL("IwpYxANrpUs"), d: "~1h" },
     { s: "ai", t: "Reinforcement Learning without Verifiable Rewards · Will Brown", u: "https://ai.engineer/speakers/will-brown", d: "19m" },
     { s: "nl", t: "Conversation 2: From academic research to frontier practice", u: NL("rhA7pLVt4E0"), d: "~1h", w: "How a research result gets into a real model.", f: "optional" },
-    { s: "you", k: "ship", t: "Post: your trace results. Weak vs strong verifier, what the model learned to exploit, what the mech-interp stage showed", d: "a weekend", w: "Blog post with charts and the notebook public. Tag Lambert; this is squarely his Chapter 14." }
+    { s: "you", k: "ship", t: "Post: a reward hacking experiment. Weak vs strong verifier, and what the model learned to exploit", d: "a weekend", w: "Blog post with charts and the notebook public." }
   ]},
   { name: "Tools, agents and evals", note: "From model training to the systems built on top. Build one agent and evaluate it properly instead of collecting framework tutorials.", items: [
     { s: "nl", t: "Lecture 11: Tool Use, Function Calling, The Road to Agents (Ch 13)", u: NL("GMry2DzC304"), d: "~1h", w: "MCP, harnesses, tool-use RL." },
@@ -396,7 +392,7 @@ const MODULES = [
     { s: "you", k: "build", t: "Build: a small agent with a 30–50 case eval suite and an LLM judge calibrated against your own ratings", d: "a weekend", w: "Inspect failing traces, change one thing, rerun. The before/after is the result." },
     { s: "you", k: "ship", t: "Post: open-source the eval harness with the before/after numbers", d: "1–2h" }
   ]},
-  { name: "Memory and retrieval", note: "Your home turf. Watch with FARO and Rosetta in mind and note every place industry memory systems assume a single embedding model.", items: [
+  { name: "Memory and retrieval", note: "Note every place industry memory systems assume a single embedding model.", items: [
     { s: "an", t: "Read: Contextual Retrieval", u: "https://www.anthropic.com/news/contextual-retrieval", d: "read", w: "A clean baseline to cite." },
     { s: "an", t: "Read: Effective Context Engineering for AI Agents", u: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", d: "read" },
     { s: "ai", t: "A Genius With Amnesia · Victor Savkin, Nx", u: Y("jVjt-2g8NMY"), d: "20m" },
@@ -404,25 +400,25 @@ const MODULES = [
     { s: "ai", t: "Grep or Embeddings? Agentic Search Over Company Documents · George He", u: "https://ai.engineer/talks/X4w2Pkz5tDY-grep-embeddings-agentic-search-over-company", d: "23m", w: "Counterpoint on when embeddings are worth it." },
     { s: "ai", t: "Giving AI Agents Memory That Learns · Jake Broekhuizen", u: "https://ai.engineer/talks/KGFyOtl5ktI-giving-ai-agents-memory-that-learns", d: "17m" },
     { s: "ai", t: "Turn 10,994 Notes Into Memory · Iusztin and Bouchard", u: Y("ZRM_TfEZcIo"), d: "40m", f: "optional" },
-    { s: "you", k: "build", t: "Build: a public demo of cross-model memory retrieval on LoCoMo", d: "1–2 weekends", w: "Memories stored with one model, retrieved with another. A Hugging Face Space plus a model card makes it clickable for recruiters." },
-    { s: "you", k: "ship", t: "Post: \"your agent's memory breaks when you swap models\" with the demo, then pitch it as a talk", d: "1 day", w: "Get the Rosetta paper on arXiv around the same time so the post can link it." }
+    { s: "you", k: "build", t: "Build: a public demo of cross-model memory retrieval on LoCoMo", d: "1–2 weekends", w: "Memories stored with one model, retrieved with another. A Hugging Face Space plus a model card makes it clickable." },
+    { s: "you", k: "ship", t: "Post: \"your agent's memory breaks when you swap models\" with the demo", d: "1 day" }
   ]},
-  { name: "Inference and systems", note: "What happens after the weights exist. Short, but interviewers probe it hard.", items: [
+  { name: "Inference and systems", note: "What happens after the weights exist. Short, but worth knowing well.", items: [
     { s: "ot", t: "Why Inference is Hard · Caleb Writes Code", u: Y("B18zBnjZKmc"), d: "talk", w: "Entry point: model loading and quantization." },
     { s: "ai", t: "What's New in Inference Engineering · Philip Kiely, Baseten", u: "https://ai.engineer/talks/75ckHC2LU_0-whats-new-in-inference-engineering-philip-kiely", d: "talk" },
     { s: "ot", t: "The Inference Frontier · Philip Kiely and Ali Taha, Baseten (Latent Space)", u: Y("7PSXtru6mmY"), d: "~1h40", w: "Batching, quantization, speculation, KV reuse, distributed serving." },
     { s: "ai", t: "How MiniMax M3 Was Built: Sparse Attention · Olive Song", u: "https://ai.engineer/talks/htod7Nv1cBc-minimax-m3-was-built-sparse-attention-native", d: "15m", f: "optional" },
     { s: "ot", t: "Reference: Baseten's Inference Engineering book", u: "https://www.baseten.co/inference-engineering/", d: "read", w: "Dip in while benchmarking rather than reading front to back.", f: "optional" },
     { s: "you", k: "build", t: "Build: benchmark one open model across two configs (e.g. HF vs vLLM, fp16 vs 4-bit)", d: "a weekend", w: "Time to first token, tokens/s, memory and task quality. Separate single-request latency from throughput under load." },
-    { s: "you", k: "ship", t: "Post: the benchmark chart and what you'd pick for which workload", d: "1–2h", w: "Tag Baseten and Caleb." }
+    { s: "you", k: "ship", t: "Post: the benchmark chart and what you'd pick for which workload", d: "1–2h" }
   ]},
   { name: "Character, interpretability, big picture", note: "Lighter material to finish on. MLST sits here as background listening.", items: [
     { s: "nl", t: "Lecture 13: An Introduction to Character Training (Ch 17)", u: NL("xECWRYBxq1E"), d: "~1h", w: "Constitutions and model specs." },
-    { s: "an", t: "Read: Tracing the Thoughts of a Large Language Model", u: "https://www.anthropic.com/research/tracing-thoughts-language-model", d: "read", w: "Connects back to the mech-interp stage of trace." },
+    { s: "an", t: "Read: Tracing the Thoughts of a Large Language Model", u: "https://www.anthropic.com/research/tracing-thoughts-language-model", d: "read", w: "How interpretability traces what a model is doing." },
     { s: "an", t: "Read: The Engineering Challenges of Scaling Interpretability", u: "https://www.anthropic.com/research/engineering-challenges-interpretability", d: "read", f: "optional" },
     { s: "nl", t: "Bonus: What's With the Shoggoths?", u: NL("3xaaGxSjGN4"), d: "short", f: "optional" },
     { s: "ot", t: "Machine Learning Street Talk: one episode on a question the course raised", u: "https://www.youtube.com/@MLStreetTalk", d: "~1–2h", w: "Pick by guest, not in order.", f: "optional" },
-    { s: "you", k: "ship", t: "Post: the 10-week recap with links to every artefact", d: "2h", w: "This becomes the pinned post and the link at the top of your CV." }
+    { s: "you", k: "ship", t: "Post: the 10-week recap with links to every artefact", d: "2h", w: "This becomes the pinned post." }
   ]}
 ];
 
@@ -552,6 +548,24 @@ function persist() {
   try { localStorage.setItem(KEY, JSON.stringify(done)); localStorage.setItem(META, JSON.stringify({ plan, updatedAt })); } catch (e) {}
 }
 function save() { updatedAt = Date.now(); persist(); }
+
+/* ---------- light and dark ---------- */
+const isDark = () => { const t = document.documentElement.dataset.theme; return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+function renderThemeBtn() {
+  const dark = isDark(), b = $("themeBtn");
+  b.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+  b.innerHTML = dark
+    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.500" fill="currentColor"/><path d="M12 2.500v2.500M12 19v2.500M2.500 12H5M19 12h2.500M5.300 5.300 7 7M17 17l1.700 1.700M5.300 18.700 7 17M17 7l1.700-1.700" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.500A8.500 8.500 0 0 1 9.500 4a8.500 8.500 0 1 0 10.500 10.500z" fill="currentColor"/></svg>';
+}
+$("themeBtn").addEventListener("click", () => {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("llm-watch-order-theme", next); } catch (e) {}
+  renderThemeBtn();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderThemeBtn);
+renderThemeBtn();
 
 /* ---------- focus player ---------- */
 // Talks whose course link is an ai.engineer page without the video id in the URL.
