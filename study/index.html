@@ -1,0 +1,949 @@
+---
+layout: null
+sitemap: false
+permalink: /study/
+---
+{% raw %}<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>LLM Watch Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* layout: one calm column. A garden on top, one next step, then the eight modules folded away. */
+:root {
+  --bg: #ffffff; --fg: #17161c; --muted: #6c6b75; --line: #ececf0; --soft: #f6f6f8; --soil: #efe3d6;
+  --ink: #1d1b26;
+  --display: "Gabarito", "Avenir Next", system-ui, sans-serif;
+  --body: "Figtree", "Avenir Next", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #000000; --fg: #f6f6f7; --muted: #a3a3ad; --line: #26262b; --soft: #131316; --soil: #2e2722; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #000000; --fg: #f6f6f7; --muted: #a3a3ad; --line: #26262b; --soft: #131316; --soil: #2e2722; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 16px/1.5 var(--body); }
+a { color: inherit; }
+h1, h2, p { margin: 0; }
+h1, h2, .coach, .display { font-family: var(--display); text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; border-radius: 6px; }
+.pastel :focus-visible { outline-color: var(--ink); }
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 72px; display: grid; gap: 28px; }
+
+/* progress, one segment per module */
+.bar { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 12px 0 10px; display: flex; align-items: center; gap: 12px; }
+.segs { flex: 1; display: flex; gap: 3px; min-width: 0; }
+.seg { height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
+.seg i { display: block; height: 100%; width: 0; background: var(--c-mid); border-radius: 4px; transition: width .5s cubic-bezier(.2,.8,.2,1); }
+.count { font-size: .82rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.head { display: grid; gap: 6px; }
+h1 { font-size: .95rem; font-weight: 600; color: var(--muted); }
+.coach { font-size: clamp(2rem, 7.5vw, 3.1rem); font-weight: 700; line-height: 1.05; letter-spacing: -.015em; }
+.lede { color: var(--muted); max-width: 60ch; margin-top: 6px; }
+
+/* garden */
+.garden { position: relative; padding-top: 44px; border-bottom: 3px solid var(--soil); }
+.plots { position: relative; display: grid; grid-template-columns: repeat(8, 1fr); align-items: end; }
+.plot { background: none; border: 0; padding: 0; display: block; min-width: 0; }
+.plot svg { display: block; width: 100%; height: auto; overflow: visible; transform-origin: 50% 100%; transition: transform .15s; }
+.plot:hover svg { transform: rotate(-3deg) scale(1.04); }
+.wiggle svg { animation: wiggle .7s cubic-bezier(.3,1.6,.5,1); }
+@keyframes wiggle { 0% { transform: scale(.92) rotate(-5deg); } 45% { transform: scale(1.1) rotate(4deg); } 100% { transform: none; } }
+.sun { position: absolute; width: 38px; height: 38px; margin-left: -19px; transition: left 1s ease, top 1s ease; }
+.critter { position: absolute; width: 24px; height: 24px; pointer-events: none; animation: bob 3.4s ease-in-out infinite alternate; }
+@keyframes bob { from { transform: translate(-5px, 4px) rotate(-5deg); } to { transform: translate(7px, -6px) rotate(6deg); } }
+.nums { display: grid; grid-template-columns: repeat(8, 1fr); margin-top: 6px; text-align: center; font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.nums .now { color: var(--fg); font-weight: 700; }
+.stats { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: .88rem; color: var(--muted); margin-top: 10px; }
+.stats span { display: inline-flex; align-items: center; gap: 5px; }
+.stats b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; }
+.stats svg { width: 18px; height: 18px; }
+
+/* next step */
+.time { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 10px; font-size: .9rem; color: var(--muted); }
+.time button { border: 1px solid var(--line); background: none; color: var(--fg); border-radius: 99px; padding: 5px 12px; min-height: 34px; font-size: .88rem; }
+.time button:hover { background: var(--soft); }
+.time button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.pastel { background: var(--c-bg); color: var(--ink); }
+.next { border-radius: 22px; padding: 22px; display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; }
+.next .kicker { font-size: .84rem; font-weight: 500; opacity: .75; }
+.next .title { grid-column: 1; font-family: var(--display); font-size: clamp(1.3rem, 4.5vw, 1.7rem); font-weight: 600; line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
+.next .art { grid-column: 2; grid-row: 1 / span 3; width: 92px; height: 92px; }
+.next .why { grid-column: 1; max-width: 52ch; font-size: .96rem; opacity: .85; }
+.next .note { grid-column: 1 / -1; font-size: .85rem; opacity: .8; }
+.acts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; align-items: center; }
+.btn { display: inline-flex; align-items: center; min-height: 42px; padding: 0 18px; border-radius: 99px; border: 1.5px solid var(--ink); background: none; color: var(--ink); font-weight: 600; font-size: .95rem; text-decoration: none; transition: transform .12s; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: scale(.97); }
+.btn.solid { background: var(--ink); color: #fff; }
+.btn.quiet { border-color: transparent; font-weight: 500; padding: 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips a { display: inline-flex; align-items: center; min-height: 30px; padding: 0 10px; border: 1px solid var(--line); border-radius: 99px; font-size: .82rem; font-weight: 500; text-decoration: none; font-variant-numeric: tabular-nums; }
+.chips a:hover { background: var(--soft); }
+.next .chips { grid-column: 1 / -1; }
+.next .chips a { border-color: var(--ink); color: var(--ink); }
+.next .chips a:hover { background: rgba(255,255,255,.5); }
+
+/* rhythm and plan */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; }
+.box { background: var(--soft); border-radius: 18px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; }
+.box .label { font-size: .84rem; color: var(--muted); }
+.big { font-family: var(--display); font-size: 1.35rem; font-weight: 600; line-height: 1.2; }
+.days { display: flex; gap: 6px; }
+.day { flex: 1; max-width: 34px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; font-size: .72rem; color: var(--muted); border: 1px solid var(--line); }
+.day.on { background: #9CE8BE; border-color: #9CE8BE; color: var(--ink); font-weight: 600; }
+.day.today { border: 2px solid var(--fg); }
+.small { font-size: .84rem; color: var(--muted); }
+.plan { line-height: 2; font-size: 1.02rem; }
+.plan input { font: inherit; font-weight: 600; color: var(--fg); background: none; border: 0; border-bottom: 2px dashed var(--muted); padding: 0 2px; width: 12em; max-width: 100%; border-radius: 0; }
+.plan input:focus { outline: none; border-bottom: 2px solid var(--fg); }
+.plan input::placeholder { color: var(--muted); font-weight: 500; }
+
+/* modules */
+#course { display: grid; gap: 12px; }
+details.mod { scroll-margin-top: 48px; }
+.mod summary { list-style: none; cursor: pointer; border-radius: 20px; padding: 18px 16px 0 20px; display: grid; grid-template-columns: 1fr 62px; gap: 2px 12px; overflow: hidden; }
+.mod summary::-webkit-details-marker { display: none; }
+.mod .mtext { padding-bottom: 18px; display: grid; gap: 4px; min-width: 0; }
+.mod .mno { font-size: .8rem; font-weight: 500; opacity: .75; }
+h2 { font-size: 1.28rem; font-weight: 600; line-height: 1.2; }
+.mod .mnote { font-size: .93rem; opacity: .82; max-width: 54ch; display: none; }
+.mod[open] .mnote { display: block; }
+.mod .mmeta { font-size: .84rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.mod .mplant { align-self: end; }
+.mod .mplant svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+ol.items { list-style: none; margin: 4px 0 8px; padding: 0; }
+ol.items li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; padding: 14px 4px; border-bottom: 1px solid var(--line); }
+ol.items li:last-child { border-bottom: 0; }
+.check { appearance: none; -webkit-appearance: none; width: 26px; height: 26px; margin: 0; border-radius: 50%; border: 2px solid var(--muted); background: none; cursor: pointer; display: grid; place-items: center; transition: transform .15s, background .15s; }
+.check:hover { background: var(--c-bg); border-color: var(--c-deep); }
+.check:active { transform: scale(.88); }
+.check:checked { background: var(--c-mid); border-color: var(--c-mid); }
+.check:checked::after { content: ""; width: 11px; height: 6px; border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); transform: translateY(-1px) rotate(-45deg); }
+.ibody { display: grid; gap: 4px; min-width: 0; }
+.ititle { font-weight: 600; overflow-wrap: anywhere; }
+.ititle a { text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.ititle a:hover { text-decoration-color: var(--c-deep); }
+li.done .ititle { color: var(--muted); font-weight: 500; }
+.imeta { display: flex; flex-wrap: wrap; gap: 3px 10px; align-items: center; font-size: .82rem; color: var(--muted); }
+.tag { padding: 1px 9px; border-radius: 99px; font-weight: 600; font-size: .76rem; background: var(--c-bg); color: var(--ink); }
+.tag.opt { background: none; border: 1px solid var(--line); color: var(--muted); font-weight: 500; }
+.why { color: var(--muted); font-size: .92rem; max-width: 60ch; }
+
+/* extras */
+details.extra summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+details.extra ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 8px; color: var(--muted); max-width: 62ch; }
+.foot { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; font-size: .88rem; color: var(--muted); }
+.reset { justify-self: start; background: none; border: 1px solid var(--line); border-radius: 99px; padding: 5px 12px; color: var(--muted); font-size: .84rem; min-height: 34px; }
+
+/* focus player: the whole window, nothing but the video */
+#focus { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--fg); overflow-y: auto; }
+#focus::backdrop { background: var(--bg); }
+.fwrap { width: min(1120px, 100%, calc((100vh - 190px) * 16 / 9)); min-width: min(100%, 560px); margin: 0 auto; padding: 12px 16px 24px; display: grid; gap: 12px; }
+.ftop { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: .88rem; color: var(--muted); }
+.fclose { background: none; border: 1px solid var(--line); color: var(--fg); border-radius: 99px; min-height: 36px; padding: 0 14px; font-size: .88rem; }
+.fclose:hover { background: var(--soft); }
+.fstage { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; }
+.fstage iframe, #fHost { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.fstage.covered iframe, .fstage.covered #fHost { display: none; }
+.fpanel { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; text-align: center; overflow-y: auto; }
+.fpanel[hidden] { display: none; }
+.fpanel .display { font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 700; }
+.fpanel p { max-width: 46ch; }
+.finfo { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px 24px; }
+.ftext { flex: 1 1 320px; min-width: 0; display: grid; gap: 4px; }
+.ftitle { font-size: 1.2rem; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
+.fparts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.fparts:empty { display: none; }
+.fparts button { min-height: 32px; min-width: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 99px; background: none; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.fparts button[aria-pressed="true"] { background: var(--c-mid); border-color: var(--c-mid); color: var(--ink); font-weight: 600; }
+.facts { display: grid; gap: 8px; justify-items: center; }
+.fbtn { min-height: 44px; padding: 0 20px; border: 0; border-radius: 99px; background: var(--c-mid); color: var(--ink); font-weight: 600; }
+.fbtn:hover { background: var(--c-deep); }
+.move { display: grid; gap: 8px; margin-top: 10px; }
+.move textarea { width: 100%; font: .82rem/1.4 ui-monospace, Menlo, monospace; background: var(--soft); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; padding: 10px; resize: vertical; }
+.moveacts { display: flex; flex-wrap: wrap; gap: 8px; }
+.move .reset { color: var(--fg); }
+
+/* feedback */
+.toast { position: fixed; left: 50%; bottom: 20px; z-index: 20; transform: translate(-50%, 90px); width: max-content; max-width: calc(100vw - 32px); background: var(--fg); color: var(--bg); border-radius: 99px; padding: 10px 10px 10px 18px; display: flex; align-items: center; gap: 12px; font-size: .92rem; font-weight: 500; transition: transform .3s cubic-bezier(.2,.9,.3,1.1); visibility: hidden; }
+.toast.show { transform: translate(-50%, 0); visibility: visible; }
+.toast button { background: none; border: 0; color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; padding: 4px 8px; }
+.petal { position: fixed; z-index: 30; pointer-events: none; top: 0; left: 0; }
+#bloomDlg { border: 0; border-radius: 28px; padding: 26px; width: min(380px, calc(100vw - 32px)); text-align: center; }
+#bloomDlg::backdrop { background: rgba(0,0,0,.45); }
+#bloomDlg .bloom { width: 170px; margin: 0 auto; }
+#bloomDlg .bloom svg { display: block; width: 100%; height: auto; overflow: visible; }
+#bloomDlg .display { font-size: 1.7rem; font-weight: 700; line-height: 1.1; }
+#bloomDlg p { margin-top: 8px; font-size: .96rem; }
+#bloomDlg .btn { margin-top: 16px; }
+
+@media (max-width: 460px) {
+  .next { padding: 18px; }
+  .next .art { width: 64px; height: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <div class="segs" id="segs" aria-hidden="true"></div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <header class="head">
+    <h1>LLM Watch Order</h1>
+    <p class="coach" id="coach" aria-live="polite"></p>
+    <p class="lede">Eight flowers, one per module. About 10 weeks at 6 to 8 hours a week.</p>
+  </header>
+
+  <section aria-label="Your garden">
+    <div class="garden" id="garden">
+      <svg class="sun" id="sun" viewBox="0 0 40 40" aria-hidden="true"><g stroke="#FFDE7A" stroke-width="3" stroke-linecap="round"><path d="M20 2v5M20 33v5M2 20h5M33 20h5M7 7l3.5 3.5M29.500 29.500 33 33M7 33l3.500-3.500M29.500 10.500 33 7"/></g><circle cx="20" cy="20" r="9" fill="#FFDE7A"/></svg>
+      <div id="critters" aria-hidden="true"></div>
+      <div class="plots" id="plots"></div>
+    </div>
+    <div class="nums" id="nums" aria-hidden="true"></div>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section aria-label="Next step">
+    <div class="time" role="group" aria-label="How long have you got?">
+      <span>I have</span>
+      <button type="button" data-cap="25" aria-pressed="false">20 minutes</button>
+      <button type="button" data-cap="70" aria-pressed="false">an hour</button>
+      <button type="button" data-cap="240" aria-pressed="false">an evening</button>
+      <button type="button" data-cap="9999" aria-pressed="false">a weekend</button>
+    </div>
+    <div class="next pastel" id="next">
+      <div class="kicker" id="nKicker"></div>
+      <div class="art" id="nArt" aria-hidden="true"></div>
+      <div class="title" id="nTitle"></div>
+      <p class="why" id="nWhy"></p>
+      <div class="chips" id="nChips"></div>
+      <p class="note" id="nNote" hidden></p>
+      <div class="acts" id="nActs">
+        <a class="btn solid" id="nOpen" target="_blank" rel="noopener"></a>
+        <button class="btn" id="nDone" type="button">Mark done</button>
+        <button class="btn quiet" id="nAnother" type="button">Show another</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pair" aria-label="Your rhythm">
+    <div class="box">
+      <div class="label">This week</div>
+      <div class="days" id="days"></div>
+      <div class="big" id="streak"></div>
+      <div class="small">Miss one week and the streak holds. Miss two and it restarts.</div>
+    </div>
+    <div class="box">
+      <div class="label">My plan</div>
+      <p class="plan"><label for="planWhen">When</label> <input id="planWhen" type="text" maxlength="60" placeholder="I finish dinner" autocomplete="off"> I'll open this page and do the next one.</p>
+      <div class="small">Saying when and where makes you far more likely to follow through.</div>
+    </div>
+  </section>
+
+  <main id="course"></main>
+
+  <details class="extra">
+    <summary>How the posting side works</summary>
+    <ul>
+      <li>One artefact per module, posted the week you finish it: a repo, a notebook, a chart or a short write-up. Cross-post to LinkedIn and X with the code linked.</li>
+      <li>Write for the person who made the video. Tag them when you build on their material; creators reshare good derived work, and that is how you get in front of their audience.</li>
+      <li>Your own research is the strongest material you have. The reward hacking results and the cross-model memory work are rarer than anything in this course, so they get the biggest posts.</li>
+      <li>Comment with substance on Interconnects, the RLHF book Discord and AI Engineer talk threads. Ten useful replies beat one cold DM.</li>
+      <li>By module 6, pitch a talk. AI Engineer runs open calls for speakers, and London meetups are an easier first stage.</li>
+    </ul>
+  </details>
+
+  <details class="extra">
+    <summary>Move progress to another device</summary>
+    <div class="move">
+      <p class="small">Progress lives in this browser. Copy it here, paste it on your other device, then add it. Adding only ever ticks more items, so nothing gets lost.</p>
+      <label class="small" for="progressText">Progress text</label>
+      <textarea id="progressText" rows="3" spellcheck="false"></textarea>
+      <div class="moveacts">
+        <button class="reset" id="copyProgress" type="button">Copy my progress</button>
+        <button class="reset" id="addProgress" type="button">Add pasted progress</button>
+      </div>
+      <p class="small" id="progressMsg" role="status"></p>
+    </div>
+  </details>
+
+  <footer class="foot">
+    <p>Justin Angel teaches how a GPT is built, Nathan Lambert teaches post-training, and the other talks slot in where they answer a question those two raise.</p>
+    <p>Optional items are safe to skip, and flowers bloom without them. Rows with several numbered links are one sitting; tick the row when you finish the set.</p>
+        <button class="reset" id="reset" type="button">Clear my progress</button>
+    <p id="resetMsg" hidden></p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status"><span id="toastText"></span><button type="button" id="toastUndo">Undo</button></div>
+
+<dialog id="focus" aria-labelledby="fTitle">
+  <div class="fwrap">
+    <div class="ftop">
+      <span id="fKicker"></span>
+      <button class="fclose" id="fClose" type="button">Close</button>
+    </div>
+    <div class="fstage" id="fStage">
+      <div id="fHost"></div>
+      <div class="fpanel pastel" id="fPanel" hidden>
+        <div class="display" id="fPanelTitle"></div>
+        <p id="fPanelText"></p>
+        <button class="btn" id="fReplay" type="button">Watch again</button>
+        <a class="btn" id="fPanelLink" target="_blank" rel="noopener" hidden>Watch on YouTube</a>
+      </div>
+    </div>
+    <div class="finfo">
+      <div class="ftext">
+        <div class="display ftitle" id="fTitle"></div>
+        <p class="why" id="fWhy"></p>
+        <div class="fparts" id="fParts" role="group" aria-label="Videos in this set"></div>
+      </div>
+      <div class="facts">
+        <button class="fbtn" id="fDone" type="button">Mark done and play next</button>
+        <a class="small" id="fLink" target="_blank" rel="noopener">Open on YouTube</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="bloomDlg" class="pastel">
+  <div class="bloom" id="bloomArt" aria-hidden="true"></div>
+  <div class="display" id="bloomTitle"></div>
+  <p id="bloomText"></p>
+  <button class="btn solid" id="bloomClose" type="button">Keep going</button>
+</dialog>
+
+<script>
+const SRC = { ja: ["Justin Angel", "--s-ja"], nl: ["Nathan Lambert", "--s-nl"], ai: ["AI Engineer", "--s-ai"], an: ["Anthropic", "--s-an"], ot: ["", "--s-ot"], you: ["You", "--s-you"] };
+const Y = id => "https://www.youtube.com/watch?v=" + id;
+const NL = id => Y(id) + "&list=PLL1tdVxB1CpVpEtMHxwuR4uI4Lxjw00_y";
+const JA = (n, id) => ["#" + n, Y(id)];
+
+// item shape: { s: source, t: title, u: url, d: duration, w: why, f: flag, k: kind, links: [[label, url]] }
+const MODULES = [
+  { name: "Build a GPT from the ground up", note: "Move fast through what the MSc already covered. Slow down from Tokenizers onwards, and do the notebooks for those.", items: [
+    { s: "ot", t: "LLM Pre-Training in 30 Min · Zachary Huang", u: Y("EFXiQSxa4d8"), d: "30m", w: "Orientation before the long workshop." },
+    { s: "ja", t: "Workshop #1–2: Using LLMs, reverse engineering an LLM", d: "~25m", w: "Lays out GPT-2 small as the parts list the rest fills in.", links: [JA(1, "vXiB0UdDhk8"), JA(2, "E0rkgxwhz5g")] },
+    { s: "ja", t: "Workshop #3–9: Perceptrons to backprop, saving and loading", d: "~1h45", w: "Refresher. 1.5x speed is fine.", links: [JA(3, "uaA8ChGcMwE"), JA(4, "G5gkYVB-P-Q"), JA(5, "VVk6N1_rFD0"), JA(6, "6BU9Gj2yoSw"), JA(7, "bVz8i9EWEQw"), JA(8, "Zf6RC6KZxKg"), JA(9, "riCiHjVEqXc")] },
+    { s: "ja", t: "Workshop #10–14: Initialization, residuals, normalization, regularization, softmax", d: "~1h15", w: "What makes deep stacks trainable.", links: [JA(10, "-pwr0RMhCg8"), JA(11, "e5V7QaHq5lQ"), JA(12, "ZqSbev8Y-ys"), JA(13, "2O8v8BX1LgM"), JA(14, "H2yV3jd4DKg")] },
+    { s: "ja", t: "Workshop #15–16: Tokenizers, embeddings", d: "~30m", w: "Closest to your thesis. Note how embedding space gets formed.", links: [JA(15, "TPPhTqPu_Yg"), JA(16, "jyrgYjeVHBo")] },
+    { s: "ja", t: "Workshop #17–18: Attention, transformers", d: "~40m", links: [JA(17, "CvGf-Eu2sl0"), JA(18, "mKAW7cYYwQs")] },
+    { s: "ot", t: "Jia-Bin Huang: CMSC848K lectures on RoPE, FlashAttention, MoE", u: "https://jbhuang0604.github.io/teaching/CMSC848K/", d: "~1h", w: "Pick those three topics from the course page. Save LoRA and GRPO for later modules." },
+    { s: "you", k: "build", t: "Build: run Justin's notebooks for #15–18 and train the tiny GPT", d: "1 evening", w: "Keep the training curve and a few samples. You need them for the post." },
+    { s: "you", k: "ship", t: "Post: what surprised you rebuilding GPT-2, with your loss curve", d: "1h", w: "Tag Justin Angel. Short, honest, one chart." }
+  ]},
+  { name: "Pretraining to post-training", note: "Finish the workshop, then switch spines. Lambert's Lecture 0 doubles as a maths bridge.", items: [
+    { s: "ja", t: "Workshop #19–23: Pre-training, evaluation, instruction tuning, RL, what we didn't cover", d: "~1h20", w: "A quick tour of everything Lambert now goes deep on.", links: [JA(19, "nN335-483Pg"), JA(20, "S6uLzsqOOUc"), JA(21, "8iwxM6XRpVQ"), JA(22, "3DJGUp0CVx8"), JA(23, "YdOsmHDeeLw")] },
+    { s: "nl", t: "Welcome to the Course", u: NL("jQPiH-KB4B0"), d: "short" },
+    { s: "nl", t: "Lecture 0: ML Foundations of LLM Post-Training", u: NL("MMDNaeIFVy8"), d: "~1h", w: "KL, cross-entropy and the rest of the maths later lectures lean on." },
+    { s: "nl", t: "Lecture 1: Overview (Ch 1–3)", u: NL("o6l6tJQgUg4"), d: "~1h" },
+    { s: "nl", t: "Lecture 2: IFT, Reward Models, Rejection Sampling (Ch 4, 5, 9)", u: NL("4gIwiSPmQkU"), d: "~1h" },
+    { s: "you", k: "build", t: "Build: SFT SmolLM2-360M on a small instruction set", d: "1–2 evenings", w: "You already have this model set up from trace. Compare base vs tuned outputs on 20 prompts." }
+  ]},
+  { name: "The RL core", note: "The densest module. Will Brown's short talk gives you the why before Lambert gives you the maths.", items: [
+    { s: "ai", t: "What RL Means for Agents · Will Brown", u: "https://ai.engineer/talks/JIsgyk0Paic-what-rl-means-agents", d: "18m" },
+    { s: "nl", t: "Lecture 3: RL Motivation and Math (Ch 6 pt 1)", u: NL("K_Sj_-1BUMM"), d: "~1h", w: "Policy gradients from scratch." },
+    { s: "nl", t: "Lecture 4: RL Implementation and Practice (Ch 6 pt 2)", u: NL("i-AIMpZHgeg"), d: "~1h", w: "Loss aggregation and async training. Directly useful for your GRPO notebook." },
+    { s: "nl", t: "GRPO's New Variants and Implementation Secrets", u: Y("amrJDwMUFNs"), d: "talk", f: "optional" },
+    { s: "nl", t: "Q&A 1: Reader questions, lectures 1–4", u: NL("x-MqKBzoxkI"), d: "~1h", f: "optional" },
+    { s: "nl", t: "Lecture 5: The Rise of Reasoning Models (Ch 7)", u: NL("o4AB5xHIDdM"), d: "~1h", w: "RLVR and inference-time scaling." },
+    { s: "ai", t: "Training Agentic Reasoners · Will Brown", u: "https://ai.engineer/talks/training-agentic-reasoners", d: "19m" },
+    { s: "nl", t: "Lecture 6: Direct Preference Optimization (Ch 8)", u: NL("6g6b4gvO-y0"), d: "~1h", w: "DPO derived step by step." },
+    { s: "nl", t: "Conversation 1: Frontier post-training recipes in 2026", u: NL("sbXEPxIazqY"), d: "~1h" },
+    { s: "nl", t: "Lecture 7: Synthetic Data and Modern Post-training (Ch 12)", u: NL("6nyJ8y8ghsE"), d: "~1h", w: "On-policy distillation, Constitutional AI, rubrics." },
+    { s: "nl", t: "Q&A 2: Reader questions, lectures 5–7", u: NL("gB-bYUECpzE"), d: "~1h", f: "optional" },
+    { s: "ai", t: "Modern Post-Training: A Deep Dive · Will Brown (WF 2026)", u: "https://ai.engineer/speakers/will-brown", d: "47m", w: "A 2026 practitioner's summary to check yourself against." },
+    { s: "you", k: "build", t: "Build: one table of data, objective and update for SFT, reward model, PPO, DPO, GRPO; then run DPO on your SFT model", d: "a weekend", w: "Be able to say which signal each method learns from and how it fails." },
+    { s: "you", k: "ship", t: "Post: the table plus your DPO before/after", d: "1–2h", w: "A one-page cheat sheet travels well. Share it in the RLHF book Discord too." }
+  ]},
+  { name: "When post-training goes wrong", note: "Reward hacking, over-optimization and forgetting. This is where your weak vs strong verifier experiment becomes your best portfolio piece.", items: [
+    { s: "nl", t: "Lecture 8: On Preferences and Preference Data (Ch 10–11)", u: NL("Y2tv5vuaxFs"), d: "~1h" },
+    { s: "nl", t: "Lecture 9: Over-Optimization and RLHF's Bad Reputation (Ch 14)", u: NL("y04JhXpiI4s"), d: "~1h", w: "Goodhart, reward hacking, sycophancy." },
+    { s: "an", t: "Read: Anthropic research on emergent misalignment from reward hacking", u: "https://www.anthropic.com/research", d: "read", w: "Find it on the research page. Pairs with Lecture 9." },
+    { s: "ai", t: "Special Topics in Kernels, RL, Reward Hacking in Agents · Daniel Han", u: "https://ai.engineer/talks/special-topics-in-kernels-rl-reward-hacking-in-agents", d: "2h20", w: "Skip to the reward hacking section if short on time." },
+    { s: "nl", t: "Lecture 10: Regularization in RL, Why SFT Forgets (Ch 15)", u: NL("IwpYxANrpUs"), d: "~1h" },
+    { s: "ai", t: "Reinforcement Learning without Verifiable Rewards · Will Brown", u: "https://ai.engineer/speakers/will-brown", d: "19m" },
+    { s: "nl", t: "Conversation 2: From academic research to frontier practice", u: NL("rhA7pLVt4E0"), d: "~1h", w: "How a research result gets into a real model.", f: "optional" },
+    { s: "you", k: "ship", t: "Post: your trace results. Weak vs strong verifier, what the model learned to exploit, what the mech-interp stage showed", d: "a weekend", w: "Blog post with charts and the notebook public. Tag Lambert; this is squarely his Chapter 14." }
+  ]},
+  { name: "Tools, agents and evals", note: "From model training to the systems built on top. Build one agent and evaluate it properly instead of collecting framework tutorials.", items: [
+    { s: "nl", t: "Lecture 11: Tool Use, Function Calling, The Road to Agents (Ch 13)", u: NL("GMry2DzC304"), d: "~1h", w: "MCP, harnesses, tool-use RL." },
+    { s: "ai", t: "How We Build Effective Agents · Barry Zhang, Anthropic", u: Y("D7_ipDqhtwk"), d: "talk" },
+    { s: "an", t: "Read: Building Effective Agents", u: "https://www.anthropic.com/engineering/building-effective-agents", d: "read" },
+    { s: "an", t: "Read: Demystifying Evals for AI Agents", u: "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents", d: "read", w: "Graders, repeated trials, regression tests." },
+    { s: "ai", t: "What if the harness mattered more than the model? · Aditya Bhargava", u: Y("2e9ANoOEn28"), d: "27m" },
+    { s: "nl", t: "Lecture 12: The Evolution of Frontier Model Evaluation (Ch 16)", u: NL("dFafQmClYq4"), d: "~1h" },
+    { s: "nl", t: "Q&A 3: Reader questions, lectures 8–11", u: NL("6StK9ttLNbQ"), d: "~1h", f: "optional" },
+    { s: "ot", t: "RAG vs Fine Tuning · IBM Technology", u: Y("00Q0G84kq3M"), d: "short", f: "optional" },
+    { s: "you", k: "build", t: "Build: a small agent with a 30–50 case eval suite and an LLM judge calibrated against your own ratings", d: "a weekend", w: "Inspect failing traces, change one thing, rerun. The before/after is the result." },
+    { s: "you", k: "ship", t: "Post: open-source the eval harness with the before/after numbers", d: "1–2h" }
+  ]},
+  { name: "Memory and retrieval", note: "Your home turf. Watch with FARO and Rosetta in mind and note every place industry memory systems assume a single embedding model.", items: [
+    { s: "an", t: "Read: Contextual Retrieval", u: "https://www.anthropic.com/news/contextual-retrieval", d: "read", w: "A clean baseline to cite." },
+    { s: "an", t: "Read: Effective Context Engineering for AI Agents", u: "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", d: "read" },
+    { s: "ai", t: "A Genius With Amnesia · Victor Savkin, Nx", u: Y("jVjt-2g8NMY"), d: "20m" },
+    { s: "ai", t: "From Context to Memory: Your Agents Need a Real Memory Layer · Anders Swanson", u: "https://ai.engineer/talks/BIhiYL4U9_M-from-context-memory-your-agents-need-real", d: "18m" },
+    { s: "ai", t: "Grep or Embeddings? Agentic Search Over Company Documents · George He", u: "https://ai.engineer/talks/X4w2Pkz5tDY-grep-embeddings-agentic-search-over-company", d: "23m", w: "Counterpoint on when embeddings are worth it." },
+    { s: "ai", t: "Giving AI Agents Memory That Learns · Jake Broekhuizen", u: "https://ai.engineer/talks/KGFyOtl5ktI-giving-ai-agents-memory-that-learns", d: "17m" },
+    { s: "ai", t: "Turn 10,994 Notes Into Memory · Iusztin and Bouchard", u: Y("ZRM_TfEZcIo"), d: "40m", f: "optional" },
+    { s: "you", k: "build", t: "Build: a public demo of cross-model memory retrieval on LoCoMo", d: "1–2 weekends", w: "Memories stored with one model, retrieved with another. A Hugging Face Space plus a model card makes it clickable for recruiters." },
+    { s: "you", k: "ship", t: "Post: \"your agent's memory breaks when you swap models\" with the demo, then pitch it as a talk", d: "1 day", w: "Get the Rosetta paper on arXiv around the same time so the post can link it." }
+  ]},
+  { name: "Inference and systems", note: "What happens after the weights exist. Short, but interviewers probe it hard.", items: [
+    { s: "ot", t: "Why Inference is Hard · Caleb Writes Code", u: Y("B18zBnjZKmc"), d: "talk", w: "Entry point: model loading and quantization." },
+    { s: "ai", t: "What's New in Inference Engineering · Philip Kiely, Baseten", u: "https://ai.engineer/talks/75ckHC2LU_0-whats-new-in-inference-engineering-philip-kiely", d: "talk" },
+    { s: "ot", t: "The Inference Frontier · Philip Kiely and Ali Taha, Baseten (Latent Space)", u: Y("7PSXtru6mmY"), d: "~1h40", w: "Batching, quantization, speculation, KV reuse, distributed serving." },
+    { s: "ai", t: "How MiniMax M3 Was Built: Sparse Attention · Olive Song", u: "https://ai.engineer/talks/htod7Nv1cBc-minimax-m3-was-built-sparse-attention-native", d: "15m", f: "optional" },
+    { s: "ot", t: "Reference: Baseten's Inference Engineering book", u: "https://www.baseten.co/inference-engineering/", d: "read", w: "Dip in while benchmarking rather than reading front to back.", f: "optional" },
+    { s: "you", k: "build", t: "Build: benchmark one open model across two configs (e.g. HF vs vLLM, fp16 vs 4-bit)", d: "a weekend", w: "Time to first token, tokens/s, memory and task quality. Separate single-request latency from throughput under load." },
+    { s: "you", k: "ship", t: "Post: the benchmark chart and what you'd pick for which workload", d: "1–2h", w: "Tag Baseten and Caleb." }
+  ]},
+  { name: "Character, interpretability, big picture", note: "Lighter material to finish on. MLST sits here as background listening.", items: [
+    { s: "nl", t: "Lecture 13: An Introduction to Character Training (Ch 17)", u: NL("xECWRYBxq1E"), d: "~1h", w: "Constitutions and model specs." },
+    { s: "an", t: "Read: Tracing the Thoughts of a Large Language Model", u: "https://www.anthropic.com/research/tracing-thoughts-language-model", d: "read", w: "Connects back to the mech-interp stage of trace." },
+    { s: "an", t: "Read: The Engineering Challenges of Scaling Interpretability", u: "https://www.anthropic.com/research/engineering-challenges-interpretability", d: "read", f: "optional" },
+    { s: "nl", t: "Bonus: What's With the Shoggoths?", u: NL("3xaaGxSjGN4"), d: "short", f: "optional" },
+    { s: "ot", t: "Machine Learning Street Talk: one episode on a question the course raised", u: "https://www.youtube.com/@MLStreetTalk", d: "~1–2h", w: "Pick by guest, not in order.", f: "optional" },
+    { s: "you", k: "ship", t: "Post: the 10-week recap with links to every artefact", d: "2h", w: "This becomes the pinned post and the link at the top of your CV." }
+  ]}
+];
+
+
+
+// Rough minutes from the free-text durations, used by the "how long have you got" picker.
+function mins(d) {
+  const s = String(d || "").toLowerCase();
+  if (s.includes("weekend")) return 600;
+  if (s.includes("day")) return 480;
+  if (s.includes("evening")) return /[–-]/.test(s) ? 240 : 150;
+  if (s === "short") return 10;
+  if (s === "read") return 15;
+  if (s === "talk") return 30;
+  let m = s.match(/(\d+)(?:[–-](\d+))?\s*h(\d+)?/);
+  if (m) return Number(m[2] || m[1]) * 60 + Number(m[3] || 0);
+  m = s.match(/(\d+)\s*m/);
+  return m ? Number(m[1]) : 30;
+}
+
+const fmtLeft = n => n < 60 ? `about ${Math.max(5, Math.round(n / 5) * 5)} min left` : `about ${Math.round(n / 60)}h left`;
+
+// Monday-based week number from local calendar date.
+const dayNo = t => { const d = new Date(t); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5); };
+const weekNo = t => Math.floor((dayNo(t) + 3) / 7);
+
+// Weeks with at least one tick. This week does not count against you until it ends,
+// and one empty week is forgiven; two in a row end the streak.
+function streak(times, now) {
+  const weeks = new Set(times.map(weekNo));
+  let w = weekNo(now), n = 0;
+  if (weeks.has(w)) n++;
+  w--;
+  while (true) {
+    if (weeks.has(w)) { n++; w--; }
+    else if (weeks.has(w - 1)) { w--; }
+    else return n;
+  }
+}
+
+// Pasted progress only ever adds ticks, so a stale copy can't wipe anything. Unknown ids and malformed text are rejected.
+function mergeProgress(text, done, plan, known) {
+  let o;
+  try { o = JSON.parse(text); } catch (e) { return null; }
+  if (!o || typeof o !== "object" || !o.done || typeof o.done !== "object" || Array.isArray(o.done)) return null;
+  const merged = { ...done };
+  let added = 0;
+  for (const [k, v] of Object.entries(o.done)) {
+    if (!known.has(k) || merged[k] || !(v === true || (typeof v === "number" && Number.isFinite(v)))) continue;
+    merged[k] = v; added++;
+  }
+  return { done: merged, plan: plan || (typeof o.plan === "string" ? o.plan.slice(0, 60) : ""), added };
+}
+
+
+const LOOK = [
+  { f: "daisy",      bg: "#D6ECFF", mid: "#A6D6FF", deep: "#5FB2F0" },
+  { f: "tulip",      bg: "#FFDDEA", mid: "#FFB3D1", deep: "#F27EAF" },
+  { f: "poppy",      bg: "#FFDDD6", mid: "#FFB1A3", deep: "#F2806C" },
+  { f: "sunflower",  bg: "#FFF1BF", mid: "#FFDE7A", deep: "#EDBD36" },
+  { f: "anemone",    bg: "#E6DEFF", mid: "#C8B6FF", deep: "#9A7FF0" },
+  { f: "zinnia",     bg: "#D3F5E1", mid: "#9CE8BE", deep: "#4FC98B" },
+  { f: "dahlia",     bg: "#FFE4CF", mid: "#FFC59A", deep: "#F39A58" },
+  { f: "cornflower", bg: "#CFF5F0", mid: "#93E6DC", deep: "#3FC7B8" }
+];
+const paint = (el, mi) => { const c = LOOK[mi]; el.style.setProperty("--c-bg", c.bg); el.style.setProperty("--c-mid", c.mid); el.style.setProperty("--c-deep", c.deep); };
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- drawings ---------- */
+const ring = (n, rx, ry, dist, fill, cx = 40, cy = 28, off = 0) => {
+  let s = "";
+  for (let i = 0; i < n; i++) s += `<ellipse cx="${cx}" cy="${cy - dist}" rx="${rx}" ry="${ry}" fill="${fill}" transform="rotate(${(360 / n * i + off).toFixed(1)} ${cx} ${cy})"/>`;
+  return s;
+};
+const dot = (r, fill, cx = 40, cy = 28) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}"/>`;
+const HEADS = [
+  c => ring(11, 3.6, 9, 11, c.mid) + dot(6, "#FFDE7A"),
+  c => `<path d="M26 16c0-5 1-8 2-9l6 7 6-9 6 9 6-7c1 1 2 4 2 9 0 12-6 20-14 20s-14-8-14-20z" fill="${c.mid}"/><path d="M40 5l6 9c1 8-1 16-6 22-5-6-7-14-6-22z" fill="${c.deep}" opacity=".55"/>`,
+  c => ring(4, 11, 11, 9, c.mid) + ring(4, 8, 8, 8, c.deep, 40, 28, 45) + dot(5, "#4A3A55"),
+  c => ring(15, 3.2, 8, 15, c.deep) + ring(15, 3.2, 8, 13, c.mid, 40, 28, 12) + dot(9, "#B98A52"),
+  c => ring(6, 7, 10.500, 10, c.mid) + dot(5.500, "#4A3A55") + ring(8, 1, 1, 8, "#4A3A55"),
+  c => ring(12, 3.6, 9, 12, c.deep) + ring(9, 3.2, 6.500, 7, c.mid, 40, 28, 15) + dot(4, "#FFDE7A"),
+  c => ring(14, 4, 9, 12, c.mid) + ring(11, 3.5, 7, 8, c.deep, 40, 28, 14) + ring(7, 2.6, 4.500, 4, c.mid, 40, 28, 6) + dot(2.500, "#FFDE7A"),
+  c => ring(8, 4.200, 8.500, 13, c.mid) + ring(8, 2.2, 7, 7, c.deep, 40, 28, 22) + dot(4, "#4A3A55")
+];
+function leaf(x, y, dir, s) {
+  return `<path d="M${x} ${y}q${dir * 8 * s} ${-13 * s} ${dir * 24 * s} ${-7 * s}q${dir * -8 * s} ${12 * s} ${dir * -24 * s} ${7 * s}z" fill="#A8E3BC"/>`;
+}
+function plant(mi, f) {
+  const c = LOOK[mi], soil = `<ellipse cx="40" cy="117" rx="21" ry="6" fill="var(--soil)"/>`;
+  if (f <= 0) return `<svg viewBox="0 0 80 120" aria-hidden="true">${soil}<ellipse cx="40" cy="112" rx="5.500" ry="4.200" fill="${c.deep}"/></svg>`;
+  const top = f >= 1 ? 30 : 112 - (18 + 62 * f);
+  let s = soil + `<path d="M40 114C38 ${top + 50} 42 ${top + 26} 40 ${top}" stroke="#7CCB9A" stroke-width="3.500" fill="none" stroke-linecap="round"/>`;
+  const spots = [[.78, -1, .7], [.55, 1, .85], [.32, -1, 1], [.14, 1, .8]];
+  const n = f >= 1 ? 4 : Math.min(4, 1 + Math.floor(f * 4.5));
+  const h = 112 - top;
+  for (let i = 0; i < n; i++) s += leaf(40, top + h * spots[i][0] + 2, spots[i][1], spots[i][2]);
+  if (f >= 1) s += HEADS[mi](c);
+  else if (f >= .75) s += `<ellipse cx="40" cy="${top - 5}" rx="6" ry="8.500" fill="${c.mid}"/><path d="M34 ${top - 3}c2 5 10 5 12 0-1 5-11 5-12 0z" fill="#7CCB9A"/>`;
+  return `<svg viewBox="0 0 80 120" aria-hidden="true">${s}</svg>`;
+}
+const BEE = `<svg viewBox="0 0 24 24"><ellipse cx="9" cy="6.500" rx="4" ry="5.500" fill="#BFE3FF" opacity=".9" transform="rotate(-25 9 6.500)"/><ellipse cx="15" cy="6.500" rx="4" ry="5.500" fill="#D6ECFF" opacity=".9" transform="rotate(25 15 6.500)"/><ellipse cx="12" cy="14" rx="7.500" ry="5.500" fill="#FFDE7A"/><path d="M9.500 9v10M14 9.200v9.600" stroke="#4A3A55" stroke-width="2"/></svg>`;
+const FLY = `<svg viewBox="0 0 24 24"><path d="M12 12C8 2 1 3 2 9c.6 4 6 5 10 3zM12 12c4-10 11-9 10-3-.6 4-6 5-10 3z" fill="#FFB3D1"/><path d="M12 12c-5 0-8 3-6.500 6.500S11 19 12 12zM12 12c5 0 8 3 6.500 6.500S13 19 12 12z" fill="#C8B6FF"/><path d="M12 7v11" stroke="#4A3A55" stroke-width="1.800" stroke-linecap="round"/></svg>`;
+const ART = {
+  watch: c => `<svg viewBox="0 0 96 96"><rect x="8" y="16" width="80" height="56" rx="13" fill="#fff"/><rect x="36" y="74" width="24" height="5" rx="2.500" fill="${c.deep}"/><path d="M40 31v26a2 2 0 0 0 3 1.700l22-13a2 2 0 0 0 0-3.400l-22-13a2 2 0 0 0-3 1.700z" fill="${c.deep}"/><circle cx="82" cy="14" r="4" fill="${c.mid}"/><circle cx="12" cy="82" r="3" fill="${c.mid}"/></svg>`,
+  read: c => `<svg viewBox="0 0 96 96"><path d="M48 26C38 17 22 16 8 19v55c14-3 30-2 40 7z" fill="#fff"/><path d="M48 26c10-9 26-10 40-7v55c-14-3-30-2-40 7z" fill="${c.mid}"/><path d="M18 32c7-1 14 0 20 3M18 44c7-1 14 0 20 3M18 56c7-1 14 0 20 3" stroke="${c.deep}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M48 26v55" stroke="${c.deep}" stroke-width="3"/></svg>`,
+  build: c => `<svg viewBox="0 0 96 96"><rect x="10" y="50" width="34" height="34" rx="8" fill="#fff"/><rect x="50" y="50" width="34" height="34" rx="8" fill="${c.deep}"/><rect x="30" y="12" width="34" height="34" rx="8" fill="${c.mid}" transform="rotate(10 47 29)"/><circle cx="27" cy="67" r="5" fill="${c.mid}"/><circle cx="67" cy="67" r="5" fill="#fff"/></svg>`,
+  ship: c => `<svg viewBox="0 0 96 96"><path d="M88 10 8 44l24 11 44-35-34 41 3 23 13-16 15 8z" fill="#fff"/><path d="M76 20 32 55l3 29 7-13z" fill="${c.deep}"/><path d="M10 72c6-1 10 0 14 4M4 88c7-2 13-1 18 3" stroke="${c.deep}" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7" fill="none"/></svg>`
+};
+const kindOf = it => it.k || (it.d === "read" ? "read" : "watch");
+
+/* ---------- state ---------- */
+const KEY = "llm-watch-order-v2", META = "llm-watch-order-meta";
+let done = {}, plan = "", updatedAt = 0;
+try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { done = {}; }
+try { const m = JSON.parse(localStorage.getItem(META) || "{}") || {}; plan = String(m.plan || ""); updatedAt = Number(m.updatedAt) || 0; } catch (e) {}
+const all = [];
+MODULES.forEach((m, mi) => m.items.forEach((it, ii) => all.push({ id: `m${mi}i${ii}`, mi, it, min: mins(it.d), opt: it.f === "optional" })));
+const inMod = mi => all.filter(x => x.mi === mi);
+const req = mi => inMod(mi).filter(x => !x.opt);
+const frac = mi => { const r = req(mi); return r.filter(x => done[x.id]).length / r.length; };
+const current = () => { for (let i = 0; i < MODULES.length; i++) if (frac(i) < 1) return i; return -1; };
+
+function persist() {
+  try { localStorage.setItem(KEY, JSON.stringify(done)); localStorage.setItem(META, JSON.stringify({ plan, updatedAt })); } catch (e) {}
+}
+function save() { updatedAt = Date.now(); persist(); }
+
+/* ---------- focus player ---------- */
+// Talks whose course link is an ai.engineer page without the video id in the URL.
+const VIDEO_OVERRIDES = { m2i6: "PbHm2qKnu10", m2i11: "V-EDrhIhHzQ", m3i3: "uIiA6DquRiE", m3i5: "AQv3qRCG6Gw" };
+const videoId = u => { const m = String(u).match(/[?&]v=([\w-]{11})/) || String(u).match(/ai\.engineer\/talks\/([\w-]{11})-/); return m ? m[1] : null; };
+function partsOf(x) {
+  if (x.it.links) return x.it.links.map(([label, u]) => ({ label, id: videoId(u) })).filter(p => p.id);
+  const id = VIDEO_OVERRIDES[x.id] || (x.it.u && videoId(x.it.u));
+  return id ? [{ label: "", id }] : [];
+}
+const byId = Object.fromEntries(all.map(x => [x.id, x]));
+const POS = "llm-watch-order-positions";
+let pos = {};
+try { pos = JSON.parse(localStorage.getItem(POS) || "{}") || {}; } catch (e) {}
+const savePos = () => { try { localStorage.setItem(POS, JSON.stringify(pos)); } catch (e) {} };
+
+let yt = null, ytReady = null, focusItem = null, focusPart = 0, posTimer = 0;
+
+function loadApi() {
+  if (ytReady) return ytReady;
+  ytReady = new Promise((resolve, reject) => {
+    window.onYouTubeIframeAPIReady = () => resolve();
+    const s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    s.onerror = reject;
+    document.head.appendChild(s);
+    setTimeout(() => reject(new Error("timeout")), 10000);
+  });
+  return ytReady;
+}
+function showPanel(kind) {
+  const panel = $("fPanel"), p = partsOf(focusItem)[focusPart];
+  $("fStage").classList.add("covered");
+  panel.hidden = false;
+  $("fPanelTitle").textContent = kind === "end" ? "That's the end of this one." : "This video can't play here.";
+  $("fPanelText").textContent = kind === "end"
+    ? `Mark it done to grow the ${LOOK[focusItem.mi].f}.`
+    : "The creator may have turned off embedding, or your browser blocked the player. You can still watch it on YouTube.";
+  $("fReplay").hidden = kind !== "end";
+  $("fPanelLink").hidden = kind === "end";
+  if (p) $("fPanelLink").href = "https://www.youtube.com/watch?v=" + p.id;
+}
+function hidePanel() { $("fPanel").hidden = true; $("fStage").classList.remove("covered"); }
+function rememberPosition() {
+  if (!yt || !yt.getCurrentTime || !focusItem) return;
+  const p = partsOf(focusItem)[focusPart], t = yt.getCurrentTime();
+  if (!p || t <= 15) return;
+  // Near the end counts as finished, so reopening it doesn't land on the end screen.
+  if (yt.getPlayerState() === 0 || t > yt.getDuration() - 20) delete pos[p.id]; else pos[p.id] = Math.floor(t);
+  savePos();
+}
+function onYtState(e) {
+  if (e.data !== 0) return; // 0 = ended
+  const list = partsOf(focusItem), p = list[focusPart];
+  if (p) { delete pos[p.id]; savePos(); }
+  if (focusPart + 1 < list.length) playPart(focusPart + 1);
+  else showPanel("end");
+}
+function playPart(i, restart) {
+  const list = partsOf(focusItem);
+  focusPart = i;
+  pos["part:" + focusItem.id] = i; savePos();
+  const p = list[i], start = restart ? 0 : pos[p.id] || 0;
+  renderFocusParts();
+  hidePanel();
+  $("fLink").href = "https://www.youtube.com/watch?v=" + p.id;
+  loadApi().then(() => {
+    if (!$("focus").open) return;
+    if (yt) { if (yt.loadVideoById) yt.loadVideoById({ videoId: p.id, startSeconds: start }); return; }
+    yt = new YT.Player("fHost", {
+      host: "https://www.youtube-nocookie.com",
+      videoId: p.id,
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1, iv_load_policy: 3, start, origin: location.origin },
+      events: {
+        onReady: () => {
+          const r = Number(pos.rate), now = partsOf(focusItem)[focusPart];
+          if (now.id !== p.id) yt.loadVideoById({ videoId: now.id, startSeconds: pos[now.id] || 0 }); // moved on while the player was starting
+          if (r && r !== 1) yt.setPlaybackRate(r);
+        },
+        onStateChange: onYtState,
+        onError: () => showPanel("error"),
+        onPlaybackRateChange: e => { pos.rate = e.data; savePos(); }
+      }
+    });
+  }).catch(() => showPanel("error"));
+}
+function renderFocusParts() {
+  const list = partsOf(focusItem);
+  $("fParts").innerHTML = list.length > 1
+    ? list.map((p, i) => `<button type="button" data-part="${i}" aria-pressed="${i === focusPart}">${esc(p.label)}</button>`).join("")
+    : "";
+}
+function openFocus(x, part) {
+  const list = partsOf(x);
+  if (!list.length) return;
+  rememberPosition();
+  focusItem = x;
+  const d = $("focus");
+  paint(d, x.mi);
+  $("fKicker").textContent = `Module ${x.mi + 1} · ${x.it.d}`;
+  $("fTitle").textContent = x.it.t;
+  $("fWhy").textContent = x.it.w || "";
+  $("fWhy").hidden = !x.it.w;
+  $("fDone").textContent = done[x.id] ? "Play next" : "Mark done and play next";
+  if (!d.open) { d.showModal(); d.appendChild($("toast")); }
+  const saved = Number(pos["part:" + x.id]) || 0;
+  playPart(part === undefined ? (saved < list.length ? saved : 0) : part);
+  clearInterval(posTimer);
+  posTimer = setInterval(rememberPosition, 10000);
+}
+$("focus").addEventListener("close", () => {
+  rememberPosition();
+  clearInterval(posTimer);
+  if (yt && yt.pauseVideo) yt.pauseVideo();
+  document.body.appendChild($("toast"));
+});
+$("fClose").addEventListener("click", () => $("focus").close());
+$("fReplay").addEventListener("click", () => playPart(focusPart, true));
+$("fParts").addEventListener("click", e => { const b = e.target.closest("button[data-part]"); if (b) playPart(Number(b.dataset.part)); });
+$("fDone").addEventListener("click", e => {
+  const x = focusItem;
+  if (!done[x.id]) setDone(x, true, e.clientX, e.clientY);
+  if ($("bloomDlg").open) return;
+  const next = candidates().list[0];
+  if (next && next !== x && partsOf(next).length) openFocus(next);
+  else $("focus").close();
+});
+// Video links play here. Cmd, Ctrl or Shift-click still opens YouTube.
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-item]");
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  const x = byId[a.dataset.item];
+  if (!x || !partsOf(x).length) return;
+  e.preventDefault();
+  openFocus(x, a.dataset.part === undefined ? undefined : Number(a.dataset.part));
+});
+
+/* ---------- moving progress between devices ---------- */
+$("copyProgress").addEventListener("click", async () => {
+  const text = JSON.stringify({ done, plan });
+  $("progressText").value = text;
+  try { await navigator.clipboard.writeText(text); $("progressMsg").textContent = "Copied. Paste it on your other device."; }
+  catch (e) { $("progressText").select(); $("progressMsg").textContent = "Couldn't reach the clipboard, so copy the selected text yourself."; }
+});
+$("addProgress").addEventListener("click", () => {
+  const r = mergeProgress($("progressText").value, done, plan, new Set(all.map(x => x.id)));
+  if (!r) { $("progressMsg").textContent = "That text isn't progress copied from this page. Copy it again and paste the whole thing."; return; }
+  done = r.done; plan = r.plan;
+  save(); renderAll();
+  $("progressMsg").textContent = r.added === 1 ? "Added 1 item." : `Added ${r.added} items.`;
+});
+
+
+/* ---------- static structure ---------- */
+$("segs").innerHTML = MODULES.map((m, mi) => `<div class="seg" style="flex:${req(mi).length};--c-mid:${LOOK[mi].mid}"><i id="seg${mi}"></i></div>`).join("");
+$("nums").innerHTML = MODULES.map((m, mi) => `<span id="num${mi}">${mi + 1}</span>`).join("");
+$("plots").innerHTML = MODULES.map((m, mi) => `<button class="plot" type="button" id="plot${mi}"></button>`).join("");
+MODULES.forEach((m, mi) => $("plot" + mi).addEventListener("click", () => { const d = $("mod" + mi); touched = true; d.open = true; d.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" }); }));
+
+let touched = false;
+const root = $("course");
+MODULES.forEach((m, mi) => {
+  const d = document.createElement("details");
+  d.className = "mod"; d.id = "mod" + mi; paint(d, mi);
+  d.innerHTML = `<summary class="pastel"><div class="mtext"><span class="mno">Module ${mi + 1} · the ${LOOK[mi].f}</span><h2>${esc(m.name)}</h2><p class="mnote">${esc(m.note)}</p><span class="mmeta" id="meta${mi}"></span></div><div class="mplant" id="mplant${mi}"></div></summary>`;
+  d.querySelector("summary").addEventListener("click", () => { touched = true; });
+  const ol = document.createElement("ol");
+  ol.className = "items";
+  inMod(mi).forEach(x => {
+    const it = x.it, li = document.createElement("li");
+    li.id = "row-" + x.id;
+    const title = it.u ? `<a href="${esc(it.u)}" data-item="${x.id}" target="_blank" rel="noopener">${esc(it.t)}</a>` : esc(it.t);
+    const chips = it.links ? `<span class="chips">${it.links.map(([l, u], pi) => `<a href="${esc(u)}" data-item="${x.id}" data-part="${pi}" target="_blank" rel="noopener">${esc(l)}</a>`).join("")}</span>` : "";
+    const tag = it.k ? `<span class="tag">${it.k === "build" ? "build" : "post"}</span>` : "";
+    const opt = x.opt ? `<span class="tag opt">optional</span>` : "";
+    const src = it.s !== "you" && SRC[it.s][0] ? `<span>${esc(SRC[it.s][0])}</span>` : "";
+    li.innerHTML = `<input class="check" type="checkbox" id="${x.id}" aria-label="Mark done: ${esc(it.t)}"><div class="ibody"><span class="ititle">${title}</span>${chips}<span class="imeta">${tag}${src}<span>${esc(it.d || "")}</span>${opt}</span>${it.w ? `<p class="why">${esc(it.w)}</p>` : ""}</div>`;
+    li.querySelector("input").addEventListener("change", e => {
+      const r = e.target.getBoundingClientRect();
+      setDone(x, e.target.checked, r.left + r.width / 2, r.top + r.height / 2);
+    });
+    ol.appendChild(li);
+  });
+  d.appendChild(ol);
+  root.appendChild(d);
+});
+
+/* ---------- next step ---------- */
+let cap = 0, skip = 0;
+function candidates() {
+  const open = all.filter(x => !done[x.id]);
+  const main = open.filter(x => !x.opt);
+  const pool = main.length ? main : open;
+  if (!cap) return { list: pool, short: false };
+  const fit = pool.filter(x => x.min <= cap);
+  if (fit.length) return { list: fit, short: false };
+  return { list: [...pool].sort((a, b) => a.min - b.min), short: true };
+}
+let shown = null;
+function renderNext() {
+  const { list, short } = candidates();
+  const card = $("next");
+  if (!list.length) {
+    shown = null;
+    paint(card, 3);
+    $("nKicker").textContent = "All done";
+    $("nTitle").textContent = "That is the whole course. Go and pin that recap post.";
+    $("nArt").innerHTML = plant(3, 1);
+    $("nWhy").hidden = true; $("nChips").innerHTML = ""; $("nNote").hidden = true; $("nActs").hidden = true;
+    return;
+  }
+  $("nActs").hidden = false;
+  const x = list[skip % list.length]; shown = x;
+  const it = x.it, k = kindOf(it);
+  paint(card, x.mi);
+  $("nKicker").textContent = `Next up · Module ${x.mi + 1} · ${it.d}`;
+  $("nTitle").textContent = it.t;
+  $("nArt").innerHTML = ART[k](LOOK[x.mi]);
+  $("nWhy").textContent = it.w || "";
+  $("nWhy").hidden = !it.w;
+  $("nChips").innerHTML = it.links ? it.links.map(([l, u], pi) => `<a href="${esc(u)}" data-item="${x.id}" data-part="${pi}" target="_blank" rel="noopener">Watch ${esc(l)}</a>`).join("") : "";
+  $("nNote").hidden = !short;
+  $("nNote").textContent = "Nothing that short is left, so here is the shortest one.";
+  const open = $("nOpen");
+  const first = it.u || (it.links && it.links[0][1]);
+  open.hidden = !first;
+  if (first) {
+    open.href = first; open.dataset.item = x.id;
+    open.textContent = it.links ? "Watch the set" : partsOf(x).length ? "Watch it" : k === "read" ? "Read it" : "Open it";
+  }
+  $("nDone").classList.toggle("solid", !first);
+  $("nAnother").hidden = list.length < 2;
+}
+document.querySelectorAll(".time button").forEach(b => b.addEventListener("click", () => {
+  const v = Number(b.dataset.cap);
+  cap = cap === v ? 0 : v; skip = 0;
+  document.querySelectorAll(".time button").forEach(o => o.setAttribute("aria-pressed", String(Number(o.dataset.cap) === cap)));
+  renderNext();
+}));
+$("nAnother").addEventListener("click", () => { skip++; renderNext(); });
+$("nDone").addEventListener("click", e => { if (shown) setDone(shown, true, e.clientX, e.clientY); });
+
+/* ---------- ticking ---------- */
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function lineFor(x, left) {
+  const f = LOOK[x.mi].f;
+  if (x.opt) return "Bonus round. That one was optional.";
+  if (x.it.k === "build") return "You built it. A bee moved in.";
+  if (x.it.k === "ship") return "It's out in the world. A butterfly arrived.";
+  return pick([`Another leaf on the ${f}.`, `The ${f} grew a little.`, `Watered. ${left} left on the ${f}.`, `That one's in your head now. ${left} to go here.`]);
+}
+function setDone(x, val, px, py) {
+  const before = frac(x.mi);
+  if (val) done[x.id] = Date.now(); else delete done[x.id];
+  skip = 0;
+  save(); renderAll();
+  if (!val) return;
+  const p = $("plot" + x.mi);
+  p.classList.remove("wiggle"); void p.offsetWidth; p.classList.add("wiggle");
+  const bloomed = before < 1 && frac(x.mi) >= 1;
+  burst(px, py, bloomed ? 46 : 16);
+  if (bloomed) showBloom(x.mi);
+  else toast(lineFor(x, req(x.mi).filter(y => !done[y.id]).length), x);
+}
+let toastTimer = 0, toastItem = null;
+function toast(text, x) {
+  $("toastText").textContent = text; toastItem = x;
+  $("toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("toast").classList.remove("show"), 5000);
+}
+$("toastUndo").addEventListener("click", () => { $("toast").classList.remove("show"); if (toastItem) setDone(toastItem, false); });
+function burst(px, py, n) {
+  if (reduced() || !Number.isFinite(px)) return;
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement("div");
+    const size = 6 + Math.random() * 8, c = LOOK[i % 8].mid;
+    el.className = "petal";
+    el.style.cssText = `width:${size}px;height:${size * 1.4}px;background:${c};border-radius:60% 60% 60% 10%`;
+    ($("focus").open ? $("focus") : document.body).appendChild(el);
+    const a = Math.random() * Math.PI * 2, d = 50 + Math.random() * (n > 20 ? 230 : 110);
+    const dx = Math.cos(a) * d, dy = Math.sin(a) * d - 40;
+    el.animate([
+      { transform: `translate(${px}px,${py}px) rotate(0deg)`, opacity: 1 },
+      { transform: `translate(${px + dx}px,${py + dy + 90}px) rotate(${Math.random() * 500 - 250}deg)`, opacity: 0 }
+    ], { duration: 800 + Math.random() * 600, easing: "cubic-bezier(.15,.7,.3,1)" }).onfinish = () => el.remove();
+  }
+}
+function showBloom(mi) {
+  const d = $("bloomDlg"), next = current();
+  if ($("focus").open) $("focus").close();
+  $("toast").classList.remove("show");
+  paint(d, mi);
+  $("bloomArt").innerHTML = plant(mi, 1);
+  $("bloomTitle").textContent = `The ${LOOK[mi].f} bloomed.`;
+  $("bloomText").textContent = next < 0
+    ? "Every module is finished. Eight for eight."
+    : `Module ${mi + 1} is finished: ${MODULES[mi].name}. Next is the ${LOOK[next].f}: ${MODULES[next].name}.`;
+  if (d.showModal) d.showModal();
+}
+$("bloomClose").addEventListener("click", () => $("bloomDlg").close());
+
+/* ---------- render ---------- */
+function renderCritters(nb, ns) {
+  const spots = [[8,6],[52,2],[28,22],[84,10],[66,30],[18,44],[42,40],[92,36],[4,30],[76,0],[34,4],[58,18],[14,16]];
+  let s = "";
+  for (let i = 0; i < nb + ns; i++) {
+    const [l, t] = spots[i % spots.length];
+    s += `<div class="critter" style="left:${l}%;top:${t}px;animation-duration:${2.8 + (i % 4) * .7}s;animation-delay:${-i * .6}s">${i < nb ? BEE : FLY}</div>`;
+  }
+  $("critters").innerHTML = s;
+}
+let lastPlants = [];
+function renderAll() {
+  const required = all.filter(x => !x.opt), n = required.filter(x => done[x.id]).length;
+  const extras = all.filter(x => x.opt && done[x.id]).length;
+  const nb = all.filter(x => x.it.k === "build" && done[x.id]).length, tb = all.filter(x => x.it.k === "build").length;
+  const ns = all.filter(x => x.it.k === "ship" && done[x.id]).length, ts = all.filter(x => x.it.k === "ship").length;
+  const cur = current(), p = n / required.length;
+
+  $("count").textContent = `${n} of ${required.length}`;
+  MODULES.forEach((m, mi) => {
+    const f = frac(mi), r = req(mi), got = r.filter(x => done[x.id]).length;
+    const key = mi + ":" + f;
+    $("seg" + mi).style.width = f * 100 + "%";
+    if (lastPlants[mi] !== key) {
+      $("plot" + mi).innerHTML = plant(mi, f);
+      $("mplant" + mi).innerHTML = plant(mi, f);
+      lastPlants[mi] = key;
+    }
+    $("plot" + mi).setAttribute("aria-label", `Go to module ${mi + 1}, ${m.name}: ${got} of ${r.length} done`);
+    $("num" + mi).classList.toggle("now", mi === cur);
+    const left = r.filter(x => !done[x.id]).reduce((a, x) => a + x.min, 0);
+    $("meta" + mi).textContent = f >= 1 ? `In bloom · ${got} of ${r.length} done` : `${got} of ${r.length} done${left < 180 ? " · " + fmtLeft(left) : ""}`;
+    inMod(mi).forEach(x => {
+      const on = !!done[x.id], cb = $(x.id);
+      cb.checked = on;
+      $("row-" + x.id).classList.toggle("done", on);
+    });
+  });
+
+  // Coach line: always the nearest finish line.
+  if (cur < 0) $("coach").textContent = "Every flower is out.";
+  else if (n === 0) $("coach").textContent = "Eight seeds in the ground. The first needs 30 minutes.";
+  else {
+    const left = req(cur).filter(x => !done[x.id]).length;
+    $("coach").textContent = left === 1 ? `One more and the ${LOOK[cur].f} blooms.` : `${left} more and the ${LOOK[cur].f} blooms.`;
+  }
+
+  // The sun climbs an arc across the garden as the whole course fills in.
+  const sun = $("sun"), w = 4 + 92 * p;
+  sun.style.left = w + "%";
+  sun.style.top = (4 + (1 - Math.sin(Math.PI * Math.min(1, p * .98 + .02))) * 56) + "px";
+
+  renderCritters(nb, ns);
+  $("stats").innerHTML =
+    `<span>${BEE}<b>${nb} of ${tb}</b> builds</span><span>${FLY}<b>${ns} of ${ts}</b> posts</span>` +
+    (extras ? `<span><b>+${extras}</b> optional</span>` : "") +
+    `<span>Builds bring bees. Posts bring butterflies.</span>`;
+
+  // This week and streak. Older ticks have no date, so they count toward the garden only.
+  const times = Object.values(done).filter(v => typeof v === "number");
+  const now = Date.now(), wk = weekNo(now), today = dayNo(now);
+  const onDays = new Set(times.filter(t => weekNo(t) === wk).map(dayNo));
+  const monday = wk * 7 - 3;
+  $("days").innerHTML = ["M", "T", "W", "T", "F", "S", "S"].map((l, i) => {
+    const dn = monday + i;
+    return `<div class="day${onDays.has(dn) ? " on" : ""}${dn === today ? " today" : ""}">${l}</div>`;
+  }).join("");
+  const st = streak(times, now);
+  $("streak").textContent = st === 0 ? "One tick starts your streak." : st === 1 ? "1 week going." : `${st} weeks going.`;
+  if (document.activeElement !== $("planWhen")) $("planWhen").value = plan;
+
+  if (!touched) MODULES.forEach((m, mi) => { $("mod" + mi).open = mi === cur; });
+  renderNext();
+}
+
+let planTimer = 0;
+$("planWhen").addEventListener("input", e => { plan = e.target.value; clearTimeout(planTimer); planTimer = setTimeout(save, 500); });
+
+// Two-step clear so a stray tap can't wipe progress.
+let armed = false;
+$("reset").addEventListener("click", () => {
+  const b = $("reset");
+  if (!armed) { armed = true; b.textContent = "Tap again to clear"; setTimeout(() => { armed = false; b.textContent = "Clear my progress"; }, 3000); return; }
+  done = {}; plan = ""; save(); touched = false; renderAll();
+  armed = false; b.textContent = "Clear my progress";
+  $("resetMsg").hidden = false; $("resetMsg").textContent = "Progress cleared.";
+});
+
+renderAll();
+</script>
+</body>
+</html>
+{% endraw %}
